@@ -7,10 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.pashop.backend.model.common.exceptions.InstanceNotFoundException;
-import es.udc.pashop.backend.model.entities.Project;
-import es.udc.pashop.backend.model.entities.ProjectDao;
-import es.udc.pashop.backend.model.entities.Task;
-import es.udc.pashop.backend.model.entities.TaskDao;
 import es.udc.pashop.backend.model.entities.User;
 import es.udc.pashop.backend.model.entities.UserDao;
 
@@ -20,12 +16,6 @@ public class PermissionCheckerImpl implements PermissionChecker {
 	
 	@Autowired
 	private UserDao userDao;
-	
-	@Autowired
-	private ProjectDao projectDao;
-	
-	@Autowired
-	private TaskDao taskDao;
 
 	@Override
 	public void checkUserExists(Long userId) throws InstanceNotFoundException {
@@ -47,38 +37,6 @@ public class PermissionCheckerImpl implements PermissionChecker {
 		
 		return user.get();
 		
-	}
-
-	@Override
-	public void checkProjectExistsAndBelongsTo(Long projectId, Long userId) 
-		throws PermissionException, InstanceNotFoundException {
-		
-		Optional<Project> project = projectDao.findById(projectId);
-		
-		if (!project.isPresent()) {
-			throw new InstanceNotFoundException("project.entities.project", projectId);
-		}
-		
-		if (project.isPresent() && !project.get().getUser().getId().equals(userId)) {
-			throw new PermissionException();
-		}
-		
-	}
-
-	@Override
-	public void checkTaskExistsAndBelongsTo(Long taskId, Long userId) 
-		throws PermissionException, InstanceNotFoundException {
-		
-		Optional<Task> task = taskDao.findById(taskId);
-		
-		if (!task.isPresent()) {
-			throw new InstanceNotFoundException("project.entities.task", taskId);
-		}
-		
-		if (task.isPresent() && !task.get().getProject().getUser().getId().equals(userId)) {
-			throw new PermissionException();
-		}
-
 	}
 
 }

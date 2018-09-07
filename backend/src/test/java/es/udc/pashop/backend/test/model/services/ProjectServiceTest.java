@@ -1,10 +1,5 @@
 package es.udc.pashop.backend.test.model.services;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.util.Optional;
-
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -15,10 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import es.udc.pashop.backend.model.common.exceptions.DuplicateInstanceException;
 import es.udc.pashop.backend.model.common.exceptions.InstanceNotFoundException;
-import es.udc.pashop.backend.model.entities.Project;
-import es.udc.pashop.backend.model.entities.ProjectDao;
 import es.udc.pashop.backend.model.entities.User;
-import es.udc.pashop.backend.model.services.ProjectService;
 import es.udc.pashop.backend.model.services.UserService;
 
 @RunWith(SpringRunner.class)
@@ -27,17 +19,7 @@ import es.udc.pashop.backend.model.services.UserService;
 public class ProjectServiceTest {
 	
 	@Autowired
-	private ProjectDao projectDao;
-	
-	@Autowired
-	private ProjectService projectService;
-	
-	@Autowired
 	private UserService userService;
-	
-	private Project createProject(String projectName) {
-		return new Project(projectName);
-	}
 	
 	private User createUser(String userName) {
 		return new User(userName, userName, userName, userName, userName + "@" + userName + ".com");

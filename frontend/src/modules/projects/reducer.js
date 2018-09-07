@@ -11,12 +11,6 @@ const allProjects = (state = initialState.allProjects, action) => {
 
     switch (action.type) {
 
-        case users.actionTypes.LOGGED_IN:
-            return action.authenticatedUser.projects;
-
-        case users.actionTypes.SIGNED_UP:
-            return action.authenticatedUser.projects;
-
         case users.actionTypes.LOGOUT:
             return initialState.allProjects;
 

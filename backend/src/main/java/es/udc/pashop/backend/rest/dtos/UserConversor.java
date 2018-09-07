@@ -1,12 +1,5 @@
 package es.udc.pashop.backend.rest.dtos;
 
-import static es.udc.pashop.backend.rest.dtos.ProjectConversor.toProjectDtos;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-
-import es.udc.pashop.backend.model.entities.Project;
 import es.udc.pashop.backend.model.entities.User;
 
 public class UserConversor {
@@ -26,11 +19,7 @@ public class UserConversor {
 	
 	public final static AuthenticatedUserDto toAuthenticatedUserDto(String serviceToken, User user) {
 		
-		List<Project> projects = new ArrayList<>(user.getProjects());
-		
-		projects.sort(Comparator.comparing(Project::getId));
-		
-		return new AuthenticatedUserDto(serviceToken, toUserDto(user), toProjectDtos(projects));
+		return new AuthenticatedUserDto(serviceToken, toUserDto(user));
 		
 	}
 

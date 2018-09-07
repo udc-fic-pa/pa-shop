@@ -1,13 +1,9 @@
 package es.udc.pashop.backend.model.entities;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -21,7 +17,6 @@ public class User {
 	private String lastName;
 	private String email;
 	private RoleType role;
-	private Set<Project> projects = new HashSet<>();
 
 	public User() {}
 
@@ -91,15 +86,6 @@ public class User {
 
 	public void setRole(RoleType role) {
 		this.role = role;
-	}
-
-	@OneToMany(mappedBy="user")
-	public Set<Project> getProjects() {
-		return projects;
-	}
-
-	public void setProjects(Set<Project> projects) {
-		this.projects = projects;
 	}
 
 }
