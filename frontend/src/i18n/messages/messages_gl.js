@@ -1,7 +1,6 @@
 export default {
 
     'project.app.Footer.text': 'PA Shop - Area de Enxeñería Telemática - Universidade da Coruña',
-
     'project.app.Header.home': 'Inicio',
     'project.app.Header.logout': 'Saír',
     'project.app.Header.new': 'Novo',
@@ -9,32 +8,19 @@ export default {
 
     'project.common.ErrorDialog.title': 'Erro',
 
-    'project.global.buttons.add': 'Crear',
     'project.global.buttons.cancel': 'Cancelar',
+    'project.global.buttons.close': 'Cerrar',
     'project.global.buttons.ok': 'OK',
     'project.global.buttons.save': 'Gardar',
     'project.global.exceptions.NetworkError': 'Erro de comunicación',
     'project.global.fields.email': 'Correo electrónico',
     'project.global.fields.firstName': 'Nome',
     'project.global.fields.lastName': 'Apelidos',
-    'project.global.fields.userName': 'Usuario',
-    'project.global.fields.name': 'Nome',
     'project.global.fields.password': 'Contrasinal',
+    'project.global.fields.userName': 'Usuario',
     'project.global.validator.email': 'Introduzca unha dirección de correo electrónico correcta',
     'project.global.validator.passwordsDoNotMatch': 'As contrasinais non coinciden',
     'project.global.validator.required': 'Campo obrigatorio',
-
-    'project.projects.AddProject.success': 'Proxecto "{projectName}" creado',
-    'project.projects.AddProject.title': 'Crear proxecto',
-    'project.projects.Project.NameEditor.title': 'Editar nome de proxecto',
-    'project.projects.Project.removeConfirmDialog.bodyTitle': 'Eliminar proxecto?',
-    'project.projects.Project.removeConfirmDialog.headerTitle': 'Confirmar borrado',
-
-    'project.projects.Projects.title': 'Proxectos',
-    'project.projects.ProjectDetails.title': 'Detalles do proxecto',
-
-    'project.tasks.AddTask.placeHolder': 'Engadir tarefa',
-    'project.tasks.Task.NameEditor.title': 'Editar nome de tarefa',
 
     'project.users.ChangePassword.fields.confirmNewPassword': 'Confirmar contrasinal nova',
     'project.users.ChangePassword.fields.newPassword': 'Contrasinal nova',

@@ -31,7 +31,9 @@ const ErrorDialog = ({error, handleClose, intl}) => {
                     <div className="modal-footer">
                         <button type="button" className="btn btn-primary" 
                             data-dismiss="modal" 
-                            onClick={handleClose}>Close</button>
+                            onClick={handleClose}>
+                            <FormattedMessage id="project.global.buttons.close"/>
+                        </button>
                     </div>
                 </div>
             </div>
