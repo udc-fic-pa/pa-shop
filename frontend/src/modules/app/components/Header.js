@@ -8,7 +8,7 @@ import users from '../../users';
 const Header = ({user, handleLogout}) => (
 
     <nav className="navbar navbar-expand-lg navbar-light bg-light border">
-        <Link className="navbar-brand" to="/">Project Manager</Link>
+        <Link className="navbar-brand" to="/">PA Shop</Link>
         <button className="navbar-toggler" type="button" 
             data-toggle="collapse" data-target="#navbarSupportedContent" 
             aria-controls="navbarSupportedContent" aria-expanded="false" 
@@ -25,14 +25,6 @@ const Header = ({user, handleLogout}) => (
                         <FormattedMessage id="project.app.Header.home"/>
                     </NavLink>
                 </li>
-                {user && 
-                <li className="nav-item">
-                    <NavLink exact className="nav-link" to="/projects/add-project">
-                        <span className="fas fa-edit"></span>&nbsp;
-                        <FormattedMessage id="project.app.Header.new"/>
-                    </NavLink>
-                </li>
-                }
             </ul>
             <ul className="navbar-nav">
                 {user ? 

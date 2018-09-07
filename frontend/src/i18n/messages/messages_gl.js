@@ -1,11 +1,11 @@
 export default {
 
-    'project.app.Footer.text': 'Task Manager - Area de Enxeñería Telemática - Universidade da Coruña',
+    'project.app.Footer.text': 'PA Shop - Area de Enxeñería Telemática - Universidade da Coruña',
 
     'project.app.Header.home': 'Inicio',
     'project.app.Header.logout': 'Saír',
     'project.app.Header.new': 'Novo',
-    'project.app.Home.welcome': 'Benvido a Project Manager!',
+    'project.app.Home.welcome': 'Benvido a PA Shop!',
 
     'project.common.ErrorDialog.title': 'Erro',
 

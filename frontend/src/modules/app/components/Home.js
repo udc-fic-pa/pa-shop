@@ -2,10 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 
-import projects, {Projects} from '../../projects';
 import users from '../../users';
 
-const Home = ({loggedIn, projects}) => {
+const Home = ({loggedIn}) => {
 
     if (!loggedIn) {
         return (
@@ -16,15 +15,12 @@ const Home = ({loggedIn, projects}) => {
     }
 
     return (
-        <div>
-            <Projects projects={projects}/>
-        </div>
+        <div/>
     );
 
 }
 
 const mapStateToProps = (state, ownProps) => ({
-    projects: projects.selectors.getProjects(state),
     loggedIn: users.selectors.getUser(state) !== null
 });
 
