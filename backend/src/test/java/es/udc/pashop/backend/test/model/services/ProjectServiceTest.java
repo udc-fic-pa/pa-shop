@@ -14,7 +14,7 @@ import es.udc.pashop.backend.model.entities.User;
 import es.udc.pashop.backend.model.services.UserService;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest({"taskmgr.jwt.signKey=mock", "taskmgr.jwt.expirationMinutes=0"})
+@SpringBootTest
 @Transactional
 public class ProjectServiceTest {
 	
