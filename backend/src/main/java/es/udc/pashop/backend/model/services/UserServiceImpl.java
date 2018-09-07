@@ -32,11 +32,13 @@ public class UserServiceImpl implements UserService {
 			throw new DuplicateInstanceException("project.entities.user", user.getUserName());
 		}
 		
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		user.setRole(User.RoleType.USER);
-		userDao.save(user);
+		User userToSignUp = new User(user.getUserName(), passwordEncoder.encode(user.getPassword()),
+			user.getFirstName(), user.getLastName(), user.getEmail());
 		
-		return user;
+		userToSignUp.setRole(User.RoleType.USER);
+		userDao.save(userToSignUp);
+		
+		return userToSignUp;
 		
 	}
 
