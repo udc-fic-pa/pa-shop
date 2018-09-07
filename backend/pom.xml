@@ -3,13 +3,13 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>es.udc.taskmgr</groupId>
-    <artifactId>task-manager-backend</artifactId>
+    <groupId>es.udc.pashop</groupId>
+    <artifactId>pa-shop-backend</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
     
-    <name>Task Manager Backend</name>
-	<description>Task Manager Backend</description>
+    <name>PA Shop Backend</name>
+	<description>PA Shop Backend</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

@@ -1,7 +1,5 @@
 -- Indexes for primary keys have been explicitly created.
 
-DROP TABLE Task;
-DROP TABLE Project;
 DROP TABLE User;
 
 CREATE TABLE User (
@@ -18,26 +16,4 @@ CREATE TABLE User (
 
 CREATE INDEX UserIndexByUserName ON User (userName);
 
-CREATE TABLE Project (
-    id BIGINT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(60) NOT NULL,
-    userId BIGINT NOT NULL,
-    CONSTRAINT ProjectPrimaryKey PRIMARY KEY (id),
-    CONSTRAINT ProjectNameUniqueKey UNIQUE (userId, name),
-    CONSTRAINT ProjectUserIdFK FOREIGN KEY(userId) REFERENCES User (id)
-) ENGINE = InnoDB;
-
-CREATE INDEX ProjectIndexByUserIdAndId ON Project (userId, id);
-
-CREATE TABLE Task (
-    id BIGINT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(60) NOT NULL,
-    completed BIT(1) NOT NULL,
-    projectId BIGINT NOT NULL,
-    CONSTRAINT TaskPrimaryKey PRIMARY KEY (id),
-    CONSTRAINT TaskNameUniqueKey UNIQUE (projectId, name),
-    CONSTRAINT TaskProjectIdFK FOREIGN KEY(projectId) REFERENCES Project (id)
-) ENGINE = InnoDB;
-
-CREATE INDEX TaskIndexByProjectIdAndId ON Task (projectId, id);
 
