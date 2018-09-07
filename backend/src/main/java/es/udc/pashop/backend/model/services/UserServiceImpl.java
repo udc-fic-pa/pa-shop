@@ -26,19 +26,15 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 
 	@Override
-	public User signUp(User user) throws DuplicateInstanceException {
+	public void signUp(User user) throws DuplicateInstanceException {
 		
 		if (userDao.existsByUserName(user.getUserName())) {
 			throw new DuplicateInstanceException("project.entities.user", user.getUserName());
 		}
 		
-		User userToSignUp = new User(user.getUserName(), passwordEncoder.encode(user.getPassword()),
-			user.getFirstName(), user.getLastName(), user.getEmail());
-		
-		userToSignUp.setRole(User.RoleType.USER);
-		userDao.save(userToSignUp);
-		
-		return userToSignUp;
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		user.setRole(User.RoleType.USER);
+		userDao.save(user);
 		
 	}
 
@@ -66,15 +62,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User updateProfile(User user) throws InstanceNotFoundException {
+	public User updateProfile(Long id, String firstName, String lastName, String email) throws InstanceNotFoundException {
 		
-		User userToUpdate = permissionChecker.checkUser(user.getId());
+		User user = permissionChecker.checkUser(id);
 		
-		userToUpdate.setFirstName(user.getFirstName());
-		userToUpdate.setLastName(user.getLastName());
-		userToUpdate.setEmail(user.getEmail());
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		user.setEmail(email);
 		
-		return userToUpdate;
+		return user;
 
 	}
 

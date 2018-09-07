@@ -14,6 +14,7 @@ import es.udc.pashop.backend.model.common.exceptions.DuplicateInstanceException;
 import es.udc.pashop.backend.model.common.exceptions.InstanceNotFoundException;
 import es.udc.pashop.backend.model.entities.User;
 import es.udc.pashop.backend.model.services.IncorrectLoginException;
+import es.udc.pashop.backend.model.services.IncorrectPasswordException;
 import es.udc.pashop.backend.model.services.UserService;
 
 @RunWith(SpringRunner.class)
@@ -33,10 +34,14 @@ public class UserServiceTest {
 	@Test
 	public void testSignUpAndLoginFromId() throws DuplicateInstanceException, InstanceNotFoundException {
 		
-		User signedUpUser = userService.signUp(createUser("test"));
-		User loggedInUser = userService.loginFromId(signedUpUser.getId());
+		User user = createUser("test");
 		
-		assertEquals(signedUpUser, loggedInUser);
+		userService.signUp(user);
+		
+		User loggedInUser = userService.loginFromId(user.getId());
+		
+		assertEquals(user, loggedInUser);
+		assertEquals(User.RoleType.USER, user.getRole());
 		
 	}
 	
@@ -59,11 +64,13 @@ public class UserServiceTest {
 	public void testLogin() throws DuplicateInstanceException, IncorrectLoginException {
 		
 		User user = createUser("test");
+		String clearPassword = user.getPassword();
 				
-		User signedUpUser = userService.signUp(user);
-		User loggedInUser = userService.login(user.getUserName(), user.getPassword());
+		userService.signUp(user);
 		
-		assertEquals(signedUpUser, loggedInUser);
+		User loggedInUser = userService.login(user.getUserName(), clearPassword);
+		
+		assertEquals(user, loggedInUser);
 		
 	}
 	
@@ -71,47 +78,73 @@ public class UserServiceTest {
 	public void testLoginWithIncorrectPassword() throws DuplicateInstanceException, IncorrectLoginException {
 		
 		User user = createUser("test");
+		String clearPassword = user.getPassword();
 		
 		userService.signUp(user);
-		userService.login(user.getUserName(), 'X' + user.getPassword());
+		userService.login(user.getUserName(), 'X' + clearPassword);
 		
+	}
+	
+	@Test(expected = IncorrectLoginException.class)
+	public void testLoginWithNonExistentUserName() throws IncorrectLoginException {
+		userService.login("X", "Y");
 	}
 	
 	@Test
 	public void testUpdateProfile() throws InstanceNotFoundException, DuplicateInstanceException {
 		
-		User signedUpUser = userService.signUp(createUser("user"));
+		User user = createUser("user");
 		
-		signedUpUser.setFirstName('X' + signedUpUser.getFirstName());
-		signedUpUser.setLastName('X' + signedUpUser.getLastName());
-		signedUpUser.setEmail('X' + signedUpUser.getEmail());
+		userService.signUp(user);
 		
-		userService.updateProfile(signedUpUser);
-		User updatedUser = userService.loginFromId(signedUpUser.getId());
+		user.setFirstName('X' + user.getFirstName());
+		user.setLastName('X' + user.getLastName());
+		user.setEmail('X' + user.getEmail());
 		
-		assertEquals(signedUpUser, updatedUser);
+		userService.updateProfile(user.getId(), 'X' + user.getFirstName(), 'X' + user.getLastName(),
+			'X' + user.getEmail());
+		
+		User updatedUser = userService.loginFromId(user.getId());
+		
+		assertEquals(user, updatedUser);
+		
+	}
+	
+	@Test(expected = InstanceNotFoundException.class)
+	public void testUpdateProfileWithNonExistentId() throws InstanceNotFoundException {		
+		userService.updateProfile(NON_EXISTENT_USER_ID, "X", "X", "X");
+	}
+	
+	@Test
+	public void testChangePassword() throws DuplicateInstanceException, InstanceNotFoundException,
+		IncorrectPasswordException, IncorrectLoginException {
+		
+		User user = createUser("user");
+		String oldPassword = user.getPassword();
+		String newPassword = 'X' + oldPassword;
+		
+		userService.signUp(user);
+		userService.changePassword(user.getId(), oldPassword, newPassword);
+		userService.login(user.getUserName(), newPassword);
+		
+	}
+	
+	@Test(expected = InstanceNotFoundException.class)
+	public void testChangePasswordWithNonExistentId() throws InstanceNotFoundException, IncorrectPasswordException {
+		userService.changePassword(NON_EXISTENT_USER_ID, "X", "Y");
+	}
+	
+	@Test(expected = IncorrectPasswordException.class)
+	public void testChangePasswordWithIncorrectPassword() throws DuplicateInstanceException, InstanceNotFoundException,
+		IncorrectPasswordException {
+		
+		User user = createUser("user");
+		String oldPassword = user.getPassword();
+		String newPassword = 'X' + oldPassword;
+		
+		userService.signUp(user);
+		userService.changePassword(user.getId(), 'Y' + oldPassword, newPassword);
 		
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

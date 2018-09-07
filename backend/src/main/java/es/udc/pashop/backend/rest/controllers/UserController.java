@@ -82,7 +82,9 @@ public class UserController {
 	public ResponseEntity<AuthenticatedUserDto> signUp(
 		@Validated({UserDto.AllValidations.class}) @RequestBody UserDto userDto) throws DuplicateInstanceException {
 		
-		User user = userService.signUp(toUser(userDto));
+		User user = toUser(userDto);
+		
+		userService.signUp(user);
 		
 		URI location = ServletUriComponentsBuilder
 			.fromCurrentRequest().path("/{id}")
@@ -121,11 +123,8 @@ public class UserController {
 			throw new PermissionException();
 		}
 		
-		User user = toUser(userDto);
-		
-		user.setId(id);
-		
-		return toUserDto(userService.updateProfile(user));
+		return toUserDto(userService.updateProfile(id, userDto.getFirstName(), userDto.getLastName(),
+			userDto.getEmail()));
 		
 	}
 	
