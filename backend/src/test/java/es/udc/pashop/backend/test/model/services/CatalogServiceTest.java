@@ -50,8 +50,8 @@ public class CatalogServiceTest {
 		Category category1 = new Category("category1");
 		Category category2 = new Category("category2");
 		
-		categoryDao.save(category1);
 		categoryDao.save(category2);
+		categoryDao.save(category1);
 				
 		assertEquals(Arrays.asList(category1, category2), catalogService.findAllCategories());
 		

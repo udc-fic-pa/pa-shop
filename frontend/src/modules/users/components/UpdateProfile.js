@@ -42,7 +42,7 @@ class UpdateProfile extends React.Component {
         const form = $('#update-profile-form');
 
         if (form.get(0).checkValidity()) {
-            this.updateUserProfile();
+            this.updateProfile();
         } else {
             this.clearMessages();
             form.get(0).classList.add('was-validated');
@@ -50,9 +50,9 @@ class UpdateProfile extends React.Component {
 
     }
 
-    updateUserProfile() {
+    updateProfile() {
 
-        this.props.updateUserProfile(
+        this.props.updateProfile(
             {id: this.props.user.id,
             firstName: this.state.firstName.trim(),
             lastName: this.state.lastName.trim(),
@@ -150,7 +150,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-    updateUserProfile: actions.updateUserProfile
+    updateProfile: actions.updateProfile
 };
 
 UpdateProfile = connect(mapStateToProps, mapDispatchToProps)(injectIntl(UpdateProfile));

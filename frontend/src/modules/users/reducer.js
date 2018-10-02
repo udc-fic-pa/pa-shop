@@ -10,16 +10,16 @@ const user = (state = initialState.user, action) => {
 
     switch (action.type) {
 
-        case actionTypes.SIGNED_UP:
+        case actionTypes.SIGN_UP_COMPLETED:
             return action.authenticatedUser.user;
 
-        case actionTypes.LOGGED_IN:
+        case actionTypes.LOGIN_COMPLETED:
             return action.authenticatedUser.user;
 
         case actionTypes.LOGOUT:
             return initialState.user;
 
-        case actionTypes.PROFILE_UPDATED:
+        case actionTypes.UPDATE_PROFILE_COMPLETED:
             return action.user;
 
         default:

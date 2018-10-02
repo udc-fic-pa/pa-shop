@@ -1,4 +1,4 @@
-export const SIGNED_UP = "project/users/signedUp";
-export const LOGGED_IN = "project/users/loggedIn";
+export const SIGN_UP_COMPLETED = "project/users/signUpCompleted";
+export const LOGIN_COMPLETED = "project/users/loginCompleted";
 export const LOGOUT = "project/users/logout";
-export const PROFILE_UPDATED = "project/users/profileUpdated";
+export const UPDATE_PROFILE_COMPLETED = "project/users/updateProfileCompleted";

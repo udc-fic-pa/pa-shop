@@ -2,26 +2,26 @@ package es.udc.pashop.backend.rest.dtos;
 
 public class ProductSummaryDto {
 	
-	private Long productId;
+	private Long id;
 	private String name;
 	private Long categoryId;
 	
 	public ProductSummaryDto() {}
 	
-	public ProductSummaryDto(Long productId, String name, Long categoryId) {
+	public ProductSummaryDto(Long id, String name, Long categoryId) {
 
-		this.productId = productId;
+		this.id = id;
 		this.name = name;
 		this.categoryId = categoryId;
 		
 	}
 
-	public Long getProductId() {
-		return productId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setProductId(Long productId) {
-		this.productId = productId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {

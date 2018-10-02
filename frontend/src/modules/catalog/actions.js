@@ -1,0 +1,71 @@
+import * as actionTypes from './actionTypes';
+import * as selectors from './selectors';
+import backend from '../../backend';
+
+const findAllCategoriesCompleted = categories => ({
+    type: actionTypes.FIND_ALL_CATEGORIES_COMPLETED,
+    categories
+}); 
+
+export const findAllCategories = () => (dispatch, getState) => {
+
+    const categories = selectors.getCategories(getState());
+
+    if (!categories) {
+
+        backend.catalogService.findAllCategories(
+            categories => dispatch(findAllCategoriesCompleted(categories))
+        );
+        
+    }
+
+}
+
+const findProductsCompleted = productSearch => ({
+    type: actionTypes.FIND_PRODUCTS_COMPLETED,
+    productSearch
+});
+
+export const findProducts = (criteria, onSuccess) => dispatch => {
+
+    dispatch(clearProductSearch());
+    backend.catalogService.findProducts(criteria,
+        result => {
+            dispatch(findProductsCompleted({criteria, result}));
+            onSuccess();
+        });
+
+}
+
+export const previousFindProductsResultPage = criteria =>
+    findProducts({categoryId: criteria.categoryId,
+        keywords: criteria.keywords, 
+        startIndex: criteria.startIndex-criteria.count,
+        count: criteria.count});
+
+export const nextFindProductsResultPage = criteria =>
+    findProducts({categoryId: criteria.categoryId,
+        keywords: criteria.keywords, 
+        startIndex: criteria.startIndex+criteria.count,
+        count: criteria.count});
+
+const clearProductSearch = () => ({
+    type: actionTypes.CLEAR_PRODUCT_SEARCH
+});
+
+const findProductByIdCompleted = product => ({
+    type: actionTypes.FIND_PRODUCT_BY_ID_COMPLETED,
+    product
+});
+    
+export const findProductById = id => dispatch => {
+
+    dispatch(clearProduct());
+    backend.catalogService.findByProductId(id,
+        product => dispatch(findProductByIdCompleted(product)));
+
+}
+
+const clearProduct = () => ({
+    type: actionTypes.CLEAR_PRODUCT
+});

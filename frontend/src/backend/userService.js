@@ -45,7 +45,7 @@ export const signUp = (user, onSuccess, onErrors) =>
 
 export const logout = () => removeServiceToken();
 
-export const updateUserProfile = (user, onSuccess, onErrors) => {
+export const updateProfile = (user, onSuccess, onErrors) => {
     appFetch(`/users/${user.id}`, config('PUT', user),
         onSuccess, onErrors);
 }
