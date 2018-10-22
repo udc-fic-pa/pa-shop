@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.pashop.backend.model.common.exceptions.DuplicateInstanceException;
 import es.udc.pashop.backend.model.common.exceptions.InstanceNotFoundException;
+import es.udc.pashop.backend.model.entities.ShoppingCart;
+import es.udc.pashop.backend.model.entities.ShoppingCartDao;
 import es.udc.pashop.backend.model.entities.User;
 import es.udc.pashop.backend.model.entities.UserDao;
 
@@ -24,6 +26,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private ShoppingCartDao shoppingCartDao;
 
 	@Override
 	public void signUp(User user) throws DuplicateInstanceException {
@@ -32,9 +37,16 @@ public class UserServiceImpl implements UserService {
 			throw new DuplicateInstanceException("project.entities.user", user.getUserName());
 		}
 		
+		ShoppingCart shoppingCart = new ShoppingCart(user);
+		
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		user.setRole(User.RoleType.USER);
+		user.setShoppingCart(shoppingCart);
+		
 		userDao.save(user);
+		shoppingCartDao.save(shoppingCart);
+
+		
 		
 	}
 

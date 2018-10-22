@@ -1,9 +1,11 @@
 package es.udc.pashop.backend.model.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User {
@@ -17,6 +19,7 @@ public class User {
 	private String lastName;
 	private String email;
 	private RoleType role;
+	private ShoppingCart shoppingCart;
 
 	public User() {}
 
@@ -86,6 +89,15 @@ public class User {
 
 	public void setRole(RoleType role) {
 		this.role = role;
+	}
+
+	@OneToOne(mappedBy="user", fetch=FetchType.LAZY)
+	public ShoppingCart getShoppingCart() {
+		return shoppingCart;
+	}
+
+	public void setShoppingCart(ShoppingCart shoppingCart) {
+		this.shoppingCart = shoppingCart;
 	}
 
 }

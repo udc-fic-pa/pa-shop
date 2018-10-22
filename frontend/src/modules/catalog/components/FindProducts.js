@@ -48,9 +48,14 @@ class FindProducts extends React.Component {
 
                 <select id="categoryId" className="custom-select my-1 mr-sm-2"
                     value={this.state.categoryId} onChange={(e) => this.handleCategoryIdChange(e)}>
-                    <option value="">
-                        <FormattedMessage id='project.catalog.FindProducts.allDepartments'/>
-                    </option>
+                    <FormattedMessage id='project.catalog.FindProducts.allDepartments'>
+                        {
+                            (message) => (
+                                <option value="">{message}</option>
+                            )
+                        }
+                    </FormattedMessage>
+    
                     {this.props.categories && this.props.categories.map((category, index) => 
                         <option key={index} value={category.id}>{category.name}</option>
                     )}

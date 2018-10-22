@@ -1,6 +1,7 @@
 package es.udc.pashop.backend.test.model.services;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import javax.transaction.Transactional;
 
@@ -8,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import es.udc.pashop.backend.model.common.exceptions.DuplicateInstanceException;
@@ -19,10 +21,11 @@ import es.udc.pashop.backend.model.services.UserService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@ActiveProfiles("test")
 @Transactional
 public class UserServiceTest {
 	
-	private final Long NON_EXISTENT_USER_ID = new Long(-1);
+	private final Long NON_EXISTENT_ID = new Long(-1);
 	
 	@Autowired
 	private UserService userService;
@@ -34,7 +37,7 @@ public class UserServiceTest {
 	@Test
 	public void testSignUpAndLoginFromId() throws DuplicateInstanceException, InstanceNotFoundException {
 		
-		User user = createUser("test");
+		User user = createUser("user");
 		
 		userService.signUp(user);
 		
@@ -42,13 +45,14 @@ public class UserServiceTest {
 		
 		assertEquals(user, loggedInUser);
 		assertEquals(User.RoleType.USER, user.getRole());
+		assertTrue(user.getShoppingCart().getItems().isEmpty());
 		
 	}
 	
 	@Test(expected = DuplicateInstanceException.class)
 	public void testSignUpDuplicatedUserName() throws DuplicateInstanceException {
 		
-		User user = createUser("test");
+		User user = createUser("user");
 		
 		userService.signUp(user);
 		userService.signUp(user);
@@ -57,13 +61,13 @@ public class UserServiceTest {
 	
 	@Test(expected = InstanceNotFoundException.class)
 	public void testloginFromNonExistentId() throws InstanceNotFoundException {		
-		userService.loginFromId(NON_EXISTENT_USER_ID);
+		userService.loginFromId(NON_EXISTENT_ID);
 	}
 	
 	@Test
 	public void testLogin() throws DuplicateInstanceException, IncorrectLoginException {
 		
-		User user = createUser("test");
+		User user = createUser("user");
 		String clearPassword = user.getPassword();
 				
 		userService.signUp(user);
@@ -77,7 +81,7 @@ public class UserServiceTest {
 	@Test(expected = IncorrectLoginException.class)
 	public void testLoginWithIncorrectPassword() throws DuplicateInstanceException, IncorrectLoginException {
 		
-		User user = createUser("test");
+		User user = createUser("user");
 		String clearPassword = user.getPassword();
 		
 		userService.signUp(user);
@@ -112,7 +116,7 @@ public class UserServiceTest {
 	
 	@Test(expected = InstanceNotFoundException.class)
 	public void testUpdateProfileWithNonExistentId() throws InstanceNotFoundException {		
-		userService.updateProfile(NON_EXISTENT_USER_ID, "X", "X", "X");
+		userService.updateProfile(NON_EXISTENT_ID, "X", "X", "X");
 	}
 	
 	@Test
@@ -131,7 +135,7 @@ public class UserServiceTest {
 	
 	@Test(expected = InstanceNotFoundException.class)
 	public void testChangePasswordWithNonExistentId() throws InstanceNotFoundException, IncorrectPasswordException {
-		userService.changePassword(NON_EXISTENT_USER_ID, "X", "Y");
+		userService.changePassword(NON_EXISTENT_ID, "X", "Y");
 	}
 	
 	@Test(expected = IncorrectPasswordException.class)

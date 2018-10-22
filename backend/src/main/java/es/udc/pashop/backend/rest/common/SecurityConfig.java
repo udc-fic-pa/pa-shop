@@ -27,9 +27,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests().antMatchers("/users/signUp").permitAll().and()
 			.authorizeRequests().antMatchers("/users/login").permitAll().and()
 			.authorizeRequests().antMatchers("/users/loginFromServiceToken").permitAll().and()
-			.authorizeRequests().antMatchers("/categories").permitAll().and()
-			.authorizeRequests().antMatchers("/products/*").permitAll().and()
-			.authorizeRequests().antMatchers("/products").permitAll().and()
+			.authorizeRequests().antMatchers("/catalog/categories").permitAll().and()
+			.authorizeRequests().antMatchers("/catalog/products/*").permitAll().and()
+			.authorizeRequests().antMatchers("/catalog/products").permitAll().and()
 			.authorizeRequests().antMatchers("/**").hasRole("USER");
 
 	}

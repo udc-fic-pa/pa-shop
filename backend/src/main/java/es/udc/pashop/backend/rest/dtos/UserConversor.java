@@ -1,5 +1,7 @@
 package es.udc.pashop.backend.rest.dtos;
 
+import static es.udc.pashop.backend.rest.dtos.ShoppingCartConversor.toShoppingCartDto;
+
 import es.udc.pashop.backend.model.entities.User;
 
 public class UserConversor {
@@ -19,7 +21,7 @@ public class UserConversor {
 	
 	public final static AuthenticatedUserDto toAuthenticatedUserDto(String serviceToken, User user) {
 		
-		return new AuthenticatedUserDto(serviceToken, toUserDto(user));
+		return new AuthenticatedUserDto(serviceToken, toUserDto(user), toShoppingCartDto(user.getShoppingCart()));
 		
 	}
 
