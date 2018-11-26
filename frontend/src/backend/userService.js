@@ -55,11 +55,10 @@ export const changePassword = (id, oldPassword, newPassword, onSuccess,
 
     const parameters = new FormData();
 
-    parameters.append("id", id);
     parameters.append("oldPassword", oldPassword);
     parameters.append("newPassword", newPassword);
 
-    appFetch(`/users/changepassword`, config('POST', parameters),
+    appFetch(`/users/${id}/changePassword`, config('POST', parameters),
         onSuccess, onErrors);
 
 }
