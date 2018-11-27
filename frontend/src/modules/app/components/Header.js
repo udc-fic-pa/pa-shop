@@ -4,6 +4,7 @@ import {Link, NavLink, withRouter} from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
 
 import {FindProducts} from '../../catalog';
+import {ShoppingCartIcon} from '../../shopping';
 import users from '../../users';
 
 const Header = ({user, handleLogout}) => (
@@ -34,8 +35,16 @@ const Header = ({user, handleLogout}) => (
     
             </ul>
 
+            
+            {user ? 
+
             <ul className="navbar-nav">
-                {user ? 
+
+                <li className="nav-item">
+                    <NavLink exact className="nav-link" to="/shopping/shopping-cart">
+                        <ShoppingCartIcon/>
+                    </NavLink>
+                </li>
                 
                 <li className="nav-item dropdown">
 
@@ -59,16 +68,20 @@ const Header = ({user, handleLogout}) => (
                     </div>
 
                 </li>
-                
-                :
 
+            </ul>
+            
+            :
+
+            <ul className="navbar-nav">
                 <li className="nav-item">
                     <NavLink exact className="nav-link" to="/users/login">
                         <FormattedMessage id="project.users.Login.title"/>
                     </NavLink>
                 </li>
-                }
             </ul>
+            
+            }
 
         </div>
     </nav>

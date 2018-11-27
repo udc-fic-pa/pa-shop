@@ -8,12 +8,12 @@ public class ShoppingCartItemDto {
 	private String productName;
 	private Long categoryId;
 	private BigDecimal productPrice;
-	private short quantity;
+	private int quantity;
 	
 	public ShoppingCartItemDto() {}
 	
 	public ShoppingCartItemDto(Long productId, String productName, Long categoryId, BigDecimal productPrice,
-		short quantity) {
+		int quantity) {
 
 		this.productId = productId;
 		this.productName = productName;
@@ -55,11 +55,11 @@ public class ShoppingCartItemDto {
 		this.productPrice = productPrice;
 	}
 
-	public short getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(short quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 

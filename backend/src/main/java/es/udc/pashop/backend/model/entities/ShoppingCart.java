@@ -18,7 +18,7 @@ import javax.persistence.Transient;
 @Entity
 public class ShoppingCart {
 	
-	public static final short MAX_ITEMS = 20;
+	public static final int MAX_ITEMS = 20;
 	
 	private Long id;
 	private Set<ShoppingCartItem> items = new HashSet<>();
@@ -74,13 +74,15 @@ public class ShoppingCart {
 		item.setShoppingCart(this);
 		
 	}
+	
+	@Transient
+	public int getTotalQuantity() {
+		return items.stream().map(i -> i.getQuantity()).reduce(0, (a, b) -> a+b);
+	}
 
 	@Transient
 	public BigDecimal getTotalPrice() {
-
-		return items.stream().map(i -> i.getProduct().getPrice().multiply(new BigDecimal(i.getQuantity()))).
-			reduce(new BigDecimal(0), (a, b) -> a.add(b));
-
+		return items.stream().map(i -> i.getTotalPrice()).reduce(new BigDecimal(0), (a, b) -> a.add(b));
 	}
 
 }

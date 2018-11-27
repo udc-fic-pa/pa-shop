@@ -3,8 +3,10 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {FormattedMessage, injectIntl} from 'react-intl';
 
+import users from '../../users';
 import * as selectors from '../selectors';
 import * as actions from '../actions';
+import {AddToShoppingCart} from '../../shopping';
 
 class ProductDetails extends React.Component {
 
@@ -44,6 +46,13 @@ class ProductDetails extends React.Component {
                     </div>
                 </div>
 
+                {this.props.user && 
+                    <div>
+                        <br/>
+                        <AddToShoppingCart productId={product.id}/>
+                    </div>
+                }
+
             </div>
     
         );
@@ -53,6 +62,7 @@ class ProductDetails extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+    user: users.selectors.getUser(state),
     product: selectors.getProduct(state),
     categories: selectors.getCategories(state)
 });

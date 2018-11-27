@@ -1,5 +1,7 @@
 package es.udc.pashop.backend.model.entities;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -7,23 +9,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class ShoppingCartItem {
 	
-	public static final short MAX_QUANTITY = 100;
+	public static final int MAX_QUANTITY = 100;
 	
 	private Long id;
 	private Product product;
 	private ShoppingCart shoppingCart;
-	private short quantity;
+	private int quantity = 0;
 	
 	public ShoppingCartItem() {}
 	
-	public ShoppingCartItem(Product product, ShoppingCart shoppingCart) {
+	public ShoppingCartItem(Product product, ShoppingCart shoppingCart, int quantity) throws MaxQuantityExceededException {
 		
 		this.product = product;	
 		this.shoppingCart = shoppingCart;
+		
+		incrementQuantity(quantity);
 		
 	}
 	
@@ -58,22 +63,27 @@ public class ShoppingCartItem {
 		this.shoppingCart = shoppingCart;
 	}
 	
-	public short getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
 	
-	public void setQuantity(short quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 	
-	public void incrementQuantity(short increment) throws MaxQuantityExceededException {
+	public void incrementQuantity(int increment) throws MaxQuantityExceededException {
 		
 		if (quantity + increment > MAX_QUANTITY ) {
-			throw new MaxQuantityExceededException((short) (MAX_QUANTITY - quantity));
+			throw new MaxQuantityExceededException(MAX_QUANTITY - quantity);
 		}
 		
 		quantity += increment;
 		
+	}
+	
+	@Transient
+	public BigDecimal getTotalPrice() {
+		return product.getPrice().multiply(new BigDecimal(quantity));
 	}
 
 }

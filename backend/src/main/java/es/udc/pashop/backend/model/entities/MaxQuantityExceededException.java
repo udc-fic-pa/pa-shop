@@ -3,13 +3,13 @@ package es.udc.pashop.backend.model.entities;
 @SuppressWarnings("serial")
 public class MaxQuantityExceededException extends Exception {
 	
-	private short maxAllowedIncrement;
+	private int maxAllowedIncrement;
 	
-	public MaxQuantityExceededException(short maxAllowedIncrement) {
+	public MaxQuantityExceededException(int maxAllowedIncrement) {
 		this.maxAllowedIncrement = maxAllowedIncrement;
 	}
 	
-	public short getMaxAllowedIncrement() {
+	public int getMaxAllowedIncrement() {
 		return maxAllowedIncrement;
 	}
 

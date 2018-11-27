@@ -85,7 +85,7 @@ public class ShoppingServiceTest {
 		
 		User user = signUpUser("user");
 		Product product = addProduct("product");
-		short quantity = 2;
+		int quantity = 2;
 				
 		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), quantity);
 		
@@ -94,6 +94,7 @@ public class ShoppingServiceTest {
 		assertEquals(1, items.size());
 		assertEquals(product, items.get(0).getProduct());
 		assertEquals(quantity, items.get(0).getQuantity());
+	
 		
 	}
 	
@@ -104,8 +105,8 @@ public class ShoppingServiceTest {
 		User user = signUpUser("user");
 		Product product1 = addProduct("product1");
 		Product product2 = addProduct("product2", product1.getCategory());
-		short quantity1 = 1;
-		short quantity2 = 2;
+		int quantity1 = 1;
+		int quantity2 = 2;
 				
 		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product1.getId(), quantity1);
 		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product2.getId(), quantity2);
@@ -121,7 +122,6 @@ public class ShoppingServiceTest {
 		assertEquals(item1.get().getQuantity(), quantity1);
 		assertTrue(item2.isPresent());
 		assertEquals(item2.get().getQuantity(), quantity2);
-
 		
 	}
 	
@@ -131,8 +131,8 @@ public class ShoppingServiceTest {
 		
 		User user = signUpUser("user");
 		Product product = addProduct("product");
-		short quantity1 = 1;
-		short quantity2 = 2;
+		int quantity1 = 1;
+		int quantity2 = 2;
 				
 		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), quantity1);
 		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), quantity2);
@@ -153,7 +153,7 @@ public class ShoppingServiceTest {
 		User user = signUpUser("user");
 		Product product = addProduct("product");
 		
-		shoppingService.addToShoppingCart(user.getId(), NON_EXISTENT_ID, product.getId(), (short) 1);
+		shoppingService.addToShoppingCart(user.getId(), NON_EXISTENT_ID, product.getId(), 1);
 		
 	}
 	
@@ -163,7 +163,7 @@ public class ShoppingServiceTest {
 		
 		User user = signUpUser("user");
 		
-		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), NON_EXISTENT_ID, (short) 1);
+		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), NON_EXISTENT_ID, 1);
 		
 	}
 	
@@ -175,7 +175,7 @@ public class ShoppingServiceTest {
 		User user2 = signUpUser("user2");
 		Product product = addProduct("product");
 		
-		shoppingService.addToShoppingCart(user1.getId(), user2.getShoppingCart().getId(), product.getId(), (short) 1);
+		shoppingService.addToShoppingCart(user1.getId(), user2.getShoppingCart().getId(), product.getId(), 1);
 		
 	}
 	
@@ -186,7 +186,7 @@ public class ShoppingServiceTest {
 		User user = signUpUser("user");
 		Product product = addProduct("product");
 		
-		shoppingService.addToShoppingCart(NON_EXISTENT_ID, user.getShoppingCart().getId(), product.getId(), (short) 1);
+		shoppingService.addToShoppingCart(NON_EXISTENT_ID, user.getShoppingCart().getId(), product.getId(), 1);
 		
 	}
 	
@@ -196,7 +196,7 @@ public class ShoppingServiceTest {
 		
 		User user = signUpUser("user");
 		Product product = addProduct("product");
-		short quantity = ShoppingCartItem.MAX_QUANTITY + 1;
+		int quantity = ShoppingCartItem.MAX_QUANTITY + 1;
 		boolean exceptionCatched = false;
 				
 		try {
@@ -218,8 +218,8 @@ public class ShoppingServiceTest {
 		
 		User user = signUpUser("user");
 		Product product = addProduct("product");
-		short quantity1 = 1;
-		short quantity2 = ShoppingCartItem.MAX_QUANTITY;
+		int quantity1 = 1;
+		int quantity2 = ShoppingCartItem.MAX_QUANTITY;
 		boolean exceptionCatched = false;
 				
 		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), quantity1);
@@ -249,14 +249,14 @@ public class ShoppingServiceTest {
 		Category category = addCategory("category");
 		boolean exceptionCatched = false;
 		
-		for (short i=0; i<ShoppingCart.MAX_ITEMS; i++) {
+		for (int i=0; i<ShoppingCart.MAX_ITEMS; i++) {
 			Product product = addProduct("product"+i, category);
-			shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), (short) 1);
+			shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), 1);
 		}
 				
 		try {
 			Product product = addProduct("product"+ShoppingCart.MAX_ITEMS, category);
-			shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), (short) 1);
+			shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), 1);
 		} catch (MaxItemsExceededException e) {
 			exceptionCatched = true;
 		}

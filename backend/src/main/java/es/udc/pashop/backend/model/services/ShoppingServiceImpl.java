@@ -28,7 +28,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 	@Autowired
 	private ShoppingCartItemDao shoppingCartItemDao;
 
-	public ShoppingCart addToShoppingCart(Long userId, Long shoppingCartId, Long productId, short quantity)
+	@Override
+	public ShoppingCart addToShoppingCart(Long userId, Long shoppingCartId, Long productId, int quantity)
 		throws InstanceNotFoundException, PermissionException, MaxQuantityExceededException, MaxItemsExceededException {
 		
 		ShoppingCart shoppingCart = permissionChecker.checkShoppingCartExistsAndBelongsTo(shoppingCartId, userId);
@@ -43,8 +44,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 		if (existingCartItem.isPresent()) {
 			existingCartItem.get().incrementQuantity(quantity);
 		} else {
-			ShoppingCartItem newCartItem = new ShoppingCartItem(product.get(), shoppingCart);
-			newCartItem.incrementQuantity(quantity);
+			ShoppingCartItem newCartItem = new ShoppingCartItem(product.get(), shoppingCart, quantity);
 			shoppingCart.addItem(newCartItem);
 			shoppingCartItemDao.save(newCartItem);
 		}

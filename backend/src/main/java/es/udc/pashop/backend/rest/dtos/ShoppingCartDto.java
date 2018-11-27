@@ -7,14 +7,17 @@ public class ShoppingCartDto {
 	
 	private Long id;
 	private List<ShoppingCartItemDto> items;
+	private int totalQuantity;
 	private BigDecimal totalPrice;
 	
 	public ShoppingCartDto() {}
 	
-	public ShoppingCartDto(Long shoppingCartId, List<ShoppingCartItemDto> items, BigDecimal totalPrice) {
+	public ShoppingCartDto(Long shoppingCartId, List<ShoppingCartItemDto> items, int totalQuantity,
+		BigDecimal totalPrice) {
 		
 		this.id = shoppingCartId;
 		this.items = items;
+		this.totalQuantity = totalQuantity;
 		this.totalPrice = totalPrice;
 		
 	}
@@ -33,6 +36,14 @@ public class ShoppingCartDto {
 
 	public void setItems(List<ShoppingCartItemDto> items) {
 		this.items = items;
+	}
+
+	public int getTotalQuantity() {
+		return totalQuantity;
+	}
+
+	public void setTotalQuantity(int totalQuantity) {
+		this.totalQuantity = totalQuantity;
 	}
 
 	public BigDecimal getTotalPrice() {

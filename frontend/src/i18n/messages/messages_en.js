@@ -26,10 +26,14 @@ export default {
     'project.global.fields.name': 'Name',
     'project.global.fields.password': 'Password',
     'project.global.fields.price': 'Price',
+    'project.global.fields.quantity': 'Quantity',
     'project.global.fields.userName': 'Username',
     'project.global.validator.email': 'Provide a correct e-mail address',
+    'project.global.validator.incorrectQuantity': 'Incorrect quantity',
     'project.global.validator.passwordsDoNotMatch': 'Passwords do not match',
     'project.global.validator.required': 'Required field',
+
+    'project.shopping.AddToCart.add': 'Add to cart',
 
     'project.users.ChangePassword.fields.confirmNewPassword': 'Confirm new password',
     'project.users.ChangePassword.fields.newPassword': 'New password',

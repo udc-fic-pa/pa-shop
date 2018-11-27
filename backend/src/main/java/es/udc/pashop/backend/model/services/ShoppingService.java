@@ -7,7 +7,7 @@ import es.udc.pashop.backend.model.entities.ShoppingCart;
 
 public interface ShoppingService {
 	
-	ShoppingCart addToShoppingCart(Long userId, Long shoppingCartId, Long productId, short quantity) 
+	ShoppingCart addToShoppingCart(Long userId, Long shoppingCartId, Long productId, int quantity) 
 		throws InstanceNotFoundException, PermissionException, MaxQuantityExceededException, MaxItemsExceededException;	
 
 }

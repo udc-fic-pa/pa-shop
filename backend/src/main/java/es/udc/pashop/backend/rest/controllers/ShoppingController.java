@@ -66,7 +66,7 @@ public class ShoppingController {
 	
 	@PostMapping("/shoppingcarts/{shoppingCartId}/addToShoppingCart")
 	public ShoppingCartDto addToShoppingCart(@RequestAttribute Long userId, @PathVariable Long shoppingCartId, 
-		@RequestParam Long productId, @RequestParam @Min(value=1) short quantity) 
+		@RequestParam Long productId, @RequestParam @Min(value=1) int quantity) 
 		throws InstanceNotFoundException, PermissionException, MaxQuantityExceededException, MaxItemsExceededException {
 		
 		return toShoppingCartDto(shoppingService.addToShoppingCart(userId, shoppingCartId, productId, quantity));
