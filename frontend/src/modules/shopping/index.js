@@ -4,5 +4,6 @@ import * as selectors from './selectors';
 
 export {default as AddToShoppingCart} from './components/AddToShoppingCart';
 export {default as ShoppingCartIcon} from './components/ShoppingCartIcon';
+export {default as ShoppingCart} from './components/ShoppingCart';
 
 export default {actions, reducer, selectors};

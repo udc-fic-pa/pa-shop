@@ -48,7 +48,7 @@ const FindProductsResult = ({productSearch, categories, previousFindProductsResu
                     {productSearch.result.items.map((product, index) => 
                         <tr key={index}>
                             <td>{selectors.getCategory(categories, product.categoryId).name}</td>
-                            <td><Link to={`/catalog/product-details/${product.id}`}>{product.name}</Link></td>
+                            <td><Link to={`/catalog/product-details/${product.id}/withBackLink`}>{product.name}</Link></td>
                     </tr>
                     )}
                 </tbody>

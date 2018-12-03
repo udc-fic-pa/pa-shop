@@ -12,6 +12,7 @@ export default {
 
     'project.common.ErrorDialog.title': 'Error',
 
+    'project.global.buttons.buy': 'Comprar',
     'project.global.buttons.cancel': 'Cancelar',
     'project.global.buttons.close': 'Cerrar',
     'project.global.buttons.next': 'Siguiente',
@@ -27,6 +28,7 @@ export default {
     'project.global.fields.password': 'Contraseña',
     'project.global.fields.price': 'Precio',
     'project.global.fields.quantity': 'Cantidad',
+    'project.global.fields.totalPrice': 'Precio total',
     'project.global.fields.userName': 'Usuario',
     'project.global.validator.email': 'Introduzca una dirección de correo electrónico correcta',
     'project.global.validator.incorrectQuantity': 'Cantidad incorrecta',
@@ -34,6 +36,7 @@ export default {
     'project.global.validator.required': 'Campo obligatorio',
 
     'project.shopping.AddToCart.add': 'Añadir al carrito',
+    'project.shopping.ShoppingCart.empty': 'El carrito está vacío',
 
     'project.users.ChangePassword.fields.confirmNewPassword': 'Confirmar contraseña nueva',
     'project.users.ChangePassword.fields.newPassword': 'Contraseña nueva',

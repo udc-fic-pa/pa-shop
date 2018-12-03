@@ -26,11 +26,13 @@ class ProductDetails extends React.Component {
 
             <div>
 
+                {this.props.match.params.withBackLink === 'withBackLink' &&
                 <p>
                     <Link to="/catalog/find-products-result">
                         <FormattedMessage id='project.catalog.ProductDetails.backToSearchResults'/>
                     </Link>
                 </p>
+                }
                 
                 <div className="card text-center">
                     <div className="card-body">
