@@ -1,8 +1,8 @@
 package es.udc.pashop.backend.model.entities;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -13,21 +13,31 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-public class ShoppingCart {
+@Table(name="OrderTable")
+public class Order {
 	
 	public static final int MAX_ITEMS = 20;
 	
 	private Long id;
-	private Set<ShoppingCartItem> items = new HashSet<>();
+	private Set<OrderItem> items = new HashSet<>();
 	private User user;
+	private LocalDateTime date;
+	private String postalAddress;
+	private String postalCode;
 	
-	public ShoppingCart() {}
+	public Order() {}
 	
-	public ShoppingCart(User user) {
+	public Order(User user, LocalDateTime date, String postalAddress, String postalCode) {
+		
 		this.user = user;
+		this.date = date;
+		this.postalAddress = postalAddress;
+		this.postalCode = postalCode;
+		
 	}
 
 	@Id
@@ -40,12 +50,12 @@ public class ShoppingCart {
 		this.id = id;
 	}
 
-	@OneToMany(mappedBy="shoppingCart")
-	public Set<ShoppingCartItem> getItems() {
+	@OneToMany(mappedBy="order")
+	public Set<OrderItem> getItems() {
 		return items;
 	}
 
-	public void setItems(Set<ShoppingCartItem> items) {
+	public void setItems(Set<OrderItem> items) {
 		this.items = items;
 	}
 
@@ -59,35 +69,40 @@ public class ShoppingCart {
 		this.user = user;
 	}
 	
-	@Transient
-	public Optional<ShoppingCartItem> getItem(Long productId) {
-		return items.stream().filter(item -> item.getProduct().getId().equals(productId)).findFirst();
+	public LocalDateTime getDate() {
+		return date;
 	}
-	
-	public void addItem(ShoppingCartItem item) throws MaxItemsExceededException {
-		
-		if (items.size() == MAX_ITEMS) {
-			throw new MaxItemsExceededException();
-		}
+
+	public void setDate(LocalDateTime date) {
+		this.date = date;
+	}
+
+	public String getPostalAddress() {
+		return postalAddress;
+	}
+
+	public void setPostalAddress(String postalAddress) {
+		this.postalAddress = postalAddress;
+	}
+
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
+	public void addItem(OrderItem item) {
 		
 		items.add(item);
-		item.setShoppingCart(this);
+		item.setOrder(this);
 		
-	}
-	
-	@Transient
-	public int getTotalQuantity() {
-		return items.stream().map(i -> i.getQuantity()).reduce(0, (a, b) -> a+b);
 	}
 
 	@Transient
 	public BigDecimal getTotalPrice() {
 		return items.stream().map(i -> i.getTotalPrice()).reduce(new BigDecimal(0), (a, b) -> a.add(b));
-	}
-	
-	@Transient
-	public boolean isEmpty() {
-		return items.isEmpty();
 	}
 
 }

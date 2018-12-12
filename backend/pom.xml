@@ -94,6 +94,11 @@
 			<artifactId>jjwt</artifactId>
 			<version>${jjwt.version}</version>
 		</dependency>
+		<!--  To use java.time types (e.g. LocalDateTime) in entities. -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-java8</artifactId>
+		</dependency>
 		
     </dependencies>
 

@@ -1,5 +1,6 @@
 package es.udc.pashop.backend.model.services;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import es.udc.pashop.backend.model.common.exceptions.InstanceNotFoundException;
 import es.udc.pashop.backend.model.entities.MaxItemsExceededException;
 import es.udc.pashop.backend.model.entities.MaxQuantityExceededException;
+import es.udc.pashop.backend.model.entities.Order;
+import es.udc.pashop.backend.model.entities.OrderDao;
+import es.udc.pashop.backend.model.entities.OrderItem;
+import es.udc.pashop.backend.model.entities.OrderItemDao;
 import es.udc.pashop.backend.model.entities.Product;
 import es.udc.pashop.backend.model.entities.ProductDao;
 import es.udc.pashop.backend.model.entities.ShoppingCart;
@@ -27,6 +32,12 @@ public class ShoppingServiceImpl implements ShoppingService {
 	
 	@Autowired
 	private ShoppingCartItemDao shoppingCartItemDao;
+	
+	@Autowired
+	private OrderItemDao orderItemDao;
+	
+	@Autowired
+	private OrderDao orderDao;
 
 	@Override
 	public ShoppingCart addToShoppingCart(Long userId, Long shoppingCartId, Long productId, int quantity)
@@ -51,6 +62,33 @@ public class ShoppingServiceImpl implements ShoppingService {
 		
 		return shoppingCart;
 		
+	}
+	
+	@Override
+	public Order buy(Long userId, Long shoppingCartId, String postalAddress, String postalCode)
+			throws InstanceNotFoundException, PermissionException, EmptyShoppingCartException {
+		
+		ShoppingCart shoppingCart = permissionChecker.checkShoppingCartExistsAndBelongsTo(shoppingCartId, userId);
+		
+		if (shoppingCart.isEmpty()) {
+			throw new EmptyShoppingCartException();
+		}
+		
+		Order order = new Order(shoppingCart.getUser(), LocalDateTime.now(), postalAddress, postalCode);
+		
+		orderDao.save(order);
+		
+		for (ShoppingCartItem shoppingCartItem : shoppingCart.getItems()) {
+			
+			OrderItem orderItem = new OrderItem(shoppingCartItem.getProduct(), shoppingCartItem.getQuantity());
+			
+			order.addItem(orderItem);
+			orderItemDao.save(orderItem);
+			
+		}
+
+		return order;
+
 	}
 
 }

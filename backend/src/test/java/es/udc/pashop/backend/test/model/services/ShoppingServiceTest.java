@@ -5,9 +5,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -24,11 +24,14 @@ import es.udc.pashop.backend.model.entities.Category;
 import es.udc.pashop.backend.model.entities.CategoryDao;
 import es.udc.pashop.backend.model.entities.MaxItemsExceededException;
 import es.udc.pashop.backend.model.entities.MaxQuantityExceededException;
+import es.udc.pashop.backend.model.entities.Order;
+import es.udc.pashop.backend.model.entities.OrderItem;
 import es.udc.pashop.backend.model.entities.Product;
 import es.udc.pashop.backend.model.entities.ProductDao;
 import es.udc.pashop.backend.model.entities.ShoppingCart;
 import es.udc.pashop.backend.model.entities.ShoppingCartItem;
 import es.udc.pashop.backend.model.entities.User;
+import es.udc.pashop.backend.model.services.EmptyShoppingCartException;
 import es.udc.pashop.backend.model.services.PermissionException;
 import es.udc.pashop.backend.model.services.ShoppingService;
 import es.udc.pashop.backend.model.services.UserService;
@@ -94,8 +97,7 @@ public class ShoppingServiceTest {
 		assertEquals(1, items.size());
 		assertEquals(product, items.get(0).getProduct());
 		assertEquals(quantity, items.get(0).getQuantity());
-	
-		
+
 	}
 	
 	@Test
@@ -111,12 +113,12 @@ public class ShoppingServiceTest {
 		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product1.getId(), quantity1);
 		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product2.getId(), quantity2);
 		
-		Collection<ShoppingCartItem> items = user.getShoppingCart().getItems();
+		Set<ShoppingCartItem> items = user.getShoppingCart().getItems();
 		
 		assertEquals(2, items.size());
 	
-		Optional<ShoppingCartItem> item1 = items.stream().filter(i -> i.getProduct() == product1).findFirst();
-		Optional<ShoppingCartItem> item2 = items.stream().filter(i -> i.getProduct() == product2).findFirst();
+		Optional<ShoppingCartItem> item1 = items.stream().filter(i -> i.getProduct().equals(product1)).findFirst();
+		Optional<ShoppingCartItem> item2 = items.stream().filter(i -> i.getProduct().equals(product2)).findFirst();
 		
 		assertTrue(item1.isPresent());
 		assertEquals(item1.get().getQuantity(), quantity1);
@@ -263,6 +265,82 @@ public class ShoppingServiceTest {
 		
 		assertTrue(exceptionCatched);
 		assertEquals(ShoppingCart.MAX_ITEMS, user.getShoppingCart().getItems().size());
+		
+	}	
+	
+	@Test
+	public void testBuy() throws InstanceNotFoundException, PermissionException, MaxQuantityExceededException,
+		MaxItemsExceededException, EmptyShoppingCartException {
+		
+		User user = signUpUser("user");
+		Product product1 = addProduct("product1");
+		Product product2 = addProduct("product2", product1.getCategory());
+		int quantity1 = 1;
+		int quantity2 = 2;
+		String postalAddress = "Postal Address";
+		String postalCode = "12345";
+				
+		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product1.getId(), quantity1);
+		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product2.getId(), quantity2);
+		
+		Order order = shoppingService.buy(user.getId(), user.getShoppingCart().getId(), postalAddress, postalCode);
+		
+		assertEquals(user, order.getUser());
+		assertEquals(postalAddress, order.getPostalAddress());
+		assertEquals(postalCode, order.getPostalCode());
+		
+		Set<OrderItem> items = order.getItems();
+		
+		assertEquals(2, items.size());
+		
+		Optional<OrderItem> item1 = items.stream().filter(i -> i.getProduct().equals(product1)).findFirst();
+		Optional<OrderItem> item2 = items.stream().filter(i -> i.getProduct().equals(product2)).findFirst();
+		
+		assertTrue(item1.isPresent());
+		assertEquals(quantity1, item1.get().getQuantity());
+		assertTrue(item2.isPresent());
+		assertEquals(quantity2, item2.get().getQuantity());
+		
+	}
+	 
+	@Test(expected = InstanceNotFoundException.class)
+	public void testBuyWithNonExistingShoppingCart() throws InstanceNotFoundException, PermissionException,
+		EmptyShoppingCartException {
+		
+		User user = signUpUser("user");
+		
+		shoppingService.buy(user.getId(), NON_EXISTENT_ID, "Postal Address", "12345");
+		
+	}
+	
+	@Test(expected = PermissionException.class)
+	public void testBuyAnotherShoppingCart() throws InstanceNotFoundException, PermissionException,
+		EmptyShoppingCartException {
+		
+		User user1 = signUpUser("user1");
+		User user2 = signUpUser("user2");
+		
+		shoppingService.buy(user1.getId(), user2.getShoppingCart().getId(), "Postal Address", "12345");
+		
+	}
+	
+	@Test(expected = PermissionException.class)
+	public void testBuyWithNonExistentUserId() throws InstanceNotFoundException, PermissionException,
+		EmptyShoppingCartException {
+		
+		User user = signUpUser("user");
+		
+		shoppingService.buy(NON_EXISTENT_ID, user.getShoppingCart().getId(), "Postal Address", "12345");
+		
+	}
+	
+	@Test(expected = EmptyShoppingCartException.class)
+	public void testBuyEmptyShoppingCart() throws InstanceNotFoundException, PermissionException,
+		EmptyShoppingCartException {
+		
+		User user = signUpUser("user");
+		
+		shoppingService.buy(user.getId(), user.getShoppingCart().getId(), "Postal Address", "12345");
 		
 	}
 

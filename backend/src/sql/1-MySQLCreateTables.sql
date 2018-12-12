@@ -1,5 +1,7 @@
 -- Indexes for primary keys have been explicitly created.
 
+DROP TABLE OrderItem;
+DROP TABLE OrderTable;
 DROP TABLE ShoppingCartItem;
 DROP TABLE ShoppingCart;
 DROP TABLE Product;
@@ -61,3 +63,27 @@ CREATE TABLE ShoppingCartItem (
     CONSTRAINT ShoppingCartItemShoppingCartIdFK FOREIGN KEY(shoppingCartId)
         REFERENCES ShoppingCart (id)
 ) ENGINE = InnoDB;
+
+CREATE TABLE OrderTable (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    userId BIGINT NOT NULL,
+    date DATETIME NOT NULL,
+    postalAddress VARCHAR(200) NOT NULL,
+    postalCode VARCHAR(20) NOT NULL,
+    CONSTRAINT OrderPK PRIMARY KEY (id),
+    CONSTRAINT OrderUserIdFK FOREIGN KEY(userId)
+        REFERENCES User (id)
+) ENGINE = InnoDB;
+
+CREATE TABLE OrderItem (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    productId BIGINT NOT NULL,
+    quantity SMALLINT NOT NULL,
+    orderId BIGINT NOT NULL,
+    CONSTRAINT OrderItemPK PRIMARY KEY (id),
+    CONSTRAINT OrderItemProductIdFK FOREIGN KEY(productId)
+        REFERENCES Product (id),
+    CONSTRAINT OrderItemOrderIdFK FOREIGN KEY(orderId)
+        REFERENCES OrderTable (id)
+) ENGINE = InnoDB;
+
