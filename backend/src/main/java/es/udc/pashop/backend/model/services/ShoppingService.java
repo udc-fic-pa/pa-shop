@@ -13,5 +13,7 @@ public interface ShoppingService {
 	
 	Order buy(Long userId, Long shoppingCartId, String postalAddress, String postalCode)
 		throws InstanceNotFoundException, PermissionException, EmptyShoppingCartException;
+	
+	Order findOrder(Long userId, Long orderId) throws InstanceNotFoundException, PermissionException;
 
 }

@@ -40,6 +40,11 @@ public class ShoppingServiceImpl implements ShoppingService {
 	private OrderDao orderDao;
 
 	@Override
+	public Order findOrder(Long userId, Long orderId) throws InstanceNotFoundException, PermissionException {
+		return permissionChecker.checkOrderExistsAndBelongsTo(orderId, userId);
+	}
+
+	@Override
 	public ShoppingCart addToShoppingCart(Long userId, Long shoppingCartId, Long productId, int quantity)
 		throws InstanceNotFoundException, PermissionException, MaxQuantityExceededException, MaxItemsExceededException {
 		

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.pashop.backend.model.common.exceptions.InstanceNotFoundException;
+import es.udc.pashop.backend.model.entities.Order;
+import es.udc.pashop.backend.model.entities.OrderDao;
 import es.udc.pashop.backend.model.entities.ShoppingCart;
 import es.udc.pashop.backend.model.entities.ShoppingCartDao;
 import es.udc.pashop.backend.model.entities.User;
@@ -21,6 +23,9 @@ public class PermissionCheckerImpl implements PermissionChecker {
 	
 	@Autowired
 	private ShoppingCartDao shoppingCartDao;
+	
+	@Autowired
+	private OrderDao orderDao;
 
 	@Override
 	public void checkUserExists(Long userId) throws InstanceNotFoundException {
@@ -59,6 +64,24 @@ public class PermissionCheckerImpl implements PermissionChecker {
 		}
 		
 		return shoppingCart.get();
+		
+	}
+
+	@Override
+	public Order checkOrderExistsAndBelongsTo(Long orderId, Long userId)
+		throws PermissionException, InstanceNotFoundException {
+		
+		Optional<Order> order = orderDao.findById(orderId);
+		
+		if (!order.isPresent()) {
+			throw new InstanceNotFoundException("project.entities.order", orderId);
+		}
+		
+		if (!order.get().getUser().getId().equals(userId)) {
+			throw new PermissionException();
+		}
+		
+		return order.get();
 		
 	}
 

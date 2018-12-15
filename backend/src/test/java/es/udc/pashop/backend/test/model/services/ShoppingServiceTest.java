@@ -269,7 +269,7 @@ public class ShoppingServiceTest {
 	}	
 	
 	@Test
-	public void testBuy() throws InstanceNotFoundException, PermissionException, MaxQuantityExceededException,
+	public void testBuyAndFindOrder() throws InstanceNotFoundException, PermissionException, MaxQuantityExceededException,
 		MaxItemsExceededException, EmptyShoppingCartException {
 		
 		User user = signUpUser("user");
@@ -283,7 +283,8 @@ public class ShoppingServiceTest {
 		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product1.getId(), quantity1);
 		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product2.getId(), quantity2);
 		
-		Order order = shoppingService.buy(user.getId(), user.getShoppingCart().getId(), postalAddress, postalCode);
+		Order order = shoppingService.buy(user.getId(), user.getShoppingCart().getId(), postalAddress, postalCode);	
+		order = shoppingService.findOrder(user.getId(), order.getId());
 		
 		assertEquals(user, order.getUser());
 		assertEquals(postalAddress, order.getPostalAddress());
@@ -341,6 +342,46 @@ public class ShoppingServiceTest {
 		User user = signUpUser("user");
 		
 		shoppingService.buy(user.getId(), user.getShoppingCart().getId(), "Postal Address", "12345");
+		
+	}
+	
+	@Test(expected = InstanceNotFoundException.class)
+	public void testFindNonExistentOrder() throws InstanceNotFoundException, PermissionException {
+		
+		User user = signUpUser("user");
+		
+		shoppingService.findOrder(user.getId(), NON_EXISTENT_ID);
+		
+	}
+	
+	@Test(expected = PermissionException.class)
+	public void testFindOrderOfAnotherUser() throws InstanceNotFoundException, PermissionException, 
+		MaxQuantityExceededException, MaxItemsExceededException, EmptyShoppingCartException {
+		
+		User user1 = signUpUser("user1");
+		User user2 = signUpUser("user2");		
+		Product product = addProduct("product");
+				
+		shoppingService.addToShoppingCart(user1.getId(), user1.getShoppingCart().getId(), product.getId(), 1);
+		
+		Order order = shoppingService.buy(user1.getId(), user1.getShoppingCart().getId(), "Postal Address", "12345");	
+		
+		shoppingService.findOrder(user2.getId(), order.getId());
+		
+	}
+	
+	@Test(expected = PermissionException.class)
+	public void testFindOrderWithNonExistingUserId() throws InstanceNotFoundException, PermissionException, 
+		MaxQuantityExceededException, MaxItemsExceededException, EmptyShoppingCartException {
+		
+		User user = signUpUser("user");
+		Product product = addProduct("product");
+				
+		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), 1);
+		
+		Order order = shoppingService.buy(user.getId(), user.getShoppingCart().getId(), "Postal Address", "12345");	
+		
+		shoppingService.findOrder(NON_EXISTENT_ID, order.getId());
 		
 	}
 
