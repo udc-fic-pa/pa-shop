@@ -89,8 +89,11 @@ public class ShoppingServiceImpl implements ShoppingService {
 			
 			order.addItem(orderItem);
 			orderItemDao.save(orderItem);
+			shoppingCartItemDao.delete(shoppingCartItem);
 			
 		}
+		
+		shoppingCart.removeAll();
 
 		return order;
 

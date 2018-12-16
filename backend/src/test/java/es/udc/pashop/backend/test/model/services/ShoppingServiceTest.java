@@ -302,6 +302,8 @@ public class ShoppingServiceTest {
 		assertTrue(item2.isPresent());
 		assertEquals(quantity2, item2.get().getQuantity());
 		
+		assertTrue(user.getShoppingCart().isEmpty());
+		
 	}
 	 
 	@Test(expected = InstanceNotFoundException.class)

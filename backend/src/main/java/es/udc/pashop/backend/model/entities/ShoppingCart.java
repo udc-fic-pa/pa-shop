@@ -75,6 +75,10 @@ public class ShoppingCart {
 		
 	}
 	
+	public void removeAll() {
+		items = new HashSet<>();
+	}
+	
 	@Transient
 	public int getTotalQuantity() {
 		return items.stream().map(i -> i.getQuantity()).reduce(0, (a, b) -> a+b);
