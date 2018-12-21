@@ -26,9 +26,10 @@ mysql -u root
 
 ```
 cd backend
+mvn sql:execute (only first time to create tables)
 mvn spring-boot:run
 
 cd frontend
-npm install
+npm install (only first time to download libraries)
 npm start
 ```
