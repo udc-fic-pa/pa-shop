@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -97,6 +99,15 @@ public class ShoppingServiceImpl implements ShoppingService {
 
 		return order;
 
+	}
+
+	@Override
+	public Block<Order> findOrders(Long userId, int startIndex, int count) {
+		
+		Slice<Order> slice = orderDao.findByUserIdOrderByDateDesc(userId, PageRequest.of(startIndex/count, count));
+		
+		return new Block<>(slice.getContent(), slice.hasNext());
+		
 	}
 
 }

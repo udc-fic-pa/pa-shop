@@ -15,5 +15,7 @@ public interface ShoppingService {
 		throws InstanceNotFoundException, PermissionException, EmptyShoppingCartException;
 	
 	Order findOrder(Long userId, Long orderId) throws InstanceNotFoundException, PermissionException;
+	
+	Block<Order> findOrders(Long userId, int startIndex, int count);
 
 }

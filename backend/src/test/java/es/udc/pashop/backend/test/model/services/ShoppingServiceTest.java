@@ -4,7 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -25,12 +27,15 @@ import es.udc.pashop.backend.model.entities.CategoryDao;
 import es.udc.pashop.backend.model.entities.MaxItemsExceededException;
 import es.udc.pashop.backend.model.entities.MaxQuantityExceededException;
 import es.udc.pashop.backend.model.entities.Order;
+import es.udc.pashop.backend.model.entities.OrderDao;
 import es.udc.pashop.backend.model.entities.OrderItem;
+import es.udc.pashop.backend.model.entities.OrderItemDao;
 import es.udc.pashop.backend.model.entities.Product;
 import es.udc.pashop.backend.model.entities.ProductDao;
 import es.udc.pashop.backend.model.entities.ShoppingCart;
 import es.udc.pashop.backend.model.entities.ShoppingCartItem;
 import es.udc.pashop.backend.model.entities.User;
+import es.udc.pashop.backend.model.services.Block;
 import es.udc.pashop.backend.model.services.EmptyShoppingCartException;
 import es.udc.pashop.backend.model.services.PermissionException;
 import es.udc.pashop.backend.model.services.ShoppingService;
@@ -56,6 +61,12 @@ public class ShoppingServiceTest {
 	@Autowired
 	private ProductDao productDao; 
 	
+	@Autowired
+	private OrderDao orderDao;
+	
+	@Autowired
+	private OrderItemDao orderItemDao;
+	
 	private User signUpUser(String userName) {
 		
 		User user = new User(userName, "password", "firstName", "lastName", userName + "@" + userName + ".com");
@@ -80,6 +91,21 @@ public class ShoppingServiceTest {
 	
 	private Product addProduct(String name) {
 		return addProduct(name, addCategory("category"));
+	}
+	
+	private Order addOrder(User user, Product product, LocalDateTime date) {
+
+		String postalAddress = "Postal Address";
+		String postalCode = "12345";
+		Order order = new Order(user, date, postalAddress, postalCode);
+		OrderItem item = new OrderItem(product, 1);
+		
+		orderDao.save(order);
+		order.addItem(item);
+		orderItemDao.save(item);
+		
+		return order;
+		
 	}
 	
 	@Test
@@ -384,6 +410,33 @@ public class ShoppingServiceTest {
 		Order order = shoppingService.buy(user.getId(), user.getShoppingCart().getId(), "Postal Address", "12345");	
 		
 		shoppingService.findOrder(NON_EXISTENT_ID, order.getId());
+		
+	}
+	
+	@Test
+	public void testFindNoOrders() {
+		
+		User user = signUpUser("user");
+		Block<Order> expectedOrders = new Block<>(new ArrayList<>(), false);
+		
+		assertEquals(expectedOrders, shoppingService.findOrders(user.getId(), 0, 1));
+		
+	}
+	
+	@Test
+	public void testFindOrders() {
+
+		Product product = addProduct("product");
+		User user = signUpUser("user");
+		Order order1 = addOrder(user, product, LocalDateTime.of(2017, 10, 1, 10, 2, 3));
+		Order order2 = addOrder(user, product, LocalDateTime.of(2018, 11, 1, 10, 2, 3));
+		Order order3 = addOrder(user, product, LocalDateTime.of(2018, 12, 1, 10, 2, 3));
+
+		Block<Order> expectedBlock = new Block<>(Arrays.asList(order3, order2), true);
+		assertEquals(expectedBlock, shoppingService.findOrders(user.getId(), 0, 2));
+		
+		expectedBlock = new Block<>(Arrays.asList(order1), false);
+		assertEquals(expectedBlock, shoppingService.findOrders(user.getId(), 2, 1));
 		
 	}
 
