@@ -9,10 +9,12 @@ import javax.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,9 +24,12 @@ import org.springframework.web.bind.annotation.RestController;
 import es.udc.pashop.backend.model.common.exceptions.InstanceNotFoundException;
 import es.udc.pashop.backend.model.entities.MaxItemsExceededException;
 import es.udc.pashop.backend.model.entities.MaxQuantityExceededException;
+import es.udc.pashop.backend.model.services.EmptyShoppingCartException;
 import es.udc.pashop.backend.model.services.PermissionException;
 import es.udc.pashop.backend.model.services.ShoppingService;
 import es.udc.pashop.backend.rest.common.ErrorsDto;
+import es.udc.pashop.backend.rest.dtos.BuyParamsDto;
+import es.udc.pashop.backend.rest.dtos.IdDto;
 import es.udc.pashop.backend.rest.dtos.ShoppingCartDto;
 
 @RestController
@@ -33,6 +38,7 @@ public class ShoppingController {
 	
 	private final static String MAX_QUANTITY_EXCEEDED_EXCEPTION_CODE = "project.exceptions.MaxQuantityExceededException";
 	private final static String MAX_ITEMS_EXCEEDED_EXCEPTION_CODE = "project.exceptions.MaxItemsExceededException";
+	private final static String EMPTY_SHOPPING_CART_EXCEPTION_CODE = "project.exceptions.EmptyShoppingCartException";
 	
 	@Autowired
 	private MessageSource messageSource;
@@ -64,12 +70,34 @@ public class ShoppingController {
 		
 	}
 	
+	@ExceptionHandler(EmptyShoppingCartException.class)
+	@ResponseStatus(HttpStatus.FORBIDDEN)
+	@ResponseBody
+	public ErrorsDto handleEmptyShoppingCartException(EmptyShoppingCartException exception, Locale locale) {
+		
+		String errorMessage = messageSource.getMessage(EMPTY_SHOPPING_CART_EXCEPTION_CODE, null,
+			EMPTY_SHOPPING_CART_EXCEPTION_CODE, locale);
+ 
+		return new ErrorsDto(errorMessage);
+		
+	}
+	
 	@PostMapping("/shoppingcarts/{shoppingCartId}/addToShoppingCart")
 	public ShoppingCartDto addToShoppingCart(@RequestAttribute Long userId, @PathVariable Long shoppingCartId, 
 		@RequestParam Long productId, @RequestParam @Min(value=1) int quantity) 
 		throws InstanceNotFoundException, PermissionException, MaxQuantityExceededException, MaxItemsExceededException {
 		
 		return toShoppingCartDto(shoppingService.addToShoppingCart(userId, shoppingCartId, productId, quantity));
+		
+	}
+	
+	@PostMapping("/shoppingcarts/{shoppingCartId}/buy")
+	public IdDto buy(@RequestAttribute Long userId, @PathVariable Long shoppingCartId,
+		@Validated @RequestBody BuyParamsDto buyParams) 
+		throws InstanceNotFoundException, PermissionException, EmptyShoppingCartException {
+		
+		return new IdDto(shoppingService.buy(userId, shoppingCartId, buyParams.getPostalAddress(),
+			buyParams.getPostalCode()).getId());
 		
 	}
 
