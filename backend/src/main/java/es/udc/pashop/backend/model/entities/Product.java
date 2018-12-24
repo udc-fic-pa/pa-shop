@@ -29,6 +29,8 @@ public class Product {
 		this.price = price;
 		this.category = category;
 		
+		price.setScale(2, RoundingMode.HALF_EVEN);
+		
 	}
 
 	@Id

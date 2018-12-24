@@ -87,7 +87,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 		
 		for (ShoppingCartItem shoppingCartItem : shoppingCart.getItems()) {
 			
-			OrderItem orderItem = new OrderItem(shoppingCartItem.getProduct(), shoppingCartItem.getQuantity());
+			OrderItem orderItem = new OrderItem(shoppingCartItem.getProduct(),
+				shoppingCartItem.getProduct().getPrice(), shoppingCartItem.getQuantity());
 			
 			order.addItem(orderItem);
 			orderItemDao.save(orderItem);

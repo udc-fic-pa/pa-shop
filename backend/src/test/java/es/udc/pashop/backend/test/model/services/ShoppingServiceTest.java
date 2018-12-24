@@ -89,6 +89,10 @@ public class ShoppingServiceTest {
 		return productDao.save(new Product(name, "description", new BigDecimal(1), category));
 	}
 	
+	private Product addProduct(String name, BigDecimal price, Category category) {
+		return productDao.save(new Product(name, "description", price, category));
+	}
+	
 	private Product addProduct(String name) {
 		return addProduct(name, addCategory("category"));
 	}
@@ -98,7 +102,7 @@ public class ShoppingServiceTest {
 		String postalAddress = "Postal Address";
 		String postalCode = "12345";
 		Order order = new Order(user, date, postalAddress, postalCode);
-		OrderItem item = new OrderItem(product, 1);
+		OrderItem item = new OrderItem(product, product.getPrice(), 1);
 		
 		orderDao.save(order);
 		order.addItem(item);
@@ -300,7 +304,7 @@ public class ShoppingServiceTest {
 		
 		User user = signUpUser("user");
 		Product product1 = addProduct("product1");
-		Product product2 = addProduct("product2", product1.getCategory());
+		Product product2 = addProduct("product2", product1.getPrice().add(new BigDecimal(1)), product1.getCategory());
 		int quantity1 = 1;
 		int quantity2 = 2;
 		String postalAddress = "Postal Address";
@@ -324,8 +328,10 @@ public class ShoppingServiceTest {
 		Optional<OrderItem> item2 = items.stream().filter(i -> i.getProduct().equals(product2)).findFirst();
 		
 		assertTrue(item1.isPresent());
+		assertEquals(product1.getPrice(), item1.get().getPrice());
 		assertEquals(quantity1, item1.get().getQuantity());
 		assertTrue(item2.isPresent());
+		assertEquals(product2.getPrice(), item2.get().getPrice());
 		assertEquals(quantity2, item2.get().getQuantity());
 		
 		assertTrue(user.getShoppingCart().isEmpty());

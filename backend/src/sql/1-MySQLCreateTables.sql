@@ -78,6 +78,7 @@ CREATE TABLE OrderTable (
 CREATE TABLE OrderItem (
     id BIGINT NOT NULL AUTO_INCREMENT,
     productId BIGINT NOT NULL,
+    price DECIMAL(11, 2) NOT NULL,
     quantity SMALLINT NOT NULL,
     orderId BIGINT NOT NULL,
     CONSTRAINT OrderItemPK PRIMARY KEY (id),
