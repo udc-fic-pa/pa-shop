@@ -4,8 +4,6 @@ import static es.udc.pashop.backend.rest.dtos.ShoppingCartConversor.toShoppingCa
 
 import java.util.Locale;
 
-import javax.validation.constraints.Min;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +25,7 @@ import es.udc.pashop.backend.model.services.EmptyShoppingCartException;
 import es.udc.pashop.backend.model.services.PermissionException;
 import es.udc.pashop.backend.model.services.ShoppingService;
 import es.udc.pashop.backend.rest.common.ErrorsDto;
+import es.udc.pashop.backend.rest.dtos.AddToCartParamsDto;
 import es.udc.pashop.backend.rest.dtos.BuyParamsDto;
 import es.udc.pashop.backend.rest.dtos.IdDto;
 import es.udc.pashop.backend.rest.dtos.ShoppingCartDto;
@@ -84,20 +82,21 @@ public class ShoppingController {
 	
 	@PostMapping("/shoppingcarts/{shoppingCartId}/addToShoppingCart")
 	public ShoppingCartDto addToShoppingCart(@RequestAttribute Long userId, @PathVariable Long shoppingCartId, 
-		@RequestParam Long productId, @RequestParam @Min(value=1) int quantity) 
+		@Validated @RequestBody AddToCartParamsDto params) 
 		throws InstanceNotFoundException, PermissionException, MaxQuantityExceededException, MaxItemsExceededException {
 		
-		return toShoppingCartDto(shoppingService.addToShoppingCart(userId, shoppingCartId, productId, quantity));
+		return toShoppingCartDto(shoppingService.addToShoppingCart(userId, shoppingCartId, params.getProductId(),
+			params.getQuantity()));
 		
 	}
 	
 	@PostMapping("/shoppingcarts/{shoppingCartId}/buy")
 	public IdDto buy(@RequestAttribute Long userId, @PathVariable Long shoppingCartId,
-		@Validated @RequestBody BuyParamsDto buyParams) 
+		@Validated @RequestBody BuyParamsDto params) 
 		throws InstanceNotFoundException, PermissionException, EmptyShoppingCartException {
 		
-		return new IdDto(shoppingService.buy(userId, shoppingCartId, buyParams.getPostalAddress(),
-			buyParams.getPostalCode()).getId());
+		return new IdDto(shoppingService.buy(userId, shoppingCartId, params.getPostalAddress(),
+			params.getPostalCode()).getId());
 		
 	}
 
