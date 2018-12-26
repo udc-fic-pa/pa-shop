@@ -42,11 +42,6 @@ public class ShoppingServiceImpl implements ShoppingService {
 	private OrderDao orderDao;
 
 	@Override
-	public Order findOrder(Long userId, Long orderId) throws InstanceNotFoundException, PermissionException {
-		return permissionChecker.checkOrderExistsAndBelongsTo(orderId, userId);
-	}
-
-	@Override
 	public ShoppingCart addToShoppingCart(Long userId, Long shoppingCartId, Long productId, int quantity)
 		throws InstanceNotFoundException, PermissionException, MaxQuantityExceededException, MaxItemsExceededException {
 		
@@ -103,6 +98,13 @@ public class ShoppingServiceImpl implements ShoppingService {
 	}
 
 	@Override
+	@Transactional(readOnly=true)
+	public Order findOrder(Long userId, Long orderId) throws InstanceNotFoundException, PermissionException {
+		return permissionChecker.checkOrderExistsAndBelongsTo(orderId, userId);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
 	public Block<Order> findOrders(Long userId, int startIndex, int count) {
 		
 		Slice<Order> slice = orderDao.findByUserIdOrderByDateDesc(userId, PageRequest.of(startIndex/count, count));
