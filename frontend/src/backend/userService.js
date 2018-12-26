@@ -48,12 +48,8 @@ export const updateProfile = (user, onSuccess, onErrors) => {
 export const changePassword = (id, oldPassword, newPassword, onSuccess,
     onErrors) => {
 
-    const parameters = new FormData();
-
-    parameters.append("oldPassword", oldPassword);
-    parameters.append("newPassword", newPassword);
-
-    appFetch(`/users/${id}/changePassword`, config('POST', parameters),
+    appFetch(`/users/${id}/changePassword`, 
+        config('POST', {oldPassword, newPassword}),
         onSuccess, onErrors);
 
 }

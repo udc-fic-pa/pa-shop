@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,6 +35,7 @@ import es.udc.pashop.backend.rest.common.ErrorsDto;
 import es.udc.pashop.backend.rest.common.JwtGenerator;
 import es.udc.pashop.backend.rest.common.JwtInfo;
 import es.udc.pashop.backend.rest.dtos.AuthenticatedUserDto;
+import es.udc.pashop.backend.rest.dtos.ChangePasswordParamsDto;
 import es.udc.pashop.backend.rest.dtos.LoginParamsDto;
 import es.udc.pashop.backend.rest.dtos.UserDto;
 
@@ -131,15 +131,15 @@ public class UserController {
 	
 	@PostMapping("/{id}/changePassword")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void changePassword(@RequestAttribute Long userId, @PathVariable Long id, @RequestParam String oldPassword,
-		@RequestParam String newPassword)
+	public void changePassword(@RequestAttribute Long userId, @PathVariable Long id,
+		@Validated @RequestBody ChangePasswordParamsDto params)
 		throws PermissionException, InstanceNotFoundException, IncorrectPasswordException {
 		
 		if (!id.equals(userId)) {
 			throw new PermissionException();
 		}
 		
-		userService.changePassword(id, oldPassword, newPassword);
+		userService.changePassword(id, params.getOldPassword(), params.getNewPassword());
 		
 	}
 	
