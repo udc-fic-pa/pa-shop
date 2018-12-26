@@ -36,6 +36,7 @@ import es.udc.pashop.backend.rest.common.ErrorsDto;
 import es.udc.pashop.backend.rest.common.JwtGenerator;
 import es.udc.pashop.backend.rest.common.JwtInfo;
 import es.udc.pashop.backend.rest.dtos.AuthenticatedUserDto;
+import es.udc.pashop.backend.rest.dtos.LoginParamsDto;
 import es.udc.pashop.backend.rest.dtos.UserDto;
 
 @RestController
@@ -95,10 +96,10 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public AuthenticatedUserDto login(@RequestParam String userName, @RequestParam String password)
+	public AuthenticatedUserDto login(@Validated @RequestBody LoginParamsDto params)
 		throws IncorrectLoginException {
 		
-		User user = userService.login(userName, password);
+		User user = userService.login(params.getUserName(), params.getPassword());
 			
 		return toAuthenticatedUserDto(generateServiceToken(user), user);
 		

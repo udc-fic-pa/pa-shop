@@ -2,12 +2,7 @@ import {config, appFetch, setServiceToken, getServiceToken, removeServiceToken, 
 
 export const login = (userName, password, onSuccess, onErrors, reauthenticationCallback) => {
 
-    const parameters = new FormData();
-
-    parameters.append("userName", userName);
-    parameters.append("password", password);
-
-    appFetch('/users/login', config('POST', parameters),
+    appFetch('/users/login', config('POST', {userName, password}),
         authenticatedUser => {
             setServiceToken(authenticatedUser.serviceToken);
             setReauthenticationCallback(reauthenticationCallback);
