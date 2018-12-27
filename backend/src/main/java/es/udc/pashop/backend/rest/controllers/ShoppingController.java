@@ -2,6 +2,7 @@ package es.udc.pashop.backend.rest.controllers;
 
 import static es.udc.pashop.backend.rest.dtos.ShoppingCartConversor.toShoppingCartDto;
 import static es.udc.pashop.backend.rest.dtos.OrderConversor.toOrderSummaryDtos;
+import static es.udc.pashop.backend.rest.dtos.OrderConversor.toOrderDto;
 
 import java.util.Locale;
 
@@ -34,6 +35,7 @@ import es.udc.pashop.backend.rest.dtos.AddToCartParamsDto;
 import es.udc.pashop.backend.rest.dtos.BlockDto;
 import es.udc.pashop.backend.rest.dtos.BuyParamsDto;
 import es.udc.pashop.backend.rest.dtos.IdDto;
+import es.udc.pashop.backend.rest.dtos.OrderDto;
 import es.udc.pashop.backend.rest.dtos.OrderSummaryDto;
 import es.udc.pashop.backend.rest.dtos.ShoppingCartDto;
 
@@ -104,6 +106,14 @@ public class ShoppingController {
 		
 		return new IdDto(shoppingService.buy(userId, shoppingCartId, params.getPostalAddress(),
 			params.getPostalCode()).getId());
+		
+	}
+	
+	@GetMapping("/orders/{orderId}")
+	public OrderDto findOrder(@RequestAttribute Long userId, @PathVariable Long orderId) 
+		throws InstanceNotFoundException, PermissionException {
+		
+		return toOrderDto(shoppingService.findOrder(userId, orderId));
 		
 	}
 	
