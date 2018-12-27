@@ -205,11 +205,10 @@ public class CatalogServiceTest {
 		assertEquals(expectedBlock, catalogService.findProducts(null, null, 0, 2));
 		
 		expectedBlock = new Block<>(Arrays.asList(product3), false);
-		assertEquals(expectedBlock, catalogService.findProducts(null, null, 2, 2));		
-		assertEquals(expectedBlock, catalogService.findProducts(null, null, 2, 1));
+		assertEquals(expectedBlock, catalogService.findProducts(null, null, 1, 2));		
 		
 		expectedBlock = new Block<>(new ArrayList<>(), false);
-		assertEquals(expectedBlock, catalogService.findProducts(null, null, 3, 2));
+		assertEquals(expectedBlock, catalogService.findProducts(null, null, 2, 2));
 		
 	}
 	

@@ -6,6 +6,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.SliceImpl;
+
 public class CustomizedProductDaoImpl implements CustomizedProductDao {
 	
 	@PersistenceContext
@@ -13,7 +17,7 @@ public class CustomizedProductDaoImpl implements CustomizedProductDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Product> find(Long categoryId, String text, int startIndex, int count) {
+	public Slice<Product> find(Long categoryId, String text, int page, int size) {
 		
 		String[] keywords = text == null ? new String[0] : text.split("\\s");
 		String queryString = "SELECT p FROM Product p";
@@ -42,7 +46,7 @@ public class CustomizedProductDaoImpl implements CustomizedProductDao {
 		
 		queryString += " ORDER BY p.name";
 		
-		Query query = entityManager.createQuery(queryString).setFirstResult(startIndex).setMaxResults(count);
+		Query query = entityManager.createQuery(queryString).setFirstResult(page*size).setMaxResults(size+1);
 		
 		if (categoryId != null) {
 			query.setParameter("categoryId", categoryId);
@@ -55,7 +59,14 @@ public class CustomizedProductDaoImpl implements CustomizedProductDao {
 	
 		}
 		
-		return query.getResultList();
+		List<Product> products = query.getResultList();
+		boolean hasNext = products.size() == (size+1);
+		
+		if (hasNext) {
+			products.remove(products.size()-1);
+		}
+		
+		return new SliceImpl<>(products, PageRequest.of(page, size), hasNext);
 		
 	}
 

@@ -40,14 +40,14 @@ export const findProducts = (criteria, onSuccess) => dispatch => {
 export const previousFindProductsResultPage = criteria =>
     findProducts({categoryId: criteria.categoryId,
         keywords: criteria.keywords, 
-        startIndex: criteria.startIndex-criteria.count,
-        count: criteria.count});
+        page: criteria.page-1,
+        size: criteria.size});
 
 export const nextFindProductsResultPage = criteria =>
     findProducts({categoryId: criteria.categoryId,
         keywords: criteria.keywords, 
-        startIndex: criteria.startIndex+criteria.count,
-        count: criteria.count});
+        page: criteria.page+1,
+        size: criteria.size});
 
 const clearProductSearch = () => ({
     type: actionTypes.CLEAR_PRODUCT_SEARCH

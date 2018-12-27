@@ -21,8 +21,7 @@ const FindProductsResult = ({productSearch, categories, previousFindProductsResu
     }
 
     let previousButtonStatus =  
-        productSearch.criteria.startIndex - productSearch.criteria.count >= 0 ? 
-            "" : "disabled";
+        productSearch.criteria.page >= 1 ? "" : "disabled";
 
     let nextButtonStatus = productSearch.result.existMoreItems ?
         "" : "disabled";

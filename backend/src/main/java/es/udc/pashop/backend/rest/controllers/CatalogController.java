@@ -41,12 +41,12 @@ public class CatalogController {
 	
 	@GetMapping("/products")
 	public BlockDto<ProductSummaryDto> findProducts(
-		@RequestParam(name="categoryId", required=false) Long categoryId,
-		@RequestParam(name="keywords", required=false) String keywords, 
-		@RequestParam(name="startIndex", defaultValue="0") int startIndex, 
-		@RequestParam(name="count", defaultValue="10") int count) {
+		@RequestParam(required=false) Long categoryId,
+		@RequestParam(required=false) String keywords, 
+		@RequestParam(defaultValue="0") int page, 
+		@RequestParam(defaultValue="10") int size) {
 		
-		Block<Product> productBlock = catalogService.findProducts(categoryId, keywords, startIndex, count);
+		Block<Product> productBlock = catalogService.findProducts(categoryId, keywords, page, size);
 		
 		return new BlockDto<>(toProductSummaryDtos(productBlock.getItems()), productBlock.getExistMoreItems());
 		

@@ -1,9 +1,9 @@
 package es.udc.pashop.backend.model.services;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,16 +43,11 @@ public class CatalogServiceImpl implements CatalogService {
 	}
 
 	@Override
-	public Block<Product> findProducts(Long categoryId, String keywords, int startIndex, int count) {
+	public Block<Product> findProducts(Long categoryId, String keywords, int page, int size) {
 		
-		List<Product> products = productDao.find(categoryId, keywords, startIndex, count+1);
-		boolean existMoreAccounts = products.size() == (count + 1);
+		Slice<Product> slice = productDao.find(categoryId, keywords, page, size);
 		
-		if (existMoreAccounts) {
-			products.remove(products.size() - 1);
-		}
-		
-		return new Block<>(products, existMoreAccounts);
+		return new Block<>(slice.getContent(), slice.hasNext());
 		
 	}
 

@@ -10,6 +10,6 @@ public interface CatalogService {
 	
 	Product findProductById(Long id) throws InstanceNotFoundException;
 	
-	Block<Product> findProducts(Long categoryId, String keywords, int startIndex, int count);
+	Block<Product> findProducts(Long categoryId, String keywords, int page, int size);
 
 }

@@ -1,9 +1,9 @@
 package es.udc.pashop.backend.model.entities;
 
-import java.util.List;
+import org.springframework.data.domain.Slice;
 
 public interface CustomizedProductDao {
 	
-	List<Product> find(Long categoryId, String text, int startIndex, int count);
+	Slice<Product> find(Long categoryId, String text, int page, int size);
 
 }
