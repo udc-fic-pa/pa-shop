@@ -442,7 +442,7 @@ public class ShoppingServiceTest {
 		assertEquals(expectedBlock, shoppingService.findOrders(user.getId(), 0, 2));
 		
 		expectedBlock = new Block<>(Arrays.asList(order1), false);
-		assertEquals(expectedBlock, shoppingService.findOrders(user.getId(), 2, 1));
+		assertEquals(expectedBlock, shoppingService.findOrders(user.getId(), 1, 2));
 		
 	}
 

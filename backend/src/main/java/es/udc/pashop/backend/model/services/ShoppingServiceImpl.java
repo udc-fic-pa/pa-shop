@@ -105,9 +105,9 @@ public class ShoppingServiceImpl implements ShoppingService {
 
 	@Override
 	@Transactional(readOnly=true)
-	public Block<Order> findOrders(Long userId, int startIndex, int count) {
+	public Block<Order> findOrders(Long userId, int page, int size) {
 		
-		Slice<Order> slice = orderDao.findByUserIdOrderByDateDesc(userId, PageRequest.of(startIndex/count, count));
+		Slice<Order> slice = orderDao.findByUserIdOrderByDateDesc(userId, PageRequest.of(page, size));
 		
 		return new Block<>(slice.getContent(), slice.hasNext());
 		

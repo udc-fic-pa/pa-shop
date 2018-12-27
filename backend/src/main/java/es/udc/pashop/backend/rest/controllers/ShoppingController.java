@@ -1,6 +1,7 @@
 package es.udc.pashop.backend.rest.controllers;
 
 import static es.udc.pashop.backend.rest.dtos.ShoppingCartConversor.toShoppingCartDto;
+import static es.udc.pashop.backend.rest.dtos.OrderConversor.toOrderSummaryDtos;
 
 import java.util.Locale;
 
@@ -9,11 +10,13 @@ import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,13 +24,17 @@ import org.springframework.web.bind.annotation.RestController;
 import es.udc.pashop.backend.model.common.exceptions.InstanceNotFoundException;
 import es.udc.pashop.backend.model.entities.MaxItemsExceededException;
 import es.udc.pashop.backend.model.entities.MaxQuantityExceededException;
+import es.udc.pashop.backend.model.entities.Order;
+import es.udc.pashop.backend.model.services.Block;
 import es.udc.pashop.backend.model.services.EmptyShoppingCartException;
 import es.udc.pashop.backend.model.services.PermissionException;
 import es.udc.pashop.backend.model.services.ShoppingService;
 import es.udc.pashop.backend.rest.common.ErrorsDto;
 import es.udc.pashop.backend.rest.dtos.AddToCartParamsDto;
+import es.udc.pashop.backend.rest.dtos.BlockDto;
 import es.udc.pashop.backend.rest.dtos.BuyParamsDto;
 import es.udc.pashop.backend.rest.dtos.IdDto;
+import es.udc.pashop.backend.rest.dtos.OrderSummaryDto;
 import es.udc.pashop.backend.rest.dtos.ShoppingCartDto;
 
 @RestController
@@ -97,6 +104,16 @@ public class ShoppingController {
 		
 		return new IdDto(shoppingService.buy(userId, shoppingCartId, params.getPostalAddress(),
 			params.getPostalCode()).getId());
+		
+	}
+	
+	@GetMapping("/orders")
+	public BlockDto<OrderSummaryDto> findOrders(@RequestAttribute Long userId, 
+		@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="10") int size) {
+		
+		Block<Order> orderBlock = shoppingService.findOrders(userId, page, size);
+		
+		return new BlockDto<>(toOrderSummaryDtos(orderBlock.getItems()), orderBlock.getExistMoreItems());
 		
 	}
 
