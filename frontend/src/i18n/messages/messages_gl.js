@@ -26,6 +26,8 @@ export default {
     'project.global.fields.lastName': 'Apelidos',
     'project.global.fields.name': 'Nome',
     'project.global.fields.password': 'Contrasinal',
+    'project.global.fields.postalAddress': 'Dirección postal',
+    'project.global.fields.postalCode': 'Código postal',
     'project.global.fields.price': 'Precio',
     'project.global.fields.quantity': 'Cantidade',
     'project.global.fields.totalPrice': 'Precio total',
@@ -36,6 +38,8 @@ export default {
     'project.global.validator.required': 'Campo obrigatorio',
 
     'project.shopping.AddToCart.add': 'Engadir ao carrito',
+    'project.shopping.BuyForm.title': 'Comprar',
+    'project.shopping.PurchaseCompleted.purchaseOrderGenerated': 'Orden de compra xerada',
     'project.shopping.ShoppingCart.empty': 'O carro está baleiro',
 
     'project.users.ChangePassword.fields.confirmNewPassword': 'Confirmar contrasinal nova',

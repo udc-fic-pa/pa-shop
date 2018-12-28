@@ -4,7 +4,8 @@ import users from '../users';
 import * as actionTypes from './actionTypes';
 
 const initialState = {
-    shoppingCart: null
+    shoppingCart: null,
+    lastOrderId: null
 };
 
 const shoppingCart = (state = initialState.shoppingCart, action) => {
@@ -20,6 +21,9 @@ const shoppingCart = (state = initialState.shoppingCart, action) => {
         case actionTypes.ADD_TO_SHOPPING_CART_COMPLETED:
             return action.shoppingCart;
 
+        case actionTypes.BUY_COMPLETED:
+            return {id: state.id, items: [], totalPrice: 0, totalQuantity: 0};
+
         default:
             return state;
 
@@ -27,8 +31,24 @@ const shoppingCart = (state = initialState.shoppingCart, action) => {
 
 }
 
+const lastOrderId = (state = initialState.lastOrderId, action) => {
+
+    switch (action.type) {
+
+        case actionTypes.BUY_COMPLETED:
+            return action.orderId;
+
+        default:
+            return state;
+
+    }
+
+}
+
+
 const reducer = combineReducers({
-    shoppingCart
+    shoppingCart,
+    lastOrderId
 });
 
 export default reducer;

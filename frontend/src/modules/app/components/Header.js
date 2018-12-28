@@ -41,7 +41,7 @@ const Header = ({user, handleLogout}) => (
             <ul className="navbar-nav">
 
                 <li className="nav-item">
-                    <NavLink exact className="nav-link" to="/shopping/shopping-cart">
+                    <NavLink exact className="nav-link" to="/shopping/edit-shopping-cart">
                         <ShoppingCartIcon/>
                     </NavLink>
                 </li>

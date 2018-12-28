@@ -1,11 +1,9 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import {FormattedMessage, injectIntl} from 'react-intl';
 
-import * as selectors from '../selectors';
 import ShoppingCartItem from './ShoppingCartItem';
 
-let ShoppingCart = ({cart}) => {
+let ShoppingCart = ({cart, edit}) => {
 
     if (cart.items.length === 0) {
         return (
@@ -35,7 +33,8 @@ let ShoppingCart = ({cart}) => {
 
                 <tbody>
                     {cart.items.map((item, index) => 
-                        <ShoppingCartItem key={index} item={item} index={index}/>
+                        <ShoppingCartItem key={index} item={item} index={index}
+                            edit={edit}/>
                     )}
                 </tbody>
 
@@ -45,23 +44,12 @@ let ShoppingCart = ({cart}) => {
                 <FormattedMessage id='project.global.fields.totalPrice'/>: {cart.totalPrice}€
             </p>
 
-            <div className="text-center">
-                <button type="button" className="btn btn-primary"
-                    onClick={() => alert('Not implemented :-(')}>
-                    <FormattedMessage id="project.global.buttons.buy"/>
-                </button>
-            </div>
-
         </div>
 
     );
 
 }
 
-const mapStateToProps = (state) => ({
-    cart: selectors.getShoppingCart(state)
-});
-
-ShoppingCart = connect(mapStateToProps)(injectIntl(ShoppingCart));
+ShoppingCart = injectIntl(ShoppingCart);
 
 export default ShoppingCart;

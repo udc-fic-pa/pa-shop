@@ -7,3 +7,11 @@ export const addToShoppingCart = (shoppingCartId, productId, quantity, onSuccess
         config('POST', {productId, quantity}), onSuccess, onErrors);
 
 }
+
+export const buy = (shoppingCartId, postalAddress, postalCode, onSuccess, 
+    onErrors) => {
+
+    appFetch(`/shopping/shoppingcarts/${shoppingCartId}/buy`, 
+        config('POST', {postalAddress, postalCode}), onSuccess, onErrors);
+
+}

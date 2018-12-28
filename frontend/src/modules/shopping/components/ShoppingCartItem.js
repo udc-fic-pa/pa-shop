@@ -38,20 +38,25 @@ class ShoppingCartItem extends React.Component {
 
     render() {
 
-        const {item, index} = this.props;
+        const {item, index, edit} = this.props;
 
         return (
             <tr key={index}>                     
                 <td>
-                    <button type="button" className="btn btn-danger btn-sm"
-                        onClick={() => alert('Not implemented :-(')}>
-                        <span className="fas fa-trash-alt"></span>
-                    </button>
-                    &nbsp;
-                    &nbsp;
+                    { edit &&
+                    <span>
+                        <button type="button" className="btn btn-danger btn-sm"
+                            onClick={() => alert('Not implemented :-(')}>
+                            <span className="fas fa-trash-alt"></span>
+                        </button>
+                        &nbsp;
+                        &nbsp;
+                    </span>
+                    }
                     <Link to={`/catalog/product-details/${item.productId}/withoutBackLink`}>{item.productName}</Link>
                 </td>
                 <td>{item.productPrice}€</td>
+                { edit &&
                 <td>
                     <form id={this.quantityFormId} className="form-inline needs-validation" 
                         noValidate onSubmit={(e) => this.handleSubmit(e)}>
@@ -67,6 +72,8 @@ class ShoppingCartItem extends React.Component {
                         </div>
                     </form>
                 </td>
+                }
+                {!edit && <td>{item.quantity}</td>}
             </tr>
         );
 
@@ -76,7 +83,8 @@ class ShoppingCartItem extends React.Component {
 
 ShoppingCartItem.propTypes = {
     item: PropTypes.object.isRequired,
-    index: PropTypes.number.isRequired
+    index: PropTypes.number.isRequired,
+    edit: PropTypes.bool
 }
 
 export default injectIntl(ShoppingCartItem);
