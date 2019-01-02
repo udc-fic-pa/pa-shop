@@ -48,7 +48,7 @@ const FindProductsResult = ({productSearch, categories, previousFindProductsResu
                         <tr key={index}>
                             <td>{selectors.getCategory(categories, product.categoryId).name}</td>
                             <td><Link to={`/catalog/product-details/${product.id}/withBackLink`}>{product.name}</Link></td>
-                    </tr>
+                        </tr>
                     )}
                 </tbody>
 

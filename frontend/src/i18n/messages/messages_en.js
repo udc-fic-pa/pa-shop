@@ -3,7 +3,7 @@ export default {
     'project.app.Footer.text': 'PA Shop - Area of Telematics Engineering - University of A Coruña',
     'project.app.Header.home': 'Home',
     'project.app.Header.logout': 'Logout',
-    'project.app.Header.new': 'New',
+    'project.shopping.header.orders': 'Orders',
     'project.app.Home.welcome': 'Welcome to PA Shop!',
 
     'project.catalog.FindProducts.allDepartments': 'All departments',
@@ -20,9 +20,11 @@ export default {
     'project.global.buttons.previous': 'Previous',
     'project.global.buttons.save': 'Save',
     'project.global.exceptions.NetworkError': 'Network error',
+    'project.global.fields.date': 'Date',
     'project.global.fields.department': 'Department',
     'project.global.fields.email': 'Email address',
     'project.global.fields.firstName': 'First name',
+    'project.global.fields.id': 'Identifier',
     'project.global.fields.lastName': 'Last name',
     'project.global.fields.name': 'Name',
     'project.global.fields.password': 'Password',
@@ -39,6 +41,7 @@ export default {
 
     'project.shopping.AddToCart.add': 'Add to cart',
     'project.shopping.BuyForm.title': 'Buy',
+    'project.shopping.Orders.noOrders': 'No orders',
     'project.shopping.PurchaseCompleted.purchaseOrderGenerated': 'Purchase order generated',
     'project.shopping.ShoppingCart.empty': 'Cart is empty',
 

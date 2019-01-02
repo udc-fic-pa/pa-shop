@@ -1,15 +1,13 @@
 package es.udc.pashop.backend.rest.dtos;
 
-import java.time.LocalDateTime;
-
 public class OrderSummaryDto {
 	
 	private Long id;
-	private LocalDateTime date;
+	private long date;
 	
 	public OrderSummaryDto() {}
 
-	public OrderSummaryDto(Long id, LocalDateTime date) {
+	public OrderSummaryDto(Long id, long date) {
 		
 		this.id = id;
 		this.date = date;
@@ -24,11 +22,11 @@ public class OrderSummaryDto {
 		this.id = id;
 	}
 
-	public LocalDateTime getDate() {
+	public long getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDateTime date) {
+	public void setDate(long date) {
 		this.date = date;
 	}
 

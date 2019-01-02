@@ -15,3 +15,7 @@ export const buy = (shoppingCartId, postalAddress, postalCode, onSuccess,
         config('POST', {postalAddress, postalCode}), onSuccess, onErrors);
 
 }
+
+export const findOrders = ({page, size}, onSuccess) => 
+    appFetch(`/shopping/orders?page=${page}&size=${size}`,
+        config('GET', null), onSuccess);

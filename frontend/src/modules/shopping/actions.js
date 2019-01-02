@@ -23,7 +23,7 @@ const buyCompleted = (orderId) => ({
 });
 
 export const buy = (shoppingCartId, postalAddress, postalCode, onSuccess, 
-    onErrors) => dispatch =>{
+    onErrors) => dispatch => {
 
     backend.shoppingService.buy(shoppingCartId, postalAddress, postalCode, ({id}) => {
         dispatch(buyCompleted(id));
@@ -32,3 +32,18 @@ export const buy = (shoppingCartId, postalAddress, postalCode, onSuccess,
     onErrors);
 
 }
+
+const findOrdersCompleted = orderSearch => ({
+    type: actionTypes.FIND_ORDERS_COMPLETED,
+    orderSearch
+});
+
+export const findOrders = criteria => dispatch =>
+    backend.shoppingService.findOrders(criteria, 
+        result => dispatch(findOrdersCompleted({criteria, result})));
+
+export const previousOrdersPage = criteria => 
+    findOrders({page: criteria.page-1, size: criteria.size});
+
+export const nextOrdersPage = criteria => 
+    findOrders({page: criteria.page+1, size: criteria.size});

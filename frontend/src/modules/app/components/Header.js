@@ -45,6 +45,12 @@ const Header = ({user, handleLogout}) => (
                         <ShoppingCartIcon/>
                     </NavLink>
                 </li>
+
+                <li className="nav-item">
+                    <NavLink exact className="nav-link" to="/shopping/orders">
+                        <FormattedMessage id="project.shopping.header.orders"/>
+                    </NavLink>
+                </li>
                 
                 <li className="nav-item dropdown">
 

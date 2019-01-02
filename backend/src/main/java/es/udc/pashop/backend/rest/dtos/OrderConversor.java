@@ -1,5 +1,7 @@
 package es.udc.pashop.backend.rest.dtos;
 
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +25,10 @@ public class OrderConversor {
 	}
 	
 	private final static OrderSummaryDto toOrderSummaryDto(Order order) {
-		return new OrderSummaryDto(order.getId(), order.getDate());
+		
+		 return new OrderSummaryDto(order.getId(), 
+		     order.getDate().truncatedTo(ChronoUnit.MINUTES).atZone(ZoneOffset.systemDefault()).toInstant().toEpochMilli());
+		 
 	}
 	
 	private final static OrderItemDto toOrderItemDto(OrderItem item) {
