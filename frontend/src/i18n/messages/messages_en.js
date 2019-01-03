@@ -41,6 +41,7 @@ export default {
 
     'project.shopping.AddToCart.add': 'Add to cart',
     'project.shopping.BuyForm.title': 'Buy',
+    'project.shopping.OrderDetails.backToOrders': 'Back to order list',
     'project.shopping.Orders.noOrders': 'No orders',
     'project.shopping.PurchaseCompleted.purchaseOrderGenerated': 'Purchase order generated',
     'project.shopping.ShoppingCart.empty': 'Cart is empty',

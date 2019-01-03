@@ -9,7 +9,11 @@ import * as selectors from '../selectors';
 class Orders extends React.Component {
 
     componentDidMount() {
-        this.props.findOrders({page: 0});
+
+        if (!this.props.orderSearch) {
+            this.props.findOrders({page: 0});
+        }
+    
     }
 
     render() {
