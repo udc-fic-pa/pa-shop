@@ -28,7 +28,6 @@ export const buy = (shoppingCartId, postalAddress, postalCode, onSuccess,
     },
     onErrors);
 
-
 const findOrdersCompleted = orderSearch => ({
     type: actionTypes.FIND_ORDERS_COMPLETED,
     orderSearch

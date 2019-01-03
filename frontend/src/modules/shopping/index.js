@@ -8,6 +8,7 @@ export {default as ShoppingCart} from './components/ShoppingCart';
 export {default as EditShoppingCart} from './components/EditShoppingCart';
 export {default as Buy} from './components/Buy';
 export {default as PurchaseCompleted} from './components/PurchaseCompleted';
+export {default as OrderList} from './components/OrderList';
 export {default as Orders} from './components/Orders';
 export {default as OrderDetails} from './components/OrderDetails';
 

@@ -7,7 +7,7 @@ import Home from './Home';
 import {Login, SignUp, UpdateProfile, ChangePassword} from '../../users';
 import users from '../../users';
 import {FindProductsResult, ProductDetails} from '../../catalog';
-import {EditShoppingCart, Buy, PurchaseCompleted, Orders, OrderDetails} from '../../shopping';
+import {EditShoppingCart, Buy, PurchaseCompleted, OrderList, Orders, OrderDetails} from '../../shopping';
 
 const Body = ({user}) => (
 
@@ -21,6 +21,7 @@ const Body = ({user}) => (
             {user && <Route exact path="/shopping/edit-shopping-cart" component={EditShoppingCart}/>}
             {user && <Route exact path="/shopping/buy" component={Buy}/>}
             {user && <Route exact path="/shopping/purchase-completed" component={PurchaseCompleted}/>}
+            {user && <Route exact path="/shopping/order-list" component={OrderList}/>}
             {user && <Route exact path="/shopping/orders" component={Orders}/>}
             {user && <Route exact path="/shopping/order-details/:id" component={OrderDetails}/>}
             {user && <Route exact path="/users/update-profile" component={UpdateProfile}/>}
