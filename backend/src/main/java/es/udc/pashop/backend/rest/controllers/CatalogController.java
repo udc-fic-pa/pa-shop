@@ -43,10 +43,9 @@ public class CatalogController {
 	public BlockDto<ProductSummaryDto> findProducts(
 		@RequestParam(required=false) Long categoryId,
 		@RequestParam(required=false) String keywords, 
-		@RequestParam(defaultValue="0") int page, 
-		@RequestParam(defaultValue="10") int size) {
+		@RequestParam(defaultValue="0") int page) {
 		
-		Block<Product> productBlock = catalogService.findProducts(categoryId, keywords, page, size);
+		Block<Product> productBlock = catalogService.findProducts(categoryId, keywords, page, 4);
 		
 		return new BlockDto<>(toProductSummaryDtos(productBlock.getItems()), productBlock.getExistMoreItems());
 		

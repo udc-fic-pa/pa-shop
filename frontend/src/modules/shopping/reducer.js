@@ -60,7 +60,6 @@ const orderSearch = (state = initialState.lastOrderId, action) => {
 
 }
 
-
 const reducer = combineReducers({
     shoppingCart,
     lastOrderId,

@@ -35,8 +35,8 @@ class FindProducts extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        this.props.findProducts({categoryId: this.state.categoryId, keywords: this.state.keywords.trim(),
-            page: 0, size: 3},
+        this.props.findProducts({categoryId: this.state.categoryId, 
+            keywords: this.state.keywords.trim(), page: 0},
             () => this.props.history.push('/catalog/find-products-result'));
     }
 

@@ -7,15 +7,13 @@ const addToShoppingCartCompleted = shoppingCart => ({
 });
 
 export const addToShoppingCart = (shoppingCartId, productId, quantity,
-    onSuccess, onErrors) => dispatch => {
-
+    onSuccess, onErrors) => dispatch =>
     backend.shoppingService.addToShoppingCart(shoppingCartId, productId, quantity,
         shoppingCart => {
             dispatch(addToShoppingCartCompleted(shoppingCart));
             onSuccess();
         },
         onErrors);
-}
 
 const buyCompleted = (orderId) => ({
     type: actionTypes.BUY_COMPLETED,
@@ -23,15 +21,13 @@ const buyCompleted = (orderId) => ({
 });
 
 export const buy = (shoppingCartId, postalAddress, postalCode, onSuccess, 
-    onErrors) => dispatch => {
-
+    onErrors) => dispatch =>
     backend.shoppingService.buy(shoppingCartId, postalAddress, postalCode, ({id}) => {
         dispatch(buyCompleted(id));
         onSuccess();
     },
     onErrors);
 
-}
 
 const findOrdersCompleted = orderSearch => ({
     type: actionTypes.FIND_ORDERS_COMPLETED,
@@ -43,7 +39,7 @@ export const findOrders = criteria => dispatch =>
         result => dispatch(findOrdersCompleted({criteria, result})));
 
 export const previousOrdersPage = criteria => 
-    findOrders({page: criteria.page-1, size: criteria.size});
+    findOrders({page: criteria.page-1});
 
 export const nextOrdersPage = criteria => 
-    findOrders({page: criteria.page+1, size: criteria.size});
+    findOrders({page: criteria.page+1});

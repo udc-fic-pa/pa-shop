@@ -8,7 +8,7 @@ import * as selectors from '../selectors';
 class Orders extends React.Component {
 
     componentDidMount() {
-        this.props.findOrders({page: 0, size: 10});
+        this.props.findOrders({page: 0});
     }
 
     render() {
