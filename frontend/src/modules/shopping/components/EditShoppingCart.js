@@ -3,12 +3,12 @@ import {connect} from 'react-redux';
 import {FormattedMessage, injectIntl} from 'react-intl';
 import {withRouter} from 'react-router-dom';
 
-import {ShoppingCart} from '..';
+import ShoppingItemList from './ShoppingItemList';
 import * as selectors from '../selectors';
 
 const EditShoppingCart = ({cart, history}) => (
     <div>
-        <ShoppingCart cart={cart} edit/>
+        <ShoppingItemList list={cart} edit/>
         {cart.items.length > 0 &&
         <div className="text-center">
             <button type="button" className="btn btn-primary"

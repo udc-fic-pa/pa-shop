@@ -1,14 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import ShoppingCart from './ShoppingCart';
+import ShoppingItemList from './ShoppingItemList';
 import BuyForm from './BuyForm';
 import * as selectors from '../selectors';
 
 const Buy = ({cart}) => cart.items.length > 0 && (
     <div>
         <BuyForm/>
-        <ShoppingCart cart={cart}/>
+        <ShoppingItemList list={cart}/>
     </div>
 );
 

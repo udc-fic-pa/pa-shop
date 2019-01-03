@@ -4,13 +4,13 @@ import {FormattedMessage, injectIntl} from 'react-intl';
 import {Link} from 'react-router-dom';
 import $ from 'jquery';
 
-class ShoppingCartItem extends React.Component {
+class ShoppingItem extends React.Component {
 
     constructor(props) {
 
         super(props);
 
-        this.quantityFormId = `modify-cart-item-quantity-form-${props.index}`;
+        this.quantityFormId = `modify-shopping-item-quantity-form-${props.index}`;
 
         this.state = {
             quantity: props.item.quantity
@@ -81,10 +81,10 @@ class ShoppingCartItem extends React.Component {
 
 }
 
-ShoppingCartItem.propTypes = {
+ShoppingItem.propTypes = {
     item: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired,
     edit: PropTypes.bool
 }
 
-export default injectIntl(ShoppingCartItem);
+export default injectIntl(ShoppingItem);
