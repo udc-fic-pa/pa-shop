@@ -1,5 +1,6 @@
 package es.udc.pashop.backend.rest.dtos;
 
+import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -20,14 +21,14 @@ public class OrderConversor {
 		
 		List<OrderItemDto> items = order.getItems().stream().map(i -> toOrderItemDto(i)).collect(Collectors.toList());
 		
-		return new OrderDto(order.getId(), items, order.getDate(), order.getPostalAddress(), order.getPostalCode());
+		return new OrderDto(order.getId(), items, toMillis(order.getDate()), order.getPostalAddress(),
+			order.getPostalCode());
 		
 	}
 	
 	private final static OrderSummaryDto toOrderSummaryDto(Order order) {
 		
-		 return new OrderSummaryDto(order.getId(), 
-		     order.getDate().truncatedTo(ChronoUnit.MINUTES).atZone(ZoneOffset.systemDefault()).toInstant().toEpochMilli());
+		 return new OrderSummaryDto(order.getId(), toMillis(order.getDate()));
 		 
 	}
 	
@@ -36,6 +37,10 @@ public class OrderConversor {
 		return new OrderItemDto(item.getId(), item.getProduct().getId(), item.getProduct().getName(), item.getPrice(),
 			item.getQuantity());
 		
+	}
+	
+	private final static long toMillis(LocalDateTime date) {
+		return date.truncatedTo(ChronoUnit.MINUTES).atZone(ZoneOffset.systemDefault()).toInstant().toEpochMilli();
 	}
 
 }

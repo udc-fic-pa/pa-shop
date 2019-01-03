@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {FormattedMessage, FormattedDate, FormattedTime, injectIntl} from 'react-intl';
+import {Link} from 'react-router-dom';
 
 import * as actions from '../actions';
 import * as selectors from '../selectors';
@@ -42,7 +43,7 @@ class Orders extends React.Component {
                     <thead>
                         <tr>
                             <th scope="col">
-                                <FormattedMessage id='project.global.fields.id'/>
+                                <FormattedMessage id='project.global.fields.purchaseOrder'/>
                             </th>
                             <th scope="col">
                                 <FormattedMessage id='project.global.fields.date'/>
@@ -53,7 +54,7 @@ class Orders extends React.Component {
                     <tbody>
                         {orderSearch.result.items.map((order, index) => 
                             <tr key={index}>
-                                <td>{order.id}</td>
+                                <td><Link to={`/shopping/order-details/${order.id}`}>{order.id}</Link></td>
                                 <td>
                                     <FormattedDate value={new Date(order.date)}/> - <FormattedTime value={new Date(order.date)}/>
                                 </td>

@@ -43,3 +43,14 @@ export const previousOrdersPage = criteria =>
 
 export const nextOrdersPage = criteria => 
     findOrders({page: criteria.page+1});
+
+const findOrderCompleted = order => ({
+    type: actionTypes.FIND_ORDER_COMPLETED,
+    order
+});
+
+export const findOrder = (orderId, onSuccess) => dispatch =>
+    backend.shoppingService.findOrder(orderId, order => {
+        dispatch(findOrderCompleted(order));
+        onSuccess();
+    })

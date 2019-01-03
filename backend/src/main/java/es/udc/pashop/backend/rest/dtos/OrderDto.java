@@ -1,19 +1,18 @@
 package es.udc.pashop.backend.rest.dtos;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class OrderDto {
 	
 	private Long id;
 	private List<OrderItemDto> items;
-	private LocalDateTime date;
+	private long date;
 	private String postalAddress;
 	private String postalCode;
 	
 	public OrderDto() {}
 
-	public OrderDto(Long id, List<OrderItemDto> items, LocalDateTime date, String postalAddress, String postalCode) {
+	public OrderDto(Long id, List<OrderItemDto> items, long date, String postalAddress, String postalCode) {
 
 		this.id = id;
 		this.items = items;
@@ -39,11 +38,11 @@ public class OrderDto {
 		this.items = items;
 	}
 
-	public LocalDateTime getDate() {
+	public long getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDateTime date) {
+	public void setDate(long date) {
 		this.date = date;
 	}
 

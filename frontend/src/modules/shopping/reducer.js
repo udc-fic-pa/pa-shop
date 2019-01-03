@@ -6,7 +6,8 @@ import * as actionTypes from './actionTypes';
 const initialState = {
     shoppingCart: null,
     lastOrderId: null,
-    orderSearch: null
+    orderSearch: null,
+    order: null
 };
 
 const shoppingCart = (state = initialState.shoppingCart, action) => {
@@ -60,10 +61,25 @@ const orderSearch = (state = initialState.lastOrderId, action) => {
 
 }
 
+const order = (state = initialState.order, action) => {
+
+    switch (action.type) {
+
+        case actionTypes.FIND_ORDER_COMPLETED:
+            return action.order
+
+        default:
+            return state;
+
+    }
+
+}
+
 const reducer = combineReducers({
     shoppingCart,
     lastOrderId,
-    orderSearch
+    orderSearch,
+    order
 });
 
 export default reducer;

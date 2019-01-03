@@ -24,7 +24,7 @@ export default {
     'project.global.fields.department': 'Departamento',
     'project.global.fields.email': 'Correo electrónico',
     'project.global.fields.firstName': 'Nombre',
-    'project.global.fields.id': 'Identificador',
+    'project.global.fields.purchaseOrder': 'Orden de compra',
     'project.global.fields.lastName': 'Apellidos',
     'project.global.fields.name': 'Nombre',
     'project.global.fields.password': 'Contraseña',
