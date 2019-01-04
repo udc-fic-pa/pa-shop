@@ -6,7 +6,7 @@ import {withRouter} from 'react-router-dom';
 import ShoppingItemList from './ShoppingItemList';
 import * as selectors from '../selectors';
 
-const EditShoppingCart = ({cart, history}) => (
+const ShoppingCart = ({cart, history}) => (
     <div>
         <ShoppingItemList list={cart} edit/>
         {cart.items.length > 0 &&
@@ -24,4 +24,4 @@ const mapStateToProps = state => ({
     cart: selectors.getShoppingCart(state)
 });
 
-export default withRouter(connect(mapStateToProps)(injectIntl(EditShoppingCart)));
+export default withRouter(connect(mapStateToProps)(injectIntl(ShoppingCart)));
