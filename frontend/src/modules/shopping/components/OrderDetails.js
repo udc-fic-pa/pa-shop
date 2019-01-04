@@ -25,7 +25,7 @@ class OrderDetails extends React.Component {
             <div>
 
                 <p>
-                    <Link to="/shopping/orders">
+                    <Link to="/shopping/find-orders-result">
                         <FormattedMessage id='project.shopping.OrderDetails.backToOrders'/>
                     </Link>
                 </p>

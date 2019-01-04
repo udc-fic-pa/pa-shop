@@ -47,7 +47,7 @@ const Header = ({user, handleLogout}) => (
                 </li>
 
                 <li className="nav-item">
-                    <NavLink exact className="nav-link" to="/shopping/order-list">
+                    <NavLink exact className="nav-link" to="/shopping/find-orders">
                         <FormattedMessage id="project.shopping.header.orders"/>
                     </NavLink>
                 </li>

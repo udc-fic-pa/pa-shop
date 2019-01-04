@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import Orders from './Orders';
+import FindOrdersResult from './FindOrdersResult';
 import * as actions from '../actions';
 
-class OrderList extends React.Component {
+class FindOrders extends React.Component {
 
     componentDidMount() {
         this.props.dispatch(actions.findOrders({page: 0}));
@@ -12,10 +12,10 @@ class OrderList extends React.Component {
 
     render() {
         return (
-            <Orders/>
+            <FindOrdersResult/>
         );
     }
 
 }
 
-export default connect()(OrderList);
+export default connect()(FindOrders);

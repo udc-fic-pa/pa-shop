@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 import * as actions from '../actions';
 import * as selectors from '../selectors';
 
-const Orders = ({orderSearch, previousOrdersPage, nextOrdersPage}) => {
+const FindOrdersResult = ({orderSearch, previousOrdersPage, nextOrdersPage}) => {
 
     if (!orderSearch) {
         return null;
@@ -90,4 +90,4 @@ const mapDispatchToProps = {
     nextOrdersPage: actions.nextOrdersPage
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Orders));
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(FindOrdersResult));
