@@ -228,6 +228,4 @@ class SignUp extends React.Component {
 
 }
 
-SignUp = connect()(injectIntl(SignUp));
-
-export default SignUp;
+export default connect()(injectIntl(SignUp));

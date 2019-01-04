@@ -139,6 +139,4 @@ class Login extends React.Component {
 
 }
 
-Login = connect()(injectIntl(Login));
-
-export default Login;
+export default connect()(injectIntl(Login));

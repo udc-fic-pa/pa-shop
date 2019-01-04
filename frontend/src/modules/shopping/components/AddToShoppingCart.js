@@ -100,7 +100,6 @@ const mapDispatchToProps = {
     addToShoppingCart: actions.addToShoppingCart
 }
 
-
 AddToShoppingCart = withRouter(connect(
     mapStateToProps, mapDispatchToProps)(injectIntl(AddToShoppingCart)));
 

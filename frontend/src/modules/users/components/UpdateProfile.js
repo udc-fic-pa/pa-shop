@@ -153,6 +153,4 @@ const mapDispatchToProps = {
     updateProfile: actions.updateProfile
 };
 
-UpdateProfile = connect(mapStateToProps, mapDispatchToProps)(injectIntl(UpdateProfile));
-
-export default UpdateProfile;
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(UpdateProfile));

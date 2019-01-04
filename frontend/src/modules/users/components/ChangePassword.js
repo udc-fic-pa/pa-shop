@@ -175,6 +175,4 @@ const mapDispatchToProps = {
     changePassword: actions.changePassword
 };
 
-ChangePassword = connect(mapStateToProps, mapDispatchToProps)(injectIntl(ChangePassword));
-
-export default ChangePassword;
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(ChangePassword));
