@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import $ from 'jquery';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
@@ -101,7 +101,7 @@ const mapDispatchToProps = {
 }
 
 AddToShoppingCart = withRouter(connect(
-    mapStateToProps, mapDispatchToProps)(injectIntl(AddToShoppingCart)));
+    mapStateToProps, mapDispatchToProps)(AddToShoppingCart));
 
 AddToShoppingCart.propTypes = {
     productId: PropTypes.number.isRequired

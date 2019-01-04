@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import {Link} from 'react-router-dom';
 import $ from 'jquery';
 
@@ -87,4 +87,4 @@ ShoppingItem.propTypes = {
     edit: PropTypes.bool
 }
 
-export default injectIntl(ShoppingItem);
+export default ShoppingItem;

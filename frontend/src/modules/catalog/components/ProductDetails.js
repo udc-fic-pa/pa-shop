@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 
 import users from '../../users';
 import * as selectors from '../selectors';
@@ -73,4 +73,4 @@ const mapDispatchToProps = {
     findProductById: actions.findProductById
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(ProductDetails));
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

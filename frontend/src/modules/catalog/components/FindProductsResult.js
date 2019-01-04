@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 
 import * as selectors from '../selectors';
 import * as actions from '../actions';
@@ -87,4 +87,4 @@ const mapDispatchToProps = {
     nextFindProductsResultPage: actions.nextFindProductsResultPage
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(FindProductsResult));
+export default connect(mapStateToProps, mapDispatchToProps)(FindProductsResult);

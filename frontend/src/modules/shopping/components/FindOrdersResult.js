@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {FormattedMessage, FormattedDate, FormattedTime, injectIntl} from 'react-intl';
+import {FormattedMessage, FormattedDate, FormattedTime} from 'react-intl';
 import {Link} from 'react-router-dom';
 
 import * as actions from '../actions';
@@ -90,4 +90,4 @@ const mapDispatchToProps = {
     nextOrdersPage: actions.nextOrdersPage
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(FindOrdersResult));
+export default connect(mapStateToProps, mapDispatchToProps)(FindOrdersResult);

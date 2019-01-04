@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import $ from 'jquery';
 
 import {Errors} from '../../common';
@@ -153,4 +153,4 @@ const mapDispatchToProps = {
     updateProfile: actions.updateProfile
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(UpdateProfile));
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateProfile);

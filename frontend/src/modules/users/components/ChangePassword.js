@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import $ from 'jquery';
 
 import {Errors} from '../../common';
@@ -175,4 +175,4 @@ const mapDispatchToProps = {
     changePassword: actions.changePassword
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(ChangePassword));
+export default connect(mapStateToProps, mapDispatchToProps)(ChangePassword);

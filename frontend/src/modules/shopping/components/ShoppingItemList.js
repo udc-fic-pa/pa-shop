@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 
 import ShoppingItem from './ShoppingItem';
 
@@ -56,4 +56,4 @@ ShoppingItem.propTypes = {
     edit: PropTypes.bool
 }
 
-export default injectIntl(ShoppingItemList);
+export default ShoppingItemList;

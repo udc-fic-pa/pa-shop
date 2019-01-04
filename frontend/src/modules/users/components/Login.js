@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import $ from 'jquery';
 
 import {Errors} from '../../common';
@@ -139,4 +139,4 @@ class Login extends React.Component {
 
 }
 
-export default connect()(injectIntl(Login));
+export default connect()(Login);

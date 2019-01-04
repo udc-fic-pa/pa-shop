@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import $ from 'jquery';
 import {withRouter} from 'react-router-dom';
 
@@ -138,4 +138,4 @@ const mapDispatchToProps = {
 }
 
 export default withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(injectIntl(BuyForm)));
+    connect(mapStateToProps, mapDispatchToProps)(BuyForm));

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import {withRouter} from 'react-router-dom';
 
 import ShoppingItemList from './ShoppingItemList';
@@ -24,4 +24,4 @@ const mapStateToProps = state => ({
     cart: selectors.getShoppingCart(state)
 });
 
-export default withRouter(connect(mapStateToProps)(injectIntl(ShoppingCart)));
+export default withRouter(connect(mapStateToProps)(ShoppingCart));
