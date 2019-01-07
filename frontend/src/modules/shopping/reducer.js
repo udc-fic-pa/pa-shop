@@ -47,12 +47,15 @@ const lastOrderId = (state = initialState.lastOrderId, action) => {
 
 }
 
-const orderSearch = (state = initialState.lastOrderId, action) => {
+const orderSearch = (state = initialState.orderSearch, action) => {
 
     switch (action.type) {
 
         case actionTypes.FIND_ORDERS_COMPLETED:
-            return action.orderSearch
+            return action.orderSearch;
+
+        case actionTypes.CLEAR_ORDER_SEARCH:
+            return initialState.orderSearch;
 
         default:
             return state;
@@ -66,7 +69,10 @@ const order = (state = initialState.order, action) => {
     switch (action.type) {
 
         case actionTypes.FIND_ORDER_COMPLETED:
-            return action.order
+            return action.order;
+
+        case actionTypes.CLEAR_ORDER:
+            return initialState.order;
 
         default:
             return state;

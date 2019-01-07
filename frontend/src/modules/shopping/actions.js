@@ -33,9 +33,17 @@ const findOrdersCompleted = orderSearch => ({
     orderSearch
 });
 
-export const findOrders = criteria => dispatch =>
+const clearOrderSearch = () => ({
+    type: actionTypes.CLEAR_ORDER_SEARCH
+});
+
+export const findOrders = criteria => dispatch => {
+
+    dispatch(clearOrderSearch());
     backend.shoppingService.findOrders(criteria, 
         result => dispatch(findOrdersCompleted({criteria, result})));
+
+}    
 
 export const previousOrdersPage = criteria => 
     findOrders({page: criteria.page-1});
@@ -48,8 +56,15 @@ const findOrderCompleted = order => ({
     order
 });
 
-export const findOrder = (orderId, onSuccess) => dispatch =>
+const clearOrder = () => ({
+    type: actionTypes.CLEAR_ORDER
+});
+
+export const findOrder = orderId => dispatch => {
+
+    dispatch(clearOrder());
     backend.shoppingService.findOrder(orderId, order => {
         dispatch(findOrderCompleted(order));
-        onSuccess();
-    })
+    });
+
+}
