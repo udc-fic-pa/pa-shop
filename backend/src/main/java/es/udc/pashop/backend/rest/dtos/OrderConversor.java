@@ -21,8 +21,8 @@ public class OrderConversor {
 		
 		List<OrderItemDto> items = order.getItems().stream().map(i -> toOrderItemDto(i)).collect(Collectors.toList());
 		
-		return new OrderDto(order.getId(), items, toMillis(order.getDate()), order.getPostalAddress(),
-			order.getPostalCode());
+		return new OrderDto(order.getId(), items, toMillis(order.getDate()), order.getTotalPrice(),
+			order.getPostalAddress(), order.getPostalCode());
 		
 	}
 	
@@ -34,7 +34,7 @@ public class OrderConversor {
 	
 	private final static OrderItemDto toOrderItemDto(OrderItem item) {
 		
-		return new OrderItemDto(item.getId(), item.getProduct().getId(), item.getProduct().getName(), item.getPrice(),
+		return new OrderItemDto(item.getId(), item.getProduct().getId(), item.getProduct().getName(), item.getProductPrice(),
 			item.getQuantity());
 		
 	}

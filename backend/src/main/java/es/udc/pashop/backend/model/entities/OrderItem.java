@@ -18,18 +18,18 @@ public class OrderItem {
 	private Long id;
 	private Product product;
 	private Order order;
-	private BigDecimal price;
+	private BigDecimal productPrice;
 	private int quantity;
 	
 	public OrderItem() {}
 	
-	public OrderItem(Product product, BigDecimal price, int quantity) {
+	public OrderItem(Product product, BigDecimal productPrice, int quantity) {
 		
 		this.product = product;	
-		this.price = price;
+		this.productPrice = productPrice;
 		this.quantity = quantity;
 		
-		price.setScale(2, RoundingMode.HALF_EVEN);
+		productPrice.setScale(2, RoundingMode.HALF_EVEN);
 		
 	}
 	
@@ -71,17 +71,17 @@ public class OrderItem {
 		this.quantity = quantity;
 	}
 	
-	public BigDecimal getPrice() {
-		return price;
+	public BigDecimal getProductPrice() {
+		return productPrice;
 	}
 
-	public void setPrice(BigDecimal price) {
-		this.price = price.setScale(2, RoundingMode.HALF_EVEN);
+	public void setProductPrice(BigDecimal productPrice) {
+		this.productPrice = productPrice.setScale(2, RoundingMode.HALF_EVEN);
 	}
 	
 	@Transient
 	public BigDecimal getTotalPrice() {
-		return price.multiply(new BigDecimal(quantity));
+		return productPrice.multiply(new BigDecimal(quantity));
 	}
 
 }

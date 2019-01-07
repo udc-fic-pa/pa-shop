@@ -5,6 +5,7 @@ import {FormattedMessage, FormattedDate, FormattedTime} from 'react-intl';
 
 import * as actions from '../actions';
 import * as selectors from '../selectors';
+import ShoppingItemList from './ShoppingItemList';
 
 class OrderDetails extends React.Component {
 
@@ -43,6 +44,8 @@ class OrderDetails extends React.Component {
                         </p>
                     </div>
                 </div>
+
+                <ShoppingItemList list={order}/>
 
             </div>
 

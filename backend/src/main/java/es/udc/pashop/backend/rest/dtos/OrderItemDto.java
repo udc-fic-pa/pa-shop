@@ -7,17 +7,17 @@ public class OrderItemDto {
 	private Long id;
 	private Long productId;
 	private String productName;
-	private BigDecimal price;
+	private BigDecimal productPrice;
 	private int quantity;
 	
 	public OrderItemDto() {}
 
-	public OrderItemDto(Long id, Long productId, String productName, BigDecimal price, int quantity) {
+	public OrderItemDto(Long id, Long productId, String productName, BigDecimal productPrice, int quantity) {
 		
 		this.id = id;
 		this.productId = productId;
 		this.productName = productName;
-		this.price = price;
+		this.productPrice = productPrice;
 		this.quantity = quantity;
 		
 	}
@@ -46,12 +46,12 @@ public class OrderItemDto {
 		this.productName = productName;
 	}
 
-	public BigDecimal getPrice() {
-		return price;
+	public BigDecimal getProductPrice() {
+		return productPrice;
 	}
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
+	public void setProductPrice(BigDecimal productPrice) {
+		this.productPrice = productPrice;
 	}
 
 	public int getQuantity() {

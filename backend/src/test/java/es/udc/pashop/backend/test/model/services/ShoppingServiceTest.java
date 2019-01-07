@@ -328,10 +328,10 @@ public class ShoppingServiceTest {
 		Optional<OrderItem> item2 = items.stream().filter(i -> i.getProduct().equals(product2)).findFirst();
 		
 		assertTrue(item1.isPresent());
-		assertEquals(product1.getPrice(), item1.get().getPrice());
+		assertEquals(product1.getPrice(), item1.get().getProductPrice());
 		assertEquals(quantity1, item1.get().getQuantity());
 		assertTrue(item2.isPresent());
-		assertEquals(product2.getPrice(), item2.get().getPrice());
+		assertEquals(product2.getPrice(), item2.get().getProductPrice());
 		assertEquals(quantity2, item2.get().getQuantity());
 		
 		assertTrue(user.getShoppingCart().isEmpty());
