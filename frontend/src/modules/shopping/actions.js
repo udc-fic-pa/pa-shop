@@ -45,10 +45,10 @@ export const findOrders = criteria => dispatch => {
 
 }    
 
-export const previousOrdersPage = criteria => 
+export const previousFindOrdersResultPage = criteria => 
     findOrders({page: criteria.page-1});
 
-export const nextOrdersPage = criteria => 
+export const nextFindOrdersResultPage = criteria => 
     findOrders({page: criteria.page+1});
 
 const findOrderCompleted = order => ({

@@ -5,8 +5,9 @@ import {Link} from 'react-router-dom';
 
 import * as actions from '../actions';
 import * as selectors from '../selectors';
+import {Pager} from '../../common';
 
-const FindOrdersResult = ({orderSearch, previousOrdersPage, nextOrdersPage}) => {
+const FindOrdersResult = ({orderSearch, previousFindOrdersResultPage, nextFindOrdersResultPage}) => {
 
     if (!orderSearch) {
         return null;
@@ -19,12 +20,6 @@ const FindOrdersResult = ({orderSearch, previousOrdersPage, nextOrdersPage}) => 
             </div>
         );
     }
-
-    let previousButtonStatus =  
-        orderSearch.criteria.page >= 1 ? "" : "disabled";
-
-    let nextButtonStatus = orderSearch.result.existMoreItems ?
-        "" : "disabled";
 
     return (
 
@@ -56,22 +51,13 @@ const FindOrdersResult = ({orderSearch, previousOrdersPage, nextOrdersPage}) => 
 
             </table>
 
-            <nav aria-label="page navigation">
-                <ul className="pagination justify-content-center">
-                    <li className={`page-item ${previousButtonStatus}`}>
-                        <button className="page-link"
-                            onClick={() => previousOrdersPage(orderSearch.criteria)}>
-                            <FormattedMessage id='project.global.buttons.previous'/>
-                        </button>
-                    </li>
-                    <li className={`page-item ${nextButtonStatus}`}>
-                        <button className="page-link"
-                            onClick={() => nextOrdersPage(orderSearch.criteria)}>
-                            <FormattedMessage id='project.global.buttons.next'/>
-                        </button>
-                    </li>
-                </ul>
-            </nav>
+            <Pager 
+                back={{
+                    enabled: orderSearch.criteria.page >= 1,
+                    handle: () => previousFindOrdersResultPage(orderSearch.criteria)}}
+                next={{
+                    enabled: orderSearch.result.existMoreItems,
+                    handle: () => nextFindOrdersResultPage(orderSearch.criteria)}}/>
 
         </div>
 
@@ -86,8 +72,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     findOrders: actions.findOrders,
-    previousOrdersPage: actions.previousOrdersPage,
-    nextOrdersPage: actions.nextOrdersPage
+    previousFindOrdersResultPage: actions.previousFindOrdersResultPage,
+    nextFindOrdersResultPage: actions.nextFindOrdersResultPage
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FindOrdersResult);

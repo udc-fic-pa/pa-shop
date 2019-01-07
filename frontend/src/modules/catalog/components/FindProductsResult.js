@@ -5,6 +5,7 @@ import {FormattedMessage} from 'react-intl';
 
 import * as selectors from '../selectors';
 import * as actions from '../actions';
+import {Pager} from '../../common';
 
 const FindProductsResult = ({productSearch, categories, previousFindProductsResultPage, nextFindProductsResultPage}) => {
 
@@ -19,12 +20,6 @@ const FindProductsResult = ({productSearch, categories, previousFindProductsResu
             </div>
         );
     }
-
-    let previousButtonStatus =  
-        productSearch.criteria.page >= 1 ? "" : "disabled";
-
-    let nextButtonStatus = productSearch.result.existMoreItems ?
-        "" : "disabled";
     
     return (
 
@@ -54,22 +49,13 @@ const FindProductsResult = ({productSearch, categories, previousFindProductsResu
 
             </table>
 
-            <nav aria-label="page navigation">
-                <ul className="pagination justify-content-center">
-                    <li className={`page-item ${previousButtonStatus}`}>
-                        <button className="page-link"
-                            onClick={() => previousFindProductsResultPage(productSearch.criteria)}>
-                            <FormattedMessage id='project.global.buttons.previous'/>
-                        </button>
-                    </li>
-                    <li className={`page-item ${nextButtonStatus}`}>
-                        <button className="page-link"
-                            onClick={() => nextFindProductsResultPage(productSearch.criteria)}>
-                            <FormattedMessage id='project.global.buttons.next'/>
-                        </button>
-                    </li>
-                </ul>
-            </nav>
+            <Pager 
+                back={{
+                    enabled: productSearch.criteria.page >= 1,
+                    handle: () => previousFindProductsResultPage(productSearch.criteria)}}
+                next={{
+                    enabled: productSearch.result.existMoreItems,
+                    handle: () => nextFindProductsResultPage(productSearch.criteria)}}/>
 
         </div>
 
