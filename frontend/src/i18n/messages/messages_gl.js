@@ -42,7 +42,7 @@ export default {
     'project.shopping.AddToCart.add': 'Engadir ao carrito',
     'project.shopping.BuyForm.title': 'Comprar',
     'project.shopping.OrderDetails.backToOrders': 'Voltar a listado de pedidos',
-    'project.shopping.Orders.noOrders': 'Non hai pedidos',
+    'project.shopping.FindOrdersResult.noOrders': 'Non se atoparon pedidos',
     'project.shopping.PurchaseCompleted.purchaseOrderGenerated': 'Orden de compra xerada',
     'project.shopping.ShoppingCart.empty': 'O carro está baleiro',
 

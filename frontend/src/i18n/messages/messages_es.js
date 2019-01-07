@@ -42,7 +42,7 @@ export default {
     'project.shopping.AddToCart.add': 'Añadir al carrito',
     'project.shopping.BuyForm.title': 'Comprar',
     'project.shopping.OrderDetails.backToOrders': 'Volver a listado de pedidos',
-    'project.shopping.Orders.noOrders': 'No hay pedidos',
+    'project.shopping.FindOrdersResult.noOrders': 'No se encontraron pedidos',
     'project.shopping.PurchaseCompleted.purchaseOrderGenerated': 'Orden de compra generada',
     'project.shopping.ShoppingCart.empty': 'El carrito está vacío',
 

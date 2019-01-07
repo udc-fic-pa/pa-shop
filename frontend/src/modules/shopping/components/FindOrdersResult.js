@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {FormattedMessage, FormattedDate, FormattedTime} from 'react-intl';
-import {Link} from 'react-router-dom';
+import {FormattedMessage} from 'react-intl';
 
 import * as actions from '../actions';
 import * as selectors from '../selectors';
 import {Pager} from '../../common';
+import Orders from './Orders';
 
 const FindOrdersResult = ({orderSearch, previousFindOrdersResultPage, nextFindOrdersResultPage}) => {
 
@@ -16,7 +16,7 @@ const FindOrdersResult = ({orderSearch, previousFindOrdersResultPage, nextFindOr
     if (orderSearch.result.items.length === 0) {
         return (
             <div className="alert alert-info" role="alert">
-                <FormattedMessage id='project.shopping.Orders.noOrders'/>
+                <FormattedMessage id='project.shopping.FindOrdersResult.noOrders'/>
             </div>
         );
     }
@@ -24,33 +24,7 @@ const FindOrdersResult = ({orderSearch, previousFindOrdersResultPage, nextFindOr
     return (
 
         <div>
-
-            <table className="table table-striped table-hover">
-
-                <thead>
-                    <tr>
-                        <th scope="col">
-                            <FormattedMessage id='project.global.fields.purchaseOrder'/>
-                        </th>
-                        <th scope="col">
-                            <FormattedMessage id='project.global.fields.date'/>
-                        </th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {orderSearch.result.items.map((order, index) => 
-                        <tr key={index}>
-                            <td><Link to={`/shopping/order-details/${order.id}`}>{order.id}</Link></td>
-                            <td>
-                                <FormattedDate value={new Date(order.date)}/> - <FormattedTime value={new Date(order.date)}/>
-                            </td>
-                        </tr>
-                    )}
-                </tbody>
-
-            </table>
-
+            <Orders orders={orderSearch.result.items}/>
             <Pager 
                 back={{
                     enabled: orderSearch.criteria.page >= 1,
@@ -58,7 +32,6 @@ const FindOrdersResult = ({orderSearch, previousFindOrdersResultPage, nextFindOr
                 next={{
                     enabled: orderSearch.result.existMoreItems,
                     handle: () => nextFindOrdersResultPage(orderSearch.criteria)}}/>
-
         </div>
 
     );
