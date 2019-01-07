@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
-import {withRouter} from 'react-router-dom';
 
 import ShoppingItemList from './ShoppingItemList';
 import * as selectors from '../selectors';
@@ -24,4 +23,4 @@ const mapStateToProps = state => ({
     cart: selectors.getShoppingCart(state)
 });
 
-export default withRouter(connect(mapStateToProps)(ShoppingCart));
+export default connect(mapStateToProps)(ShoppingCart);

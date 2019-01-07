@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link, NavLink, withRouter} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
 
 import {FindProducts} from '../../catalog';
@@ -105,4 +105,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     }
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

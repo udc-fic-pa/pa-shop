@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
 
 import * as actions from '../actions';
 
@@ -19,4 +18,4 @@ class FindOrders extends React.Component {
 
 }
 
-export default withRouter(connect()(FindOrders));
+export default connect()(FindOrders);
