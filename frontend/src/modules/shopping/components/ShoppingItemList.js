@@ -51,7 +51,7 @@ const ShoppingItemList = ({list, edit}) => {
 
 }
 
-ShoppingItem.propTypes = {
+ShoppingItemList.propTypes = {
     list: PropTypes.object.isRequired,
     edit: PropTypes.bool
 }
