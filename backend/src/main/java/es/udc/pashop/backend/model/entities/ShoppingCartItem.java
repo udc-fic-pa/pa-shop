@@ -28,7 +28,7 @@ public class ShoppingCartItem {
 		this.product = product;	
 		this.shoppingCart = shoppingCart;
 		
-		incrementQuantity(quantity);
+		setQuantity(quantity);
 		
 	}
 	
@@ -67,17 +67,23 @@ public class ShoppingCartItem {
 		return quantity;
 	}
 	
-	public void setQuantity(int quantity) {
+	public void setQuantity(int quantity) throws MaxQuantityExceededException {
+		
+		if (quantity > MAX_QUANTITY ) {
+			throw new MaxQuantityExceededException(MAX_QUANTITY);
+		}
+		
 		this.quantity = quantity;
+		
 	}
 	
 	public void incrementQuantity(int increment) throws MaxQuantityExceededException {
 		
-		if (quantity + increment > MAX_QUANTITY ) {
+		if (quantity + increment > MAX_QUANTITY) {
 			throw new MaxQuantityExceededException(MAX_QUANTITY - quantity);
 		}
 		
-		quantity += increment;
+		this.quantity += increment;
 		
 	}
 	

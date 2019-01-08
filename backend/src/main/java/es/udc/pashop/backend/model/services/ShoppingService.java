@@ -11,6 +11,9 @@ public interface ShoppingService {
 	ShoppingCart addToShoppingCart(Long userId, Long shoppingCartId, Long productId, int quantity) 
 		throws InstanceNotFoundException, PermissionException, MaxQuantityExceededException, MaxItemsExceededException;
 	
+	ShoppingCart updateShoppingCartItemQuantity(Long userId, Long shoppingCartId, Long productId, int quantity)
+		throws InstanceNotFoundException, PermissionException, MaxQuantityExceededException;
+	
 	Order buy(Long userId, Long shoppingCartId, String postalAddress, String postalCode)
 		throws InstanceNotFoundException, PermissionException, EmptyShoppingCartException;
 	

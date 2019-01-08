@@ -1,16 +1,25 @@
 import backend from '../../backend';
 import * as actionTypes from './actionTypes';
 
-const addToShoppingCartCompleted = shoppingCart => ({
-    type: actionTypes.ADD_TO_SHOPPING_CART_COMPLETED,
+const shoppingCartUpdated = shoppingCart => ({
+    type: actionTypes.SHOPPING_CART_UPDATED,
     shoppingCart
 });
 
 export const addToShoppingCart = (shoppingCartId, productId, quantity,
     onSuccess, onErrors) => dispatch =>
-    backend.shoppingService.addToShoppingCart(shoppingCartId, productId, quantity,
-        shoppingCart => {
-            dispatch(addToShoppingCartCompleted(shoppingCart));
+    backend.shoppingService.addToShoppingCart(shoppingCartId, productId,
+        quantity, shoppingCart => {
+            dispatch(shoppingCartUpdated(shoppingCart));
+            onSuccess();
+        },
+        onErrors);
+
+export const updateShoppingCartItemQuantity = (shoppingCartId, productId, 
+    quantity, onSuccess, onErrors) => dispatch => 
+    backend.shoppingService.updateShoppingCartItemQuantity(shoppingCartId,
+        productId, quantity, shoppingCart => {
+            dispatch(shoppingCartUpdated(shoppingCart));
             onSuccess();
         },
         onErrors);

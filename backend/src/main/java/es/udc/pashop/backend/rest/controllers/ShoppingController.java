@@ -38,6 +38,7 @@ import es.udc.pashop.backend.rest.dtos.IdDto;
 import es.udc.pashop.backend.rest.dtos.OrderDto;
 import es.udc.pashop.backend.rest.dtos.OrderSummaryDto;
 import es.udc.pashop.backend.rest.dtos.ShoppingCartDto;
+import es.udc.pashop.backend.rest.dtos.UpdateShoppingCartItemQuantityDto;
 
 @RestController
 @RequestMapping("/shopping")
@@ -96,6 +97,16 @@ public class ShoppingController {
 		
 		return toShoppingCartDto(shoppingService.addToShoppingCart(userId, shoppingCartId, params.getProductId(),
 			params.getQuantity()));
+		
+	}
+	
+	@PostMapping("/shoppingcarts/{shoppingCartId}/updateShoppingCartItemQuantity")
+	public ShoppingCartDto updateShoppingCartItemQuantity(@RequestAttribute Long userId, 
+		@PathVariable Long shoppingCartId, @RequestBody UpdateShoppingCartItemQuantityDto params)
+		throws InstanceNotFoundException, PermissionException, MaxQuantityExceededException {
+		
+		return toShoppingCartDto(shoppingService.updateShoppingCartItemQuantity(userId, shoppingCartId,
+			params.getProductId(), params.getQuantity()));
 		
 	}
 	

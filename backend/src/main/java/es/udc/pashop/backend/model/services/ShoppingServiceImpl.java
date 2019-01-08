@@ -67,6 +67,23 @@ public class ShoppingServiceImpl implements ShoppingService {
 	}
 	
 	@Override
+	public ShoppingCart updateShoppingCartItemQuantity(Long userId, Long shoppingCartId, Long productId, int quantity)
+		throws InstanceNotFoundException, PermissionException, MaxQuantityExceededException {
+		
+		ShoppingCart shoppingCart = permissionChecker.checkShoppingCartExistsAndBelongsTo(shoppingCartId, userId);
+		Optional<ShoppingCartItem> existingCartItem = shoppingCart.getItem(productId);
+		
+		if (!existingCartItem.isPresent()) {
+			throw new InstanceNotFoundException("project.entities.product", productId);
+		}
+		
+		existingCartItem.get().setQuantity(quantity);
+		
+		return shoppingCart;
+		
+	}
+	
+	@Override
 	public Order buy(Long userId, Long shoppingCartId, String postalAddress, String postalCode)
 			throws InstanceNotFoundException, PermissionException, EmptyShoppingCartException {
 		

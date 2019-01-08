@@ -4,10 +4,12 @@ import {FormattedMessage} from 'react-intl';
 
 import ShoppingItemList from './ShoppingItemList';
 import * as selectors from '../selectors';
+import * as actions from '../actions';
 
-const ShoppingCart = ({cart, history}) => (
+const ShoppingCart = ({cart, history, handleUpdateQuantity}) => (
     <div>
-        <ShoppingItemList list={cart} edit/>
+        <ShoppingItemList list={cart} edit
+            handleUpdateQuantity={handleUpdateQuantity}/>
         {cart.items.length > 0 &&
         <div className="text-center">
             <button type="button" className="btn btn-primary"
@@ -23,4 +25,8 @@ const mapStateToProps = state => ({
     cart: selectors.getShoppingCart(state)
 });
 
-export default connect(mapStateToProps)(ShoppingCart);
+const mapDispatchToProps = {
+    handleUpdateQuantity: actions.updateShoppingCartItemQuantity
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart);

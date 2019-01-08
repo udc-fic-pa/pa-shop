@@ -10,7 +10,7 @@ class ShoppingItem extends React.Component {
 
         super(props);
 
-        this.quantityFormId = `modify-shopping-item-quantity-form-${props.index}`;
+        this.quantityFormId = `modify-shopping-item-quantity-form-${props.item.productId}`;
 
         this.state = {
             quantity: props.item.quantity
@@ -29,11 +29,27 @@ class ShoppingItem extends React.Component {
         const form = $(`#${this.quantityFormId}`);
 
         if (form.get(0).checkValidity()) {
-            alert('Not implemented :-(');
+            this.handleUpdateQuantity();
         } else {
+            this.props.handleBackendErrors(null);
             form.get(0).classList.add('was-validated');
         }
     
+    }
+
+    handleUpdateQuantity() {
+
+        this.props.handleUpdateQuantity(this.props.shoppingItemListId,
+            this.props.item.productId, this.state.quantity, 
+            () => {
+                this.setState({quantity: this.props.item.quantity});
+                this.props.handleBackendErrors(null);
+            }, 
+            backendErrors => {
+                this.setState({quantity: this.props.item.quantity});
+                this.props.handleBackendErrors(backendErrors);
+            });
+
     }
 
     render() {
@@ -60,11 +76,11 @@ class ShoppingItem extends React.Component {
                 <td>
                     <form id={this.quantityFormId} className="form-inline needs-validation" 
                         noValidate onSubmit={(e) => this.handleSubmit(e)}>
-                        <input type="number" className="form-control w-25 mb-2 mr-2" 
+                        <input type="number" className="form-control col-md-4 mr-2" 
                             value={this.state.quantity}
                             onChange={(e) => this.handleQuantityChange(e)}
                             min="1"/>
-                        <button type="submit" className="btn btn-primary mb-2">
+                        <button type="submit" className="btn btn-primary">
                             <FormattedMessage id="project.global.buttons.save"/>
                         </button>
                         <div className="invalid-feedback">
@@ -82,9 +98,12 @@ class ShoppingItem extends React.Component {
 }
 
 ShoppingItem.propTypes = {
+    shoppingItemListId: PropTypes.number.isRequired,
     item: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired,
-    edit: PropTypes.bool
+    edit: PropTypes.bool,
+    handleUpdateQuantity: PropTypes.func,
+    handleBackendErrors: PropTypes.func
 }
 
 export default ShoppingItem;

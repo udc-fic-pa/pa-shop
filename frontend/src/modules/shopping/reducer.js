@@ -20,7 +20,7 @@ const shoppingCart = (state = initialState.shoppingCart, action) => {
         case users.actionTypes.SIGN_UP_COMPLETED:
             return action.authenticatedUser.shoppingCart;
 
-        case actionTypes.ADD_TO_SHOPPING_CART_COMPLETED:
+        case actionTypes.SHOPPING_CART_UPDATED:
             return action.shoppingCart;
 
         case actionTypes.BUY_COMPLETED:
