@@ -1,5 +1,6 @@
 package es.udc.pashop.backend.rest.dtos;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,8 @@ public class ShoppingCartConversor {
 		
 		List<ShoppingCartItemDto> items = 
 			cart.getItems().stream().map(i -> toShoppingCartItemDto(i)).collect(Collectors.toList());
+		
+		items.sort(Comparator.comparing(ShoppingCartItemDto::getProductName));
 		
 		return new ShoppingCartDto(cart.getId(), items, cart.getTotalQuantity(), cart.getTotalPrice());
 		

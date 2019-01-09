@@ -3,6 +3,7 @@ package es.udc.pashop.backend.rest.dtos;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +21,8 @@ public class OrderConversor {
 	public final static OrderDto toOrderDto(Order order) {
 		
 		List<OrderItemDto> items = order.getItems().stream().map(i -> toOrderItemDto(i)).collect(Collectors.toList());
+		
+		items.sort(Comparator.comparing(OrderItemDto::getProductName));
 		
 		return new OrderDto(order.getId(), items, toMillis(order.getDate()), order.getTotalPrice(),
 			order.getPostalAddress(), order.getPostalCode());
