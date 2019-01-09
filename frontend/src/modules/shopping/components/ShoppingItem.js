@@ -76,10 +76,10 @@ class ShoppingItem extends React.Component {
                 <td>
                     <form id={this.quantityFormId} className="form-inline needs-validation" 
                         noValidate onSubmit={(e) => this.handleSubmit(e)}>
-                        <input type="number" className="form-control col-md-4 mr-2" 
+                        <input type="number" className="form-control mr-2" style={{width: '50%'}}
                             value={this.state.quantity}
                             onChange={(e) => this.handleQuantityChange(e)}
-                            min="1"/>
+                            min="1" max="1000"/>
                         <button type="submit" className="btn btn-primary">
                             <FormattedMessage id="project.global.buttons.save"/>
                         </button>

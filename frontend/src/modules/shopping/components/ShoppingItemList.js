@@ -50,11 +50,11 @@ class ShoppingItemList extends React.Component {
 
                     <thead>
                         <tr>
-                            <th scope="col" className="col-md-4"></th>
-                            <th scope="col" className="col-md-2">
+                            <th scope="col" style={{width: '60%'}}></th>
+                            <th scope="col" style={{width: '20%'}}>
                                 <FormattedMessage id='project.global.fields.price'/>
                             </th>
-                            <th scope="col" className="col-md-2">
+                            <th scope="col" style={{width: '20%'}}>
                                 <FormattedMessage id='project.global.fields.quantity'/>
                             </th>
                         </tr>
