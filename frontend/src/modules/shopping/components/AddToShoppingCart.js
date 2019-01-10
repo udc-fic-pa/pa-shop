@@ -35,7 +35,7 @@ class AddToShoppingCart extends React.Component {
         if (form.get(0).checkValidity()) {
             this.props.addToShoppingCart(this.props.shoppingCartId, 
                 this.props.productId, this.state.quantity,
-                () => this.props.history.push('/'),
+                () => this.props.history.push('/shopping/shopping-cart'),
                 errors => this.setBackendErrors(errors));
         } else {
             this.clearMessages();
