@@ -21,7 +21,7 @@ const Orders = ({orders}) => (
         <tbody>
             {orders.map((order, index) => 
                 <tr key={index}>
-                    <td><Link to={`/shopping/order-details/${order.id}`}>{order.id}</Link></td>
+                    <td><Link to={`/shopping/order-details/${order.id}/withBackLink`}>{order.id}</Link></td>
                     <td>
                         <FormattedDate value={new Date(order.date)}/> - <FormattedTime value={new Date(order.date)}/>
                     </td>

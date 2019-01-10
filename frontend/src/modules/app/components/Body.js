@@ -23,7 +23,7 @@ const Body = ({user}) => (
             {user && <Route exact path="/shopping/purchase-completed" component={PurchaseCompleted}/>}
             {user && <Route exact path="/shopping/find-orders" component={FindOrders}/>}
             {user && <Route exact path="/shopping/find-orders-result" component={FindOrdersResult}/>}
-            {user && <Route exact path="/shopping/order-details/:id" component={OrderDetails}/>}
+            {user && <Route exact path="/shopping/order-details/:id/:withBackLink" component={OrderDetails}/>}
             {user && <Route exact path="/users/update-profile" component={UpdateProfile}/>}
             {user && <Route exact path="/users/change-password" component={ChangePassword}/>}
             {!user && <Route exact path="/users/login" component={Login}/>}
