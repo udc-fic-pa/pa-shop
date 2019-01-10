@@ -29,7 +29,7 @@ class ShoppingItemList extends React.Component {
 
     render() {
 
-        const {list, edit,  handleUpdateQuantity} = this.props;
+        const {list, edit,  handleUpdateQuantity, handleRemoveItem} = this.props;
 
         if (list.items.length === 0) {
             return (
@@ -66,6 +66,7 @@ class ShoppingItemList extends React.Component {
                                 item={item} index={index}
                                 edit={edit} 
                                 handleUpdateQuantity={handleUpdateQuantity}
+                                handleRemoveItem={handleRemoveItem}
                                 handleBackendErrors={errors => this.setBackendErrors(errors)}/>
                         )}
                     </tbody>
@@ -87,7 +88,8 @@ class ShoppingItemList extends React.Component {
 ShoppingItemList.propTypes = {
     list: PropTypes.object.isRequired,
     edit: PropTypes.bool,
-    handleUpdateQuantity: PropTypes.func
+    handleUpdateQuantity: PropTypes.func,
+    handleRemoveItem: PropTypes.func
 }
 
 export default ShoppingItemList;

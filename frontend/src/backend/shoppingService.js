@@ -10,6 +10,11 @@ export const updateShoppingCartItemQuantity = (shoppingCartId, productId,
     appFetch(`/shopping/shoppingcarts/${shoppingCartId}/updateShoppingCartItemQuantity`, 
         config('POST', {productId, quantity}), onSuccess, onErrors);
 
+export const removeShoppingCartItem = (shoppingCartId, productId, onSuccess,
+    onErrors) =>
+    appFetch(`/shopping/shoppingcarts/${shoppingCartId}/removeShoppingCartItem`, 
+        config('POST', {productId}), onSuccess, onErrors);
+
 export const buy = (shoppingCartId, postalAddress, postalCode, onSuccess, 
     onErrors) =>
     appFetch(`/shopping/shoppingcarts/${shoppingCartId}/buy`, 

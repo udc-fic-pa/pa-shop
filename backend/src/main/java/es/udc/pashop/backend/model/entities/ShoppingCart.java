@@ -79,6 +79,10 @@ public class ShoppingCart {
 		items = new HashSet<>();
 	}
 	
+	public void removeItem(ShoppingCartItem existingCartItem) {
+		items.remove(existingCartItem);
+	}
+	
 	@Transient
 	public int getTotalQuantity() {
 		return items.stream().map(i -> i.getQuantity()).reduce(0, (a, b) -> a+b);

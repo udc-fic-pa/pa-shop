@@ -1,15 +1,14 @@
 package es.udc.pashop.backend.test.model.services;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -34,6 +33,7 @@ import es.udc.pashop.backend.model.entities.Product;
 import es.udc.pashop.backend.model.entities.ProductDao;
 import es.udc.pashop.backend.model.entities.ShoppingCart;
 import es.udc.pashop.backend.model.entities.ShoppingCartItem;
+import es.udc.pashop.backend.model.entities.ShoppingCartItemDao;
 import es.udc.pashop.backend.model.entities.User;
 import es.udc.pashop.backend.model.services.Block;
 import es.udc.pashop.backend.model.services.EmptyShoppingCartException;
@@ -60,6 +60,9 @@ public class ShoppingServiceTest {
 	
 	@Autowired
 	private ProductDao productDao; 
+	
+	@Autowired
+	private ShoppingCartItemDao shoppingCartItemDao; 
 	
 	@Autowired
 	private OrderDao orderDao;
@@ -122,11 +125,12 @@ public class ShoppingServiceTest {
 				
 		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), quantity);
 		
-		List<ShoppingCartItem> items = new ArrayList<>(user.getShoppingCart().getItems());
+		ShoppingCart shoppingCart = user.getShoppingCart();
+		Optional<ShoppingCartItem> item = shoppingCart.getItem(product.getId());
 		
-		assertEquals(1, items.size());
-		assertEquals(product, items.get(0).getProduct());
-		assertEquals(quantity, items.get(0).getQuantity());
+		assertEquals(1, shoppingCart.getItems().size());
+		assertTrue(item.isPresent());
+		assertEquals(quantity, item.get().getQuantity());
 
 	}
 	
@@ -143,12 +147,12 @@ public class ShoppingServiceTest {
 		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product1.getId(), quantity1);
 		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product2.getId(), quantity2);
 		
-		Set<ShoppingCartItem> items = user.getShoppingCart().getItems();
+		ShoppingCart shoppingCart = user.getShoppingCart();
 		
-		assertEquals(2, items.size());
+		assertEquals(2, shoppingCart.getItems().size());
 	
-		Optional<ShoppingCartItem> item1 = items.stream().filter(i -> i.getProduct().equals(product1)).findFirst();
-		Optional<ShoppingCartItem> item2 = items.stream().filter(i -> i.getProduct().equals(product2)).findFirst();
+		Optional<ShoppingCartItem> item1 = shoppingCart.getItem(product1.getId());
+		Optional<ShoppingCartItem> item2 = shoppingCart.getItem(product2.getId());
 		
 		assertTrue(item1.isPresent());
 		assertEquals(item1.get().getQuantity(), quantity1);
@@ -169,11 +173,12 @@ public class ShoppingServiceTest {
 		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), quantity1);
 		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), quantity2);
 		
-		List<ShoppingCartItem> items = new ArrayList<>(user.getShoppingCart().getItems());
+		ShoppingCart shoppingCart = user.getShoppingCart();
+		Optional<ShoppingCartItem> item = shoppingCart.getItem(product.getId());
 		
-		assertEquals(1, items.size());
-		assertEquals(product, items.get(0).getProduct());
-		assertEquals(quantity1 + quantity2, items.get(0).getQuantity());
+		assertEquals(1, shoppingCart.getItems().size());
+		assertTrue(item.isPresent());
+		assertEquals(quantity1 + quantity2, item.get().getQuantity());
 
 		
 	}
@@ -265,11 +270,12 @@ public class ShoppingServiceTest {
 		
 		assertTrue(exceptionCatched);
 		
-		List<ShoppingCartItem> items = new ArrayList<>(user.getShoppingCart().getItems());
-
-		assertEquals(1, items.size());
-		assertEquals(quantity1, items.get(0).getQuantity());
-
+		ShoppingCart shoppingCart = user.getShoppingCart();
+		Optional<ShoppingCartItem> item = shoppingCart.getItem(product.getId());
+		
+		assertEquals(1, shoppingCart.getItems().size());
+		assertTrue(item.isPresent());
+		assertEquals(quantity1, item.get().getQuantity());
 		
 	}
 	
@@ -311,9 +317,9 @@ public class ShoppingServiceTest {
 		shoppingService.updateShoppingCartItemQuantity(user.getId(), 
 			user.getShoppingCart().getId(), product.getId(), quantity2);
 		
-		ShoppingCartItem item = new ArrayList<>(user.getShoppingCart().getItems()).get(0);
+		Optional<ShoppingCartItem> item = user.getShoppingCart().getItem(product.getId());
 	
-		assertEquals(quantity2, item.getQuantity());
+		assertEquals(quantity2, item.get().getQuantity());
 	
 	}
 	
@@ -333,11 +339,21 @@ public class ShoppingServiceTest {
 		PermissionException, MaxQuantityExceededException, MaxItemsExceededException {
 		
 		User user = signUpUser("user");
+		
+		shoppingService.updateShoppingCartItemQuantity(user.getId(), user.getShoppingCart().getId(), NON_EXISTENT_ID, 
+			1);
+		
+	}
+	
+	@Test(expected = PermissionException.class)
+	public void testUpdateShoppingCartItemQuantityWithNonExistentUserId() throws InstanceNotFoundException,
+		PermissionException, MaxQuantityExceededException {
+		
+		User user = signUpUser("user");
 		Product product = addProduct("product");
 		
-		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), 1);
-		shoppingService.updateShoppingCartItemQuantity(user.getId(), user.getShoppingCart().getId(), NON_EXISTENT_ID, 
-			2);
+		shoppingService.updateShoppingCartItemQuantity(NON_EXISTENT_ID, user.getShoppingCart().getId(), product.getId(), 
+			1);
 		
 	}
 	
@@ -349,7 +365,6 @@ public class ShoppingServiceTest {
 		User user2 = signUpUser("user2");
 		Product product = addProduct("product");
 		
-		shoppingService.addToShoppingCart(user1.getId(), user1.getShoppingCart().getId(), product.getId(), 1);
 		shoppingService.addToShoppingCart(user2.getId(), user2.getShoppingCart().getId(), product.getId(), 1);
 		shoppingService.updateShoppingCartItemQuantity(user1.getId(), user2.getShoppingCart().getId(), product.getId(), 
 			2);
@@ -370,6 +385,59 @@ public class ShoppingServiceTest {
 	}
 	
 	@Test
+	public void removeShoppingCartItem() throws InstanceNotFoundException, PermissionException,
+		MaxQuantityExceededException, MaxItemsExceededException {
+		
+		User user = signUpUser("user");
+		Product product1 = addProduct("product1");
+		Product product2 = addProduct("product2", product1.getCategory());
+		
+		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product1.getId(), 1);
+		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product2.getId(), 1);
+		shoppingService.removeShoppingCartItem(user.getId(), user.getShoppingCart().getId(), product1.getId());
+		
+		ShoppingCart shoppingCart = user.getShoppingCart();
+		
+		assertFalse(shoppingCart.getItem(product1.getId()).isPresent());
+		assertTrue(shoppingCart.getItem(product2.getId()).isPresent());
+		assertFalse(shoppingCartItemDao.findById(product1.getId()).isPresent());
+		
+	}
+	
+	@Test(expected = InstanceNotFoundException.class)
+	public void removeNonExistentShoppingCartItem() throws InstanceNotFoundException, PermissionException,
+		MaxQuantityExceededException, MaxItemsExceededException {
+		
+		User user = signUpUser("user");
+		
+		shoppingService.removeShoppingCartItem(user.getId(), user.getShoppingCart().getId(), NON_EXISTENT_ID);
+		
+	}
+	
+	@Test(expected = PermissionException.class)
+	public void testRemoveShoppingCartItemWithNonExistentUserId() throws InstanceNotFoundException,
+		PermissionException {
+		
+		User user = signUpUser("user");
+		Product product = addProduct("product");
+		
+		shoppingService.removeShoppingCartItem(NON_EXISTENT_ID, user.getShoppingCart().getId(), product.getId());
+		
+	}
+	
+	@Test(expected = PermissionException.class)
+	public void removeItemFromAnotherShoppingCart() throws InstanceNotFoundException, PermissionException,
+		MaxQuantityExceededException, MaxItemsExceededException {
+		
+		User user1 = signUpUser("user1");
+		User user2 = signUpUser("user2");
+		Product product = addProduct("product");
+		
+		shoppingService.removeShoppingCartItem(user1.getId(), user2.getShoppingCart().getId(), product.getId());
+		
+	}
+	
+	@Test
 	public void testBuyAndFindOrder() throws InstanceNotFoundException, PermissionException, MaxQuantityExceededException,
 		MaxItemsExceededException, EmptyShoppingCartException {
 		
@@ -385,18 +453,16 @@ public class ShoppingServiceTest {
 		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product2.getId(), quantity2);
 		
 		Order order = shoppingService.buy(user.getId(), user.getShoppingCart().getId(), postalAddress, postalCode);	
-		order = shoppingService.findOrder(user.getId(), order.getId());
+		Order foundOrder = shoppingService.findOrder(user.getId(), order.getId());
 		
+		assertEquals(order, foundOrder);
 		assertEquals(user, order.getUser());
 		assertEquals(postalAddress, order.getPostalAddress());
-		assertEquals(postalCode, order.getPostalCode());
+		assertEquals(postalCode, order.getPostalCode());	
+		assertEquals(2, order.getItems().size());
 		
-		Set<OrderItem> items = order.getItems();
-		
-		assertEquals(2, items.size());
-		
-		Optional<OrderItem> item1 = items.stream().filter(i -> i.getProduct().equals(product1)).findFirst();
-		Optional<OrderItem> item2 = items.stream().filter(i -> i.getProduct().equals(product2)).findFirst();
+		Optional<OrderItem> item1 = order.getItem(product1.getId());
+		Optional<OrderItem> item2 = order.getItem(product2.getId());
 		
 		assertTrue(item1.isPresent());
 		assertEquals(product1.getPrice(), item1.get().getProductPrice());
@@ -404,7 +470,6 @@ public class ShoppingServiceTest {
 		assertTrue(item2.isPresent());
 		assertEquals(product2.getPrice(), item2.get().getProductPrice());
 		assertEquals(quantity2, item2.get().getQuantity());
-		
 		assertTrue(user.getShoppingCart().isEmpty());
 		
 	}

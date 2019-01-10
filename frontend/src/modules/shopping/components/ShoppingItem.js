@@ -37,6 +37,19 @@ class ShoppingItem extends React.Component {
     
     }
 
+    handleRemoveItem() {
+
+        this.props.handleRemoveItem(this.props.shoppingItemListId,
+            this.props.item.productId, 
+            () => {
+                this.props.handleBackendErrors(null);
+            }, 
+            backendErrors => {
+                this.props.handleBackendErrors(backendErrors);
+            });
+
+    }
+
     handleUpdateQuantity() {
 
         this.props.handleUpdateQuantity(this.props.shoppingItemListId,
@@ -62,7 +75,7 @@ class ShoppingItem extends React.Component {
                     { edit &&
                     <span>
                         <button type="button" className="btn btn-danger btn-sm"
-                            onClick={() => alert('Not implemented :-(')}>
+                            onClick={() => this.handleRemoveItem()}>
                             <span className="fas fa-trash-alt"></span>
                         </button>
                         &nbsp;
@@ -103,6 +116,7 @@ ShoppingItem.propTypes = {
     index: PropTypes.number.isRequired,
     edit: PropTypes.bool,
     handleUpdateQuantity: PropTypes.func,
+    handleRemoveItem: PropTypes.func,
     handleBackendErrors: PropTypes.func
 }
 

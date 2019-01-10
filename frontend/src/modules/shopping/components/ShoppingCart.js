@@ -6,10 +6,13 @@ import ShoppingItemList from './ShoppingItemList';
 import * as selectors from '../selectors';
 import * as actions from '../actions';
 
-const ShoppingCart = ({cart, history, handleUpdateQuantity}) => (
+const ShoppingCart = ({cart, history, handleUpdateQuantity, 
+    handleRemoveItem}) => (
+
     <div>
         <ShoppingItemList list={cart} edit
-            handleUpdateQuantity={handleUpdateQuantity}/>
+            handleUpdateQuantity={handleUpdateQuantity}
+            handleRemoveItem={handleRemoveItem}/>
         {cart.items.length > 0 &&
         <div className="text-center">
             <button type="button" className="btn btn-primary"
@@ -19,6 +22,7 @@ const ShoppingCart = ({cart, history, handleUpdateQuantity}) => (
         </div>
         }
     </div>
+
 );
 
 const mapStateToProps = state => ({
@@ -26,7 +30,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    handleUpdateQuantity: actions.updateShoppingCartItemQuantity
+    handleUpdateQuantity: actions.updateShoppingCartItemQuantity,
+    handleRemoveItem: actions.removeShoppingCartItem
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart);

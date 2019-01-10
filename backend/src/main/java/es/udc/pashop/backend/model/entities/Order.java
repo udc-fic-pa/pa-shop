@@ -3,6 +3,7 @@ package es.udc.pashop.backend.model.entities;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -91,6 +92,11 @@ public class Order {
 
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
+	}
+	
+	@Transient
+	public Optional<OrderItem> getItem(Long productId) {
+		return items.stream().filter(item -> item.getProduct().getId().equals(productId)).findFirst();
 	}
 
 	public void addItem(OrderItem item) {

@@ -1,8 +1,8 @@
 package es.udc.pashop.backend.rest.controllers;
 
-import static es.udc.pashop.backend.rest.dtos.ShoppingCartConversor.toShoppingCartDto;
-import static es.udc.pashop.backend.rest.dtos.OrderConversor.toOrderSummaryDtos;
 import static es.udc.pashop.backend.rest.dtos.OrderConversor.toOrderDto;
+import static es.udc.pashop.backend.rest.dtos.OrderConversor.toOrderSummaryDtos;
+import static es.udc.pashop.backend.rest.dtos.ShoppingCartConversor.toShoppingCartDto;
 
 import java.util.Locale;
 
@@ -37,6 +37,7 @@ import es.udc.pashop.backend.rest.dtos.BuyParamsDto;
 import es.udc.pashop.backend.rest.dtos.IdDto;
 import es.udc.pashop.backend.rest.dtos.OrderDto;
 import es.udc.pashop.backend.rest.dtos.OrderSummaryDto;
+import es.udc.pashop.backend.rest.dtos.RemoveShoppingCartItemDto;
 import es.udc.pashop.backend.rest.dtos.ShoppingCartDto;
 import es.udc.pashop.backend.rest.dtos.UpdateShoppingCartItemQuantityDto;
 
@@ -107,6 +108,14 @@ public class ShoppingController {
 		
 		return toShoppingCartDto(shoppingService.updateShoppingCartItemQuantity(userId, shoppingCartId,
 			params.getProductId(), params.getQuantity()));
+		
+	}
+	
+	@PostMapping("/shoppingcarts/{shoppingCartId}/removeShoppingCartItem")
+	public ShoppingCartDto removeShoppingCartItem(@RequestAttribute Long userId, @PathVariable Long shoppingCartId,
+		@RequestBody RemoveShoppingCartItemDto params) throws InstanceNotFoundException, PermissionException {
+		
+		return toShoppingCartDto(shoppingService.removeShoppingCartItem(userId, shoppingCartId, params.getProductId()));
 		
 	}
 	

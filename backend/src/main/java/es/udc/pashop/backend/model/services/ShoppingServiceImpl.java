@@ -84,6 +84,24 @@ public class ShoppingServiceImpl implements ShoppingService {
 	}
 	
 	@Override
+	public ShoppingCart removeShoppingCartItem(Long userId, Long shoppingCartId, Long productId)
+		throws InstanceNotFoundException, PermissionException {
+		
+		ShoppingCart shoppingCart = permissionChecker.checkShoppingCartExistsAndBelongsTo(shoppingCartId, userId);
+		Optional<ShoppingCartItem> existingCartItem = shoppingCart.getItem(productId);
+		
+		if (!existingCartItem.isPresent()) {
+			throw new InstanceNotFoundException("project.entities.product", productId);
+		}
+		
+		shoppingCart.removeItem(existingCartItem.get());
+		shoppingCartItemDao.delete(existingCartItem.get());
+		
+		return shoppingCart;
+		
+	}
+	
+	@Override
 	public Order buy(Long userId, Long shoppingCartId, String postalAddress, String postalCode)
 			throws InstanceNotFoundException, PermissionException, EmptyShoppingCartException {
 		

@@ -24,6 +24,15 @@ export const updateShoppingCartItemQuantity = (shoppingCartId, productId,
         },
         onErrors);
 
+export const removeShoppingCartItem = (shoppingCartId, productId, onSuccess, 
+    onErrors) => dispatch => 
+    backend.shoppingService.removeShoppingCartItem(shoppingCartId,
+        productId, shoppingCart => {
+            dispatch(shoppingCartUpdated(shoppingCart));
+            onSuccess();
+        },
+        onErrors);
+
 const buyCompleted = (orderId) => ({
     type: actionTypes.BUY_COMPLETED,
     orderId
