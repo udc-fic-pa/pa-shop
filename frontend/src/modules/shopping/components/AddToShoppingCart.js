@@ -38,7 +38,7 @@ class AddToShoppingCart extends React.Component {
                 () => this.props.history.push('/shopping/shopping-cart'),
                 errors => this.setBackendErrors(errors));
         } else {
-            this.clearMessages();
+            this.setBackendErrors(null);
             form.get(0).classList.add('was-validated');
         }
 
@@ -46,10 +46,6 @@ class AddToShoppingCart extends React.Component {
 
     setBackendErrors(backendErrors) {
         this.setState({backendErrors});
-    }
-
-    clearMessages() {
-        this.setState({backendErrors: null});
     }
 
     handleErrorsClose() {

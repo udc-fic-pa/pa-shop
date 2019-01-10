@@ -41,7 +41,7 @@ class BuyForm extends React.Component {
         if (form.get(0).checkValidity()) {
             this.buy();
         } else {
-            this.clearMessages();
+            this.setBackendErrors(null);
             form.get(0).classList.add('was-validated');
         }
 
@@ -58,10 +58,6 @@ class BuyForm extends React.Component {
 
     setBackendErrors(backendErrors) {
         this.setState({backendErrors});
-    }
-
-    clearMessages() {
-        this.setState({backendErrors: null});
     }
 
     handleErrorsClose() {

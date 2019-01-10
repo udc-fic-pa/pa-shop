@@ -51,7 +51,7 @@ class ChangePassword extends React.Component {
         if (form.checkValidity() && this.checkConfirmNewPassword()) {
             this.changePasword();
         } else {
-            this.clearMessages();
+            this.setBackendErrors(null);
             form.classList.add('was-validated');
         }
 
@@ -83,10 +83,6 @@ class ChangePassword extends React.Component {
 
     setBackendErrors(backendErrors) {
         this.setState({backendErrors});
-    }
-
-    clearMessages() {
-        this.setState({backendErrors: null});
     }
 
     handleErrorsClose() {

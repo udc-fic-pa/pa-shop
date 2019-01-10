@@ -65,7 +65,7 @@ class SignUp extends React.Component {
         if (form.checkValidity() && this.checkConfirmPassword()) {
             this.signUp();
         } else {
-            this.clearMessages();
+            this.setBackendErrors(null);
             form.classList.add('was-validated');
         }
 
@@ -102,10 +102,6 @@ class SignUp extends React.Component {
 
     setBackendErrors(backendErrors) {
         this.setState({backendErrors});
-    }
-
-    clearMessages() {
-        this.setState({backendErrors: null});
     }
 
     handleErrorsClose() {

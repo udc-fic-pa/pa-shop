@@ -44,7 +44,7 @@ class UpdateProfile extends React.Component {
         if (form.get(0).checkValidity()) {
             this.updateProfile();
         } else {
-            this.clearMessages();
+            this.setBackendErrors(null);
             form.get(0).classList.add('was-validated');
         }
 
@@ -64,10 +64,6 @@ class UpdateProfile extends React.Component {
 
     setBackendErrors(backendErrors) {
         this.setState({backendErrors});
-    }
-
-    clearMessages() {
-        this.setState({backendErrors: null});
     }
 
     handleErrorsClose() {
