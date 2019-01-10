@@ -4,7 +4,7 @@ export default {
     'project.app.Header.home': 'Inicio',
     'project.app.Header.logout': 'Salir',
     'project.shopping.header.orders': 'Pedidos',
-    'project.app.Home.welcome': '¡Bienvenido a PA Shop!',
+    'project.app.Home.welcome': 'Busque en nuestro catálogo de productos.',
 
     'project.catalog.FindProducts.allDepartments': 'Todos los departamentos',
     'project.catalog.FindProductsResult.noProductsFound': 'No se encontraron productos',
