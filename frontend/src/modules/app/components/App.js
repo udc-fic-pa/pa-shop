@@ -13,12 +13,10 @@ const reauthenticationCallback = dispatch => () =>
 class App extends React.Component {
 
     componentDidMount() {
-
-        if (!this.props.loggedIn)  {
-            this.props.dispatch(
-                users.actions.tryLoginFromServiceToken(
-                    reauthenticationCallback(this.props.dispatch)));
-        }
+  
+        this.props.dispatch(
+            users.actions.tryLoginFromServiceToken(
+                reauthenticationCallback(this.props.dispatch)));
 
     }
 
