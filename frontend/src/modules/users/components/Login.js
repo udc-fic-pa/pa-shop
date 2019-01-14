@@ -10,7 +10,6 @@ import * as actions from '../actions';
 const initialState = {
     userName: '',
     password: '',
-    rememberMe: false,
     backendErrors: null
 };
 
@@ -36,10 +35,6 @@ class Login extends React.Component {
 
     handlePasswordChange(event) {
         this.setState({password: event.target.value});
-    }
-
-    handleRememberMeChange() {
-        this.setState({rememberMe: !this.state.rememberMe});
     }
 
     handleSubmit(event) {
@@ -120,17 +115,6 @@ class Login extends React.Component {
                                         required/>
                                     <div className="invalid-feedback">
                                         <FormattedMessage id='project.global.validator.required'/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="form-group row">     
-                                <div className="offset-md-3 col-md-4">
-                                    <div className="form-check">
-                                        <input type="checkbox" id="rememberMe" className="form-check-input"
-                                            onChange={(e) => this.handleRememberMeChange(e)}/>
-                                        <label htmlFor="rememberMe" className="form-check-label">
-                                            Example checkbox
-                                        </label>
                                     </div>
                                 </div>
                             </div>
