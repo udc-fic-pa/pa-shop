@@ -110,7 +110,7 @@ class BuyForm extends React.Component {
                             <div className="form-group row">
                                 <div className="offset-md-3 col-md-1">
                                     <button type="submit" className="btn btn-primary">
-                                        <FormattedMessage id="project.shopping.BuyForm.title"/>
+                                        <FormattedMessage id="project.global.buttons.buy"/>
                                     </button>
                                 </div>
                             </div>

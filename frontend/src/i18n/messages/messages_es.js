@@ -19,6 +19,7 @@ export default {
     'project.global.buttons.ok': 'OK',
     'project.global.buttons.back': 'Anterior',
     'project.global.buttons.save': 'Guardar',
+    'project.global.buttons.search': 'Buscar',
     'project.global.exceptions.NetworkError': 'Fallo de comunicación',
     'project.global.fields.date': 'Fecha',
     'project.global.fields.department': 'Departamento',

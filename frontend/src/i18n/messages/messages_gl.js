@@ -19,6 +19,7 @@ export default {
     'project.global.buttons.ok': 'OK',
     'project.global.buttons.back': 'Anterior',
     'project.global.buttons.save': 'Gardar',
+    'project.global.buttons.search': 'Buscar',
     'project.global.exceptions.NetworkError': 'Erro de comunicación',
     'project.global.fields.date': 'Data',
     'project.global.fields.department': 'Departamento',
@@ -40,7 +41,7 @@ export default {
     'project.global.validator.required': 'Campo obrigatorio',
 
     'project.shopping.AddToCart.add': 'Engadir ao carrito',
-    'project.shopping.BuyForm.title': 'Comprar',
+    'project.shopping.BuyForm.title': 'Mercar',
     'project.shopping.OrderDetails.backToOrders': 'Voltar a listado de pedidos',
     'project.shopping.FindOrdersResult.noOrders': 'Non se atoparon pedidos',
     'project.shopping.PurchaseCompleted.purchaseOrderGenerated': 'Orden de compra xerada',

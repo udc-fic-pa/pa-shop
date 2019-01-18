@@ -64,7 +64,9 @@ class FindProducts extends React.Component {
                 <input id="keywords" type="text" className="form-control mr-sm-2"
                     value={this.state.keywords} onChange={(e) => this.handleKeywordsChange(e)}/>
                 
-                <button type="submit" className="btn btn-primary my-2 my-sm-0">Search</button>
+                <button type="submit" className="btn btn-primary my-2 my-sm-0">
+                    <FormattedMessage id='project.global.buttons.search'/>
+                </button>
 
             </form>
 
