@@ -26,14 +26,11 @@ const findProductsCompleted = productSearch => ({
     productSearch
 });
 
-export const findProducts = (criteria, onSuccess) => dispatch => {
+export const findProducts = criteria => dispatch => {
 
     dispatch(clearProductSearch());
     backend.catalogService.findProducts(criteria,
-        result => {
-            dispatch(findProductsCompleted({criteria, result}));
-            onSuccess();
-        });
+        result => dispatch(findProductsCompleted({criteria, result})));
 
 }
 
