@@ -1,4 +1,4 @@
-# Personal Project Manager
+# PA Shop
 
 ## Requirements
 
