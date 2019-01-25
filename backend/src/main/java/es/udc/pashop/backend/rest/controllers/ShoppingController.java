@@ -141,7 +141,7 @@ public class ShoppingController {
 	public BlockDto<OrderSummaryDto> findOrders(@RequestAttribute Long userId, 
 		@RequestParam(defaultValue="0") int page) {
 		
-		Block<Order> orderBlock = shoppingService.findOrders(userId, page, 4);
+		Block<Order> orderBlock = shoppingService.findOrders(userId, page, 10);
 		
 		return new BlockDto<>(toOrderSummaryDtos(orderBlock.getItems()), orderBlock.getExistMoreItems());
 		
