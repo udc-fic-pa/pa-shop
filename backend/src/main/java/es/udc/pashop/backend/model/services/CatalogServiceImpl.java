@@ -1,5 +1,7 @@
 package es.udc.pashop.backend.model.services;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +27,14 @@ public class CatalogServiceImpl implements CatalogService {
 	private ProductDao productDao;
 
 	@Override
-	public Iterable<Category> findAllCategories() {
-		return categoryDao.findAll(new Sort(Sort.Direction.ASC, "name"));
+	public List<Category> findAllCategories() {
+		
+		Iterable<Category> categories = categoryDao.findAll(new Sort(Sort.Direction.ASC, "name"));
+		List<Category> categoriesAsList = new ArrayList<>();
+		
+		categories.forEach(c -> categoriesAsList.add(c));
+		
+		return categoriesAsList;
 	}
 
 	@Override

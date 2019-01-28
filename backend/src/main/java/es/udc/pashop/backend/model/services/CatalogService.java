@@ -1,12 +1,14 @@
 package es.udc.pashop.backend.model.services;
 
+import java.util.List;
+
 import es.udc.pashop.backend.model.common.exceptions.InstanceNotFoundException;
 import es.udc.pashop.backend.model.entities.Category;
 import es.udc.pashop.backend.model.entities.Product;
 
 public interface CatalogService {
 	
-	Iterable<Category> findAllCategories();
+	List<Category> findAllCategories();
 	
 	Product findProductById(Long id) throws InstanceNotFoundException;
 	

@@ -1,7 +1,7 @@
 package es.udc.pashop.backend.rest.dtos;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import es.udc.pashop.backend.model.entities.Category;
 
@@ -13,16 +13,8 @@ public class CategoryConversor {
 		return new CategoryDto(category.getId(), category.getName());
 	}
 	
-	public final static List<CategoryDto> toCategoryDtos(Iterable<Category> categories) {
-		
-		List<CategoryDto> categoryDtos = new ArrayList<>();
-		
-		for (Category category : categories) {
-			categoryDtos.add(toCategoryDto(category));
-		}
-		
-		return categoryDtos;
-		
+	public final static List<CategoryDto> toCategoryDtos(List<Category> categories) {
+		return categories.stream().map(c -> toCategoryDto(c)).collect(Collectors.toList());
 	}
 
 }
