@@ -1,10 +1,5 @@
 # PA Shop
 
-## Installing the development environment and building the examples
-
-- [Instructions for Unix-like operating systems (spanish)] (/LEEME_UNIX.md).
-- [Instructions for Windows (spanish)] (/LEEME_WINDOWS.md).
-
 ## Requirements
 
 - Node 8+.
