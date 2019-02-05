@@ -176,16 +176,17 @@
   (`mysqladmin` o `myqsl`), probar a ejecutarlos añadiendo la opción `-p` para que
   solicite la password del usuario root.
 
-- Creación de bases de datos ws y wstest (abrir en una consola diferente)
+- Creación de bases de datos pa, patest, paproject y paprojecttest (abrir en una 
+  consola diferente)
 
 ```shell
-  mysqladmin -u root create pa
-  mysqladmin -u root create patest
-  mysqladmin -u root create paproject
-  mysqladmin -u root create paprojecttest
+	mysqladmin -u root create pa
+	mysqladmin -u root create patest
+	mysqladmin -u root create paproject
+	mysqladmin -u root create paprojecttest    
 ```
 
-- Creación de usuario ws con password con permisos sobre ws y wstest
+- Creación de usuario pa con password con permisos sobre todas las bases de datos
 
 ```shell
     mysql -u root
