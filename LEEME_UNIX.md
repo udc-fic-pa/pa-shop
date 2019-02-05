@@ -164,7 +164,7 @@
 
 - Más información: https://dev.mysql.com/doc/refman/8.0/en/osx-installation.html
 
-## Creación de bases de datos necesarias para los ejemplos
+## Creación de bases de datos necesarias para los ejemplos y el proyecto plantilla
 
 - Arrancar MySQL (sólo si el arranque no es automático)
 
