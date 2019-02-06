@@ -91,7 +91,7 @@ public class User {
 		this.role = role;
 	}
 
-	@OneToOne(mappedBy="user", fetch=FetchType.LAZY)
+	@OneToOne(mappedBy="user", optional=false, fetch=FetchType.LAZY)
 	public ShoppingCart getShoppingCart() {
 		return shoppingCart;
 	}
