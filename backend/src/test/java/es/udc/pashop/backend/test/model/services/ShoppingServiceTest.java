@@ -91,11 +91,7 @@ public class ShoppingServiceTest {
 	private Product addProduct(String name, Category category) {
 		return productDao.save(new Product(name, "description", new BigDecimal(1), category));
 	}
-	
-	private Product addProduct(String name, BigDecimal price, Category category) {
-		return productDao.save(new Product(name, "description", price, category));
-	}
-	
+
 	private Product addProduct(String name) {
 		return addProduct(name, addCategory("category"));
 	}
@@ -443,7 +439,7 @@ public class ShoppingServiceTest {
 		
 		User user = signUpUser("user");
 		Product product1 = addProduct("product1");
-		Product product2 = addProduct("product2", product1.getPrice().add(new BigDecimal(1)), product1.getCategory());
+		Product product2 = addProduct("product2", product1.getCategory());
 		int quantity1 = 1;
 		int quantity2 = 2;
 		String postalAddress = "Postal Address";
