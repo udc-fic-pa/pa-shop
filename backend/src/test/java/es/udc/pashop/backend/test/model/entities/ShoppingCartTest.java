@@ -5,8 +5,6 @@ import static org.junit.Assert.assertEquals;
 import java.math.BigDecimal;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import es.udc.pashop.backend.model.entities.Category;
 import es.udc.pashop.backend.model.entities.MaxItemsExceededException;
@@ -15,7 +13,6 @@ import es.udc.pashop.backend.model.entities.Product;
 import es.udc.pashop.backend.model.entities.ShoppingCart;
 import es.udc.pashop.backend.model.entities.ShoppingCartItem;
 
-@RunWith(SpringRunner.class)
 public class ShoppingCartTest {
 	
 	private Product createProduct(String name, BigDecimal price) {
