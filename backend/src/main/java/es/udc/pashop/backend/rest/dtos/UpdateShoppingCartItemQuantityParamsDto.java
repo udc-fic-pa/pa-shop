@@ -3,12 +3,12 @@ package es.udc.pashop.backend.rest.dtos;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-public class UpdateShoppingCartItemQuantityDto {
+public class UpdateShoppingCartItemQuantityParamsDto {
 	
 	private Long productId;
 	private int quantity;
 	
-	public UpdateShoppingCartItemQuantityDto() {}
+	public UpdateShoppingCartItemQuantityParamsDto() {}
 
 	@NotNull
 	public Long getProductId() {

@@ -31,15 +31,15 @@ import es.udc.pashop.backend.model.services.EmptyShoppingCartException;
 import es.udc.pashop.backend.model.services.PermissionException;
 import es.udc.pashop.backend.model.services.ShoppingService;
 import es.udc.pashop.backend.rest.common.ErrorsDto;
-import es.udc.pashop.backend.rest.dtos.AddToCartParamsDto;
+import es.udc.pashop.backend.rest.dtos.AddToShoppingCartParamsDto;
 import es.udc.pashop.backend.rest.dtos.BlockDto;
 import es.udc.pashop.backend.rest.dtos.BuyParamsDto;
 import es.udc.pashop.backend.rest.dtos.IdDto;
 import es.udc.pashop.backend.rest.dtos.OrderDto;
 import es.udc.pashop.backend.rest.dtos.OrderSummaryDto;
-import es.udc.pashop.backend.rest.dtos.RemoveShoppingCartItemDto;
+import es.udc.pashop.backend.rest.dtos.RemoveShoppingCartItemParamsDto;
 import es.udc.pashop.backend.rest.dtos.ShoppingCartDto;
-import es.udc.pashop.backend.rest.dtos.UpdateShoppingCartItemQuantityDto;
+import es.udc.pashop.backend.rest.dtos.UpdateShoppingCartItemQuantityParamsDto;
 
 @RestController
 @RequestMapping("/shopping")
@@ -93,7 +93,7 @@ public class ShoppingController {
 	
 	@PostMapping("/shoppingcarts/{shoppingCartId}/addToShoppingCart")
 	public ShoppingCartDto addToShoppingCart(@RequestAttribute Long userId, @PathVariable Long shoppingCartId, 
-		@Validated @RequestBody AddToCartParamsDto params) 
+		@Validated @RequestBody AddToShoppingCartParamsDto params) 
 		throws InstanceNotFoundException, PermissionException, MaxQuantityExceededException, MaxItemsExceededException {
 		
 		return toShoppingCartDto(shoppingService.addToShoppingCart(userId, shoppingCartId, params.getProductId(),
@@ -103,7 +103,7 @@ public class ShoppingController {
 	
 	@PostMapping("/shoppingcarts/{shoppingCartId}/updateShoppingCartItemQuantity")
 	public ShoppingCartDto updateShoppingCartItemQuantity(@RequestAttribute Long userId, 
-		@PathVariable Long shoppingCartId, @RequestBody UpdateShoppingCartItemQuantityDto params)
+		@PathVariable Long shoppingCartId, @RequestBody UpdateShoppingCartItemQuantityParamsDto params)
 		throws InstanceNotFoundException, PermissionException, MaxQuantityExceededException {
 		
 		return toShoppingCartDto(shoppingService.updateShoppingCartItemQuantity(userId, shoppingCartId,
@@ -113,7 +113,7 @@ public class ShoppingController {
 	
 	@PostMapping("/shoppingcarts/{shoppingCartId}/removeShoppingCartItem")
 	public ShoppingCartDto removeShoppingCartItem(@RequestAttribute Long userId, @PathVariable Long shoppingCartId,
-		@RequestBody RemoveShoppingCartItemDto params) throws InstanceNotFoundException, PermissionException {
+		@RequestBody RemoveShoppingCartItemParamsDto params) throws InstanceNotFoundException, PermissionException {
 		
 		return toShoppingCartDto(shoppingService.removeShoppingCartItem(userId, shoppingCartId, params.getProductId()));
 		

@@ -2,11 +2,11 @@ package es.udc.pashop.backend.rest.dtos;
 
 import javax.validation.constraints.NotNull;
 
-public class RemoveShoppingCartItemDto {
+public class RemoveShoppingCartItemParamsDto {
 	
 	private Long productId;
 	
-	public RemoveShoppingCartItemDto() {}
+	public RemoveShoppingCartItemParamsDto() {}
 
 	@NotNull
 	public Long getProductId() {
