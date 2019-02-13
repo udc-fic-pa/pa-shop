@@ -3,8 +3,8 @@
 -- in the "pa" database.
 -------------------------------------------------------------------------------
 
-INSERT INTO Category (name) VALUES ('Cine');
-INSERT INTO Category (name) VALUES ('Música');
+INSERT INTO Category (name) VALUES ('Movies');
+INSERT INTO Category (name) VALUES ('Music');
 
 INSERT INTO Product(name, description, price, categoryId) 
     VALUES ('2001: A Space Odyssey [Blu-ray]', 
