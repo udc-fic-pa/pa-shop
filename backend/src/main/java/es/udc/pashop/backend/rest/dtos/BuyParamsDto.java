@@ -8,8 +8,6 @@ public class BuyParamsDto {
 	private String postalAddress;
 	private String postalCode;
 	
-	public BuyParamsDto() {}
-
 	@NotNull
 	@Size(min=1, max=200) 
 	public String getPostalAddress() {

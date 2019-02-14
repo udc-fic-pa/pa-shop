@@ -8,8 +8,6 @@ public class ChangePasswordParamsDto {
 	private String oldPassword;
 	private String newPassword;
 	
-	public ChangePasswordParamsDto() {}
-
 	@NotNull
 	public String getOldPassword() {
 		return oldPassword;

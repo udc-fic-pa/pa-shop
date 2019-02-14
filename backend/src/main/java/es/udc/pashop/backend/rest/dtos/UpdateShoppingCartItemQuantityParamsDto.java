@@ -8,8 +8,6 @@ public class UpdateShoppingCartItemQuantityParamsDto {
 	private Long productId;
 	private int quantity;
 	
-	public UpdateShoppingCartItemQuantityParamsDto() {}
-
 	@NotNull
 	public Long getProductId() {
 		return productId;

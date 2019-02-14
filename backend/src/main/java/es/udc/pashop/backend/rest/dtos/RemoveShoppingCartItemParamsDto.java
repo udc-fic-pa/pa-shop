@@ -6,8 +6,6 @@ public class RemoveShoppingCartItemParamsDto {
 	
 	private Long productId;
 	
-	public RemoveShoppingCartItemParamsDto() {}
-
 	@NotNull
 	public Long getProductId() {
 		return productId;

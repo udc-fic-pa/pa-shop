@@ -8,8 +8,6 @@ public class AddToShoppingCartParamsDto {
 	private Long productId;
 	private int quantity;
 	
-	public AddToShoppingCartParamsDto() {}
-
 	@NotNull
 	public Long getProductId() {
 		return productId;
