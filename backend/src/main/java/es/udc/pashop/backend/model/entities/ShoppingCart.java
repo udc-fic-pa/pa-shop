@@ -11,8 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 @Entity
@@ -49,7 +49,7 @@ public class ShoppingCart {
 		this.items = items;
 	}
 
-	@ManyToOne(optional=false, fetch=FetchType.LAZY)
+	@OneToOne(optional=false, fetch=FetchType.LAZY)
 	@JoinColumn(name= "userId")
 	public User getUser() {
 		return user;
