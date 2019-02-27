@@ -42,7 +42,7 @@ CREATE TABLE Product (
         REFERENCES Category (id)
 ) ENGINE = InnoDB;
 
-CREATE INDEX ProductIndexByName ON Category (name);
+CREATE INDEX ProductIndexByName ON Product (name);
 
 CREATE TABLE ShoppingCart (
     id BIGINT NOT NULL AUTO_INCREMENT,
