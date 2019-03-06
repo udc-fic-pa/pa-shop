@@ -56,7 +56,7 @@ public class ShoppingController {
 	private ShoppingService shoppingService;
 	
 	@ExceptionHandler(MaxQuantityExceededException.class)
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ResponseBody
 	public ErrorsDto handleMaxQuantityExceededException(MaxQuantityExceededException exception, Locale locale) {
 		
@@ -68,7 +68,7 @@ public class ShoppingController {
 	}
 	
 	@ExceptionHandler(MaxItemsExceededException.class)
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ResponseBody
 	public ErrorsDto handleMaxItemsExceededException(MaxItemsExceededException exception, Locale locale) {
 		
@@ -80,7 +80,7 @@ public class ShoppingController {
 	}
 	
 	@ExceptionHandler(EmptyShoppingCartException.class)
-	@ResponseStatus(HttpStatus.FORBIDDEN)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ResponseBody
 	public ErrorsDto handleEmptyShoppingCartException(EmptyShoppingCartException exception, Locale locale) {
 		
