@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, FormattedNumber} from 'react-intl';
 
 import ShoppingItem from './ShoppingItem';
 import {Errors} from '../../common';
@@ -74,7 +74,8 @@ class ShoppingItemList extends React.Component {
                 </table>
 
                 <p className="text-center font-weight-bold">
-                    <FormattedMessage id='project.global.fields.totalPrice'/>: {list.totalPrice}€
+                    <FormattedMessage id='project.global.fields.totalPrice'/> 
+                    : <FormattedNumber value={list.totalPrice}/>€
                 </p>
 
             </div>

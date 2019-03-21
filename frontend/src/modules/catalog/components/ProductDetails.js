@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, FormattedNumber} from 'react-intl';
 
 import users from '../../users';
 import * as selectors from '../selectors';
@@ -42,8 +42,9 @@ class ProductDetails extends React.Component {
                                 {selectors.getCategory(this.props.categories, product.categoryId).name}
                         </h6>
                         <p className="card-text">{product.description}</p>
-                        <p className="card-text">
-                            <strong><FormattedMessage id='project.global.fields.price'/></strong>: {product.price}€
+                        <p className="card-text font-weight-bold">
+                            <FormattedMessage id='project.global.fields.price'/>
+                            : <FormattedNumber value={product.price}/>€
                         </p>
                     </div>
                 </div>

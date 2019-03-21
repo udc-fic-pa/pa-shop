@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, FormattedNumber} from 'react-intl';
 import {Link} from 'react-router-dom';
 import $ from 'jquery';
 
@@ -84,7 +84,7 @@ class ShoppingItem extends React.Component {
                     }
                     <Link to={`/catalog/product-details/${item.productId}/withoutBackLink`}>{item.productName}</Link>
                 </td>
-                <td>{item.productPrice}€</td>
+                <td><FormattedNumber value={item.productPrice}/>€</td>
                 { edit &&
                 <td>
                     <form id={this.quantityFormId} className="form-inline needs-validation" 
