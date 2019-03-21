@@ -67,10 +67,10 @@ class ShoppingItem extends React.Component {
 
     render() {
 
-        const {item, index, edit} = this.props;
+        const {item, edit} = this.props;
 
         return (
-            <tr key={index}>                     
+            <tr>                   
                 <td>
                     { edit &&
                     <span>
@@ -113,7 +113,6 @@ class ShoppingItem extends React.Component {
 ShoppingItem.propTypes = {
     shoppingItemListId: PropTypes.number.isRequired,
     item: PropTypes.object.isRequired,
-    index: PropTypes.number.isRequired,
     edit: PropTypes.bool,
     handleUpdateQuantity: PropTypes.func,
     handleRemoveItem: PropTypes.func,

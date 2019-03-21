@@ -61,9 +61,9 @@ class ShoppingItemList extends React.Component {
                     </thead>
 
                     <tbody>
-                        {list.items.map((item, index) => 
-                            <ShoppingItem shoppingItemListId={list.id} key={index} 
-                                item={item} index={index}
+                        {list.items.map(item => 
+                            <ShoppingItem shoppingItemListId={list.id}
+                                key={item.productId} item={item}
                                 edit={edit} 
                                 handleUpdateQuantity={handleUpdateQuantity}
                                 handleRemoveItem={handleRemoveItem}
