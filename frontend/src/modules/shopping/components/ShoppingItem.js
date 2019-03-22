@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {FormattedMessage, FormattedNumber} from 'react-intl';
-import {Link} from 'react-router-dom';
 import $ from 'jquery';
+
+import {ProductLink} from '../../common';
 
 class ShoppingItem extends React.Component {
 
@@ -82,7 +83,7 @@ class ShoppingItem extends React.Component {
                         &nbsp;
                     </span>
                     }
-                    <Link to={`/catalog/product-details/${item.productId}/withoutBackLink`}>{item.productName}</Link>
+                    <ProductLink id={item.productId} name={item.productName}/>
                 </td>
                 <td><FormattedNumber value={item.productPrice}/>€</td>
                 { edit &&

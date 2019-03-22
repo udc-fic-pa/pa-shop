@@ -1,7 +1,8 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import {FormattedMessage, FormattedDate, FormattedTime} from 'react-intl';
 import PropTypes from 'prop-types';
+
+import OrderLink from './OrderLink';
 
 const Orders = ({orders}) => (
 
@@ -21,7 +22,7 @@ const Orders = ({orders}) => (
         <tbody>
             {orders.map(order => 
                 <tr key={order.id}>
-                    <td><Link to={`/shopping/order-details/${order.id}/withBackLink`}>{order.id}</Link></td>
+                    <td><OrderLink id={order.id} withBackLink={true}/></td>
                     <td>
                         <FormattedDate value={new Date(order.date)}/> - <FormattedTime value={new Date(order.date)}/>
                     </td>
