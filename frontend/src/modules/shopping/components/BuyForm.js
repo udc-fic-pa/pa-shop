@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 import $ from 'jquery';
-import {withRouter} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
@@ -133,5 +133,10 @@ const mapDispatchToProps = {
     buy: actions.buy
 }
 
-export default withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(BuyForm));
+BuyForm = connect(mapStateToProps, mapDispatchToProps)(BuyForm);
+
+BuyForm.propTypes = {
+    history: PropTypes.object.isRequired
+};
+
+export default BuyForm;

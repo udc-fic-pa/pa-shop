@@ -5,9 +5,9 @@ import ShoppingItemList from './ShoppingItemList';
 import BuyForm from './BuyForm';
 import * as selectors from '../selectors';
 
-const Buy = ({cart}) => cart.items.length > 0 && (
+const Buy = ({cart, history}) => cart.items.length > 0 && (
     <div>
-        <BuyForm/>
+        <BuyForm history={history}/>
         <ShoppingItemList list={cart}/>
     </div>
 );

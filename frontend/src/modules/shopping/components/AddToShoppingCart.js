@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 import $ from 'jquery';
 import PropTypes from 'prop-types';
-import {withRouter} from 'react-router-dom';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
@@ -96,11 +95,12 @@ const mapDispatchToProps = {
     addToShoppingCart: actions.addToShoppingCart
 }
 
-AddToShoppingCart = withRouter(connect(
-    mapStateToProps, mapDispatchToProps)(AddToShoppingCart));
+AddToShoppingCart = connect(
+    mapStateToProps, mapDispatchToProps)(AddToShoppingCart);
 
 AddToShoppingCart.propTypes = {
-    productId: PropTypes.number.isRequired
+    productId: PropTypes.number.isRequired,
+    history: PropTypes.object.isRequired
 };
 
 export default AddToShoppingCart;

@@ -85,4 +85,8 @@ const mapDispatchToProps = {
     findProducts: actions.findProducts
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FindProducts));
+/*
+ * It is not necessary to call withRouter(connect(...)(FindProducts)), since
+ * we only need to inject "history" (mutable) in FindProducts.
+ */
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(FindProducts));

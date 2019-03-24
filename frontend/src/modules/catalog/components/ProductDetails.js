@@ -52,7 +52,8 @@ class ProductDetails extends React.Component {
                 {this.props.user && 
                     <div>
                         <br/>
-                        <AddToShoppingCart productId={product.id}/>
+                        <AddToShoppingCart productId={product.id} 
+                            history={this.props.history}/>
                     </div>
                 }
 
