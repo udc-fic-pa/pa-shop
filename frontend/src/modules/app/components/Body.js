@@ -9,7 +9,7 @@ import users from '../../users';
 import {FindProductsResult, ProductDetails} from '../../catalog';
 import {ShoppingCart, Buy, PurchaseCompleted, FindOrders, FindOrdersResult, OrderDetails} from '../../shopping';
 
-const Body = ({user}) => (
+const Body = ({loggedIn}) => (
 
     <div className="container">
         <br/>
@@ -18,17 +18,17 @@ const Body = ({user}) => (
             <Route exact path="/" component={Home}/>
             <Route exact path="/catalog/find-products-result" component={FindProductsResult}/>
             <Route exact path="/catalog/product-details/:id/:withBackLink" component={ProductDetails}/>
-            {user && <Route exact path="/shopping/shopping-cart" component={ShoppingCart}/>}
-            {user && <Route exact path="/shopping/buy" component={Buy}/>}
-            {user && <Route exact path="/shopping/purchase-completed" component={PurchaseCompleted}/>}
-            {user && <Route exact path="/shopping/find-orders" component={FindOrders}/>}
-            {user && <Route exact path="/shopping/find-orders-result" component={FindOrdersResult}/>}
-            {user && <Route exact path="/shopping/order-details/:id/:withBackLink" component={OrderDetails}/>}
-            {user && <Route exact path="/users/update-profile" component={UpdateProfile}/>}
-            {user && <Route exact path="/users/change-password" component={ChangePassword}/>}
-            {user && <Route exact path="/users/logout" component={Logout}/>}
-            {!user && <Route exact path="/users/login" component={Login}/>}
-            {!user && <Route exact path="/users/signup" component={SignUp}/>}
+            {loggedIn && <Route exact path="/shopping/shopping-cart" component={ShoppingCart}/>}
+            {loggedIn && <Route exact path="/shopping/buy" component={Buy}/>}
+            {loggedIn && <Route exact path="/shopping/purchase-completed" component={PurchaseCompleted}/>}
+            {loggedIn && <Route exact path="/shopping/find-orders" component={FindOrders}/>}
+            {loggedIn && <Route exact path="/shopping/find-orders-result" component={FindOrdersResult}/>}
+            {loggedIn && <Route exact path="/shopping/order-details/:id/:withBackLink" component={OrderDetails}/>}
+            {loggedIn && <Route exact path="/users/update-profile" component={UpdateProfile}/>}
+            {loggedIn && <Route exact path="/users/change-password" component={ChangePassword}/>}
+            {loggedIn && <Route exact path="/users/logout" component={Logout}/>}
+            {!loggedIn && <Route exact path="/users/login" component={Login}/>}
+            {!loggedIn && <Route exact path="/users/signup" component={SignUp}/>}
             <Route component={Home}/>
         </Switch>
     </div>
@@ -36,7 +36,7 @@ const Body = ({user}) => (
 );
 
 const mapStateToProps = state => ({
-    user: users.selectors.getUser(state)
+    loggedIn: users.selectors.isLoggedIn(state)
 });
 
 /*

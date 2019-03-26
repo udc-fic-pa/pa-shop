@@ -49,7 +49,7 @@ class ProductDetails extends React.Component {
                     </div>
                 </div>
 
-                {this.props.user && 
+                {this.props.loggedIn && 
                     <div>
                         <br/>
                         <AddToShoppingCart productId={product.id} 
@@ -66,7 +66,7 @@ class ProductDetails extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    user: users.selectors.getUser(state),
+    loggedIn: users.selectors.isLoggedIn(state),
     product: selectors.getProduct(state),
     categories: selectors.getCategories(state)
 });
