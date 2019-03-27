@@ -139,12 +139,7 @@ public class ShoppingController {
 	
 	@GetMapping("/orders")
 	public BlockDto<OrderSummaryDto> findOrders(@RequestAttribute Long userId, 
-		@RequestParam(name="userId") Long ownerId,
-		@RequestParam(defaultValue="0") int page) throws PermissionException {
-		
-		if (!ownerId.equals(userId)) {
-			throw new PermissionException();
-		}
+		@RequestParam(defaultValue="0") int page) {
 		
 		Block<Order> orderBlock = shoppingService.findOrders(userId, page, 10);
 		
