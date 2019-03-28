@@ -7,7 +7,7 @@ import Home from './Home';
 import {Login, SignUp, UpdateProfile, ChangePassword, Logout} from '../../users';
 import users from '../../users';
 import {FindProductsResult, ProductDetails} from '../../catalog';
-import {ShoppingCart, Buy, PurchaseCompleted, FindOrders, OrderDetails} from '../../shopping';
+import {ShoppingCart, Buy, PurchaseCompleted, FindOrders, FindOrdersResult, OrderDetails} from '../../shopping';
 
 const Body = ({loggedIn}) => (
 
@@ -22,6 +22,7 @@ const Body = ({loggedIn}) => (
             {loggedIn && <Route exact path="/shopping/buy" component={Buy}/>}
             {loggedIn && <Route exact path="/shopping/purchase-completed" component={PurchaseCompleted}/>}
             {loggedIn && <Route exact path="/shopping/find-orders" component={FindOrders}/>}
+            {loggedIn && <Route exact path="/shopping/find-orders-result" component={FindOrdersResult}/>}
             {loggedIn && <Route exact path="/shopping/order-details/:id/:withBackLink" component={OrderDetails}/>}
             {loggedIn && <Route exact path="/users/update-profile" component={UpdateProfile}/>}
             {loggedIn && <Route exact path="/users/change-password" component={ChangePassword}/>}
