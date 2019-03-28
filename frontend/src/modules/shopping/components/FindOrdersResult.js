@@ -28,10 +28,10 @@ const FindOrdersResult = ({orderSearch, previousFindOrdersResultPage, nextFindOr
             <Pager 
                 back={{
                     enabled: orderSearch.criteria.page >= 1,
-                    handle: () => previousFindOrdersResultPage(orderSearch.criteria)}}
+                    onClick: () => previousFindOrdersResultPage(orderSearch.criteria)}}
                 next={{
                     enabled: orderSearch.result.existMoreItems,
-                    handle: () => nextFindOrdersResultPage(orderSearch.criteria)}}/>
+                    onClick: () => nextFindOrdersResultPage(orderSearch.criteria)}}/>
         </div>
 
     );

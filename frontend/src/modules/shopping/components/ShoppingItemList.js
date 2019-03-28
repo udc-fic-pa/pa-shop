@@ -29,7 +29,7 @@ class ShoppingItemList extends React.Component {
 
     render() {
 
-        const {list, edit,  handleUpdateQuantity, handleRemoveItem} = this.props;
+        const {list, edit, onUpdateQuantity, onRemoveItem} = this.props;
 
         if (list.items.length === 0) {
             return (
@@ -44,7 +44,7 @@ class ShoppingItemList extends React.Component {
             <div>
 
                 <Errors errors={this.state.backendErrors}
-                    handleClose={() => this.handleErrorsClose()}/>
+                    onClose={() => this.handleErrorsClose()}/>
 
                 <table className="table">
 
@@ -65,9 +65,9 @@ class ShoppingItemList extends React.Component {
                             <ShoppingItem shoppingItemListId={list.id}
                                 key={item.productId} item={item}
                                 edit={edit} 
-                                handleUpdateQuantity={handleUpdateQuantity}
-                                handleRemoveItem={handleRemoveItem}
-                                handleBackendErrors={errors => this.setBackendErrors(errors)}/>
+                                onUpdateQuantity={onUpdateQuantity}
+                                onRemoveItem={onRemoveItem}
+                                onBackendErrors={errors => this.setBackendErrors(errors)}/>
                         )}
                     </tbody>
 
@@ -89,8 +89,8 @@ class ShoppingItemList extends React.Component {
 ShoppingItemList.propTypes = {
     list: PropTypes.object.isRequired,
     edit: PropTypes.bool,
-    handleUpdateQuantity: PropTypes.func,
-    handleRemoveItem: PropTypes.func
+    onUpdateQuantity: PropTypes.func,
+    onRemoveItem: PropTypes.func
 }
 
 export default ShoppingItemList;

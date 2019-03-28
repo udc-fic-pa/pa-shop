@@ -70,7 +70,7 @@ class BuyForm extends React.Component {
 
             <div>
                 <Errors errors={this.state.backendErrors}
-                    handleClose={() => this.handleErrorsClose()}/>
+                    onClose={() => this.handleErrorsClose()}/>
                 <div className="card bg-light border-dark">
                     <h5 className="card-header">
                         <FormattedMessage id="project.shopping.BuyForm.title"/>

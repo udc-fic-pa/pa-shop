@@ -32,7 +32,7 @@ class ShoppingItem extends React.Component {
         if (form.get(0).checkValidity()) {
             this.handleUpdateQuantity();
         } else {
-            this.props.handleBackendErrors(null);
+            this.props.onBackendErrors(null);
             form.get(0).classList.add('was-validated');
         }
     
@@ -40,28 +40,28 @@ class ShoppingItem extends React.Component {
 
     handleRemoveItem() {
 
-        this.props.handleRemoveItem(this.props.shoppingItemListId,
+        this.props.onRemoveItem(this.props.shoppingItemListId,
             this.props.item.productId, 
             () => {
-                this.props.handleBackendErrors(null);
+                this.props.onBackendErrors(null);
             }, 
             backendErrors => {
-                this.props.handleBackendErrors(backendErrors);
+                this.props.onBackendErrors(backendErrors);
             });
 
     }
 
     handleUpdateQuantity() {
 
-        this.props.handleUpdateQuantity(this.props.shoppingItemListId,
+        this.props.onUpdateQuantity(this.props.shoppingItemListId,
             this.props.item.productId, this.state.quantity, 
             () => {
                 this.setState({quantity: this.props.item.quantity});
-                this.props.handleBackendErrors(null);
+                this.props.onBackendErrors(null);
             }, 
             backendErrors => {
                 this.setState({quantity: this.props.item.quantity});
-                this.props.handleBackendErrors(backendErrors);
+                this.props.onBackendErrors(backendErrors);
             });
 
     }
@@ -115,9 +115,9 @@ ShoppingItem.propTypes = {
     shoppingItemListId: PropTypes.number.isRequired,
     item: PropTypes.object.isRequired,
     edit: PropTypes.bool,
-    handleUpdateQuantity: PropTypes.func,
-    handleRemoveItem: PropTypes.func,
-    handleBackendErrors: PropTypes.func
+    onUpdateQuantity: PropTypes.func,
+    onRemoveItem: PropTypes.func,
+    onBackendErrors: PropTypes.func
 }
 
 export default ShoppingItem;

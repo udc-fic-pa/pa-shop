@@ -55,7 +55,7 @@ class AddToShoppingCart extends React.Component {
 
         return (
             <div>
-                <Errors errors={this.state.backendErrors} handleClose={() => this.handleErrorsClose()}/>
+                <Errors errors={this.state.backendErrors} onClose={() => this.handleErrorsClose()}/>
                 <form id="add-to-cart-form" className="needs-validation" noValidate onSubmit={(e) => this.handleSubmit(e)}>
                     <div className="form-group row">
                         <label htmlFor="quantity" className="offset-md-5 col-md-1 col-form-label">
