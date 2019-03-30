@@ -13,7 +13,7 @@ const Body = ({loggedIn}) => (
 
     <div className="container">
         <br/>
-        <Route path="/" component={AppGlobalComponents}/>
+        <AppGlobalComponents/>
         <Switch>
             <Route exact path="/" component={Home}/>
             <Route exact path="/catalog/find-products-result" component={FindProductsResult}/>
