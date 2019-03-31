@@ -21,7 +21,7 @@ export const buy = (shoppingCartId, postalAddress, postalCode, onSuccess,
         config('POST', {postalAddress, postalCode}), onSuccess, onErrors);
 
 export const findOrders = ({page}, onSuccess) => 
-    appFetch(`/shopping/orders?page=${page}`, config('GET', null), onSuccess);
+    appFetch(`/shopping/orders?page=${page}`, config('GET'), onSuccess);
 
 export const findOrder = (orderId, onSuccess) =>
-    appFetch(`/shopping/orders/${orderId}`, config('GET', null), onSuccess);
+    appFetch(`/shopping/orders/${orderId}`, config('GET'), onSuccess);
