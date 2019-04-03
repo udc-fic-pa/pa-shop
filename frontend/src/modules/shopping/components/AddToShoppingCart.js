@@ -73,7 +73,7 @@ class AddToShoppingCart extends React.Component {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <div className="offset-md-6 col-md-1">
+                        <div className="offset-md-6 col-md-2">
                             <button type="submit" className="btn btn-primary">
                                 <FormattedMessage id="project.shopping.AddToCart.add"/>
                             </button>
