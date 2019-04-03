@@ -39,7 +39,7 @@ class ProductDetails extends React.Component {
                         <h5 className="card-title">{product.name}</h5>
                         <h6 className="card-subtitle text-muted">
                             <FormattedMessage id='project.global.fields.department'/>:&nbsp;
-                                {selectors.getCategory(this.props.categories, product.categoryId).name}
+                                {selectors.getCategoryName(this.props.categories, product.categoryId)}
                         </h6>
                         <p className="card-text">{product.description}</p>
                         <p className="card-text font-weight-bold">

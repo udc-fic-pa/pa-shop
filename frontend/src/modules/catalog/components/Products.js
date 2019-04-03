@@ -23,7 +23,7 @@ const Products = ({products, categories}) => (
         <tbody>
             {products.map(product => 
                 <tr key={product.id}>
-                    <td>{selectors.getCategory(categories, product.categoryId).name}</td>
+                    <td>{selectors.getCategoryName(categories, product.categoryId)}</td>
                     <td><ProductLink id={product.id} name={product.name} withBackLink={true}/></td>
                 </tr>
             )}
