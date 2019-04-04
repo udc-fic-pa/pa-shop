@@ -17,10 +17,10 @@ public class CustomizedProductDaoImpl implements CustomizedProductDao {
 	
 	private String[] getTokens(String keywords) {
 		
-		if (keywords == null || keywords.trim().length() == 0) {
+		if (keywords == null || keywords.length() == 0) {
 			return new String[0];
 		} else {
-			return keywords.trim().split("\\s");
+			return keywords.split("\\s");
 		}
 		
 	}

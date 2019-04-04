@@ -15,7 +15,7 @@ public class BuyParamsDto {
 	}
 
 	public void setPostalAddress(String postalAddress) {
-		this.postalAddress = postalAddress;
+		this.postalAddress = postalAddress.trim();
 	}
 
 	@NotNull
@@ -25,7 +25,7 @@ public class BuyParamsDto {
 	}
 
 	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode;
+		this.postalCode = postalCode.trim();
 	}
 
 }

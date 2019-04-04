@@ -49,8 +49,8 @@ class BuyForm extends React.Component {
 
     buy() {
 
-        this.props.buy(this.props.shoppingCartId, this.state.postalAddress,
-            this.state.postalCode, 
+        this.props.buy(this.props.shoppingCartId, 
+            this.state.postalAddress.trim(), this.state.postalCode.trim(), 
             () => this.props.history.push('/shopping/purchase-completed'),
             errors => this.setBackendErrors(errors));
 

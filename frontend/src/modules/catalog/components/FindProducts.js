@@ -33,12 +33,12 @@ class FindProducts extends React.Component {
         event.preventDefault();
         this.props.dispatch(actions.findProducts(
             {categoryId: this.toNumber(this.state.categoryId), 
-                keywords: this.state.keywords, page: 0}));
+                keywords: this.state.keywords.trim(), page: 0}));
         this.props.history.push('/catalog/find-products-result');
     }
 
     toNumber(value) {
-        return value === '' ? null : Number(value);
+        return value.length > 0 ? Number(value) : null;
     }
 
     render () {

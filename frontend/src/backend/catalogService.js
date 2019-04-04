@@ -8,13 +8,8 @@ export const findProducts = ({categoryId, keywords, page},
 
     let path = `/catalog/products?page=${page}`;
 
-    if (categoryId) {
-        path += `&categoryId=${categoryId}`;
-    }
-
-    if (keywords && keywords.trim() !== '') {
-        path += `&keywords=${keywords.trim()}`;
-    }
+    path += categoryId ? `&categoryId=${categoryId}` : "";
+    path += keywords.length > 0 ? `&keywords=${keywords}` : "";
 
     appFetch(path, config('GET'), onSuccess);
 
