@@ -5,35 +5,21 @@ import {FormattedMessage} from 'react-intl';
 import * as selectors from '../selectors';
 import * as actions from '../actions';
 
-class CategorySelector extends React.Component {
+const CategorySelector = ({categories, findAllCategories, ...remainingProps} ) => (
 
-    componentDidMount() {
-        this.props.findAllCategories();
-    }
+    <select {...remainingProps}>
 
-    render() {
+        <FormattedMessage id='project.catalog.CategorySelector.allDepartments'>
+            {message => (<option value="">{message}</option>)}
+        </FormattedMessage>
 
-        const {categories, findAllCategories, ...remainingProps} = this.props;
+        {categories && categories.map(category => 
+            <option key={category.id} value={category.id}>{category.name}</option>
+        )}
 
-        return (
+    </select>
 
-            <select {...remainingProps}>
-
-                <FormattedMessage id='project.catalog.CategorySelector.allDepartments'>
-                    {message => (<option value="">{message}</option>)}
-                </FormattedMessage>
-
-                {categories && categories.map(category => 
-                    <option key={category.id} value={category.id}>{category.name}</option>
-                )}
-
-            </select>
-
-        );
-
-    }
-
-}
+);
 
 const mapStateToProps = state => ({
     categories: selectors.getCategories(state)
