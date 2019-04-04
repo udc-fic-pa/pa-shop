@@ -11,7 +11,13 @@ import {AddToShoppingCart} from '../../shopping';
 class ProductDetails extends React.Component {
 
     componentDidMount() {
-        this.props.findProductById(this.props.match.params.id);
+
+        const id = Number(this.props.match.params.id);
+
+        if (!Number.isNaN(id)) {
+            this.props.findProductById(id);
+        }
+    
     }
 
     render() {

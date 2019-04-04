@@ -8,11 +8,11 @@ export const findProducts = ({categoryId, keywords, page},
 
     let path = `/catalog/products?page=${page}`;
 
-    if (categoryId !== '') {
+    if (categoryId) {
         path += `&categoryId=${categoryId}`;
     }
 
-    if (keywords.trim() !== '') {
+    if (keywords && keywords.trim() !== '') {
         path += `&keywords=${keywords.trim()}`;
     }
 

@@ -10,7 +10,13 @@ import ShoppingItemList from './ShoppingItemList';
 class OrderDetails extends React.Component {
 
     componentDidMount() {
-        this.props.findOrder(this.props.match.params.id);
+
+        const id = Number(this.props.match.params.id);
+
+        if (!Number.isNaN(id)) {   
+            this.props.findOrder(id);
+        }
+
     }
 
     render() {
