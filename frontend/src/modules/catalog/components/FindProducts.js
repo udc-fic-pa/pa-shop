@@ -33,7 +33,7 @@ class FindProducts extends React.Component {
         event.preventDefault();
         this.props.dispatch(actions.findProducts(
             {categoryId: this.state.categoryId, 
-                keywords: this.state.keywords.trim(), page: 0}));
+                keywords: this.state.keywords, page: 0}));
         this.props.history.push('/catalog/find-products-result');
     }
 

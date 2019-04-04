@@ -4,9 +4,21 @@ export const findAllCategories = (onSuccess) =>
     appFetch('/catalog/categories', config('GET'), onSuccess);
 
 export const findProducts = ({categoryId, keywords, page}, 
-    onSuccess) => 
-    appFetch(`/catalog/products?categoryId=${categoryId}&keywords=${keywords}&` +
-        `page=${page}`, config('GET'), onSuccess);
+    onSuccess) => {
+
+    let path = `/catalog/products?page=${page}`;
+
+    if (categoryId !== '') {
+        path += `&categoryId=${categoryId}`;
+    }
+
+    if (keywords.trim() !== '') {
+        path += `&keywords=${keywords.trim()}`;
+    }
+
+    appFetch(path, config('GET'), onSuccess);
+
+}
 
 export const findByProductId = (id, onSuccess) => 
     appFetch(`/catalog/products/${id}`, config('GET'), onSuccess);

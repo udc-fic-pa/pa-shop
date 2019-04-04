@@ -14,15 +14,25 @@ public class CustomizedProductDaoImpl implements CustomizedProductDao {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
+	
+	private String[] getTokens(String keywords) {
+		
+		if (keywords == null || keywords.trim().length() == 0) {
+			return new String[0];
+		} else {
+			return keywords.trim().split("\\s");
+		}
+		
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Slice<Product> find(Long categoryId, String text, int page, int size) {
+	public Slice<Product> find(Long categoryId, String keywords, int page, int size) {
 		
-		String[] keywords = text == null ? new String[0] : text.split("\\s");
+		String[] tokens = getTokens(keywords);
 		String queryString = "SELECT p FROM Product p";
 		
-		if (categoryId != null || keywords.length > 0) {
+		if (categoryId != null || tokens.length > 0) {
 			queryString += " WHERE ";
 		}
 		
@@ -30,17 +40,17 @@ public class CustomizedProductDaoImpl implements CustomizedProductDao {
 			queryString += "p.category.id = :categoryId";
 		}
 		
-		if (keywords.length != 0) {
+		if (tokens.length != 0) {
 			
 			if (categoryId != null) {
 				queryString += " AND ";
 			}
 			
-			for (int i = 0; i<keywords.length-1; i++) {
-				queryString += "LOWER(p.name) LIKE LOWER(:keyword" + i + ") AND ";
+			for (int i = 0; i<tokens.length-1; i++) {
+				queryString += "LOWER(p.name) LIKE LOWER(:token" + i + ") AND ";
 			}
 			
-			queryString += "LOWER(p.name) LIKE LOWER(:keyword" + (keywords.length-1) + ")";
+			queryString += "LOWER(p.name) LIKE LOWER(:token" + (tokens.length-1) + ")";
 			
 		}
 		
@@ -52,9 +62,9 @@ public class CustomizedProductDaoImpl implements CustomizedProductDao {
 			query.setParameter("categoryId", categoryId);
 		}
 		
-		if (keywords.length != 0) {
-			for (int i = 0; i<keywords.length; i++) {
-				query.setParameter("keyword" + i, '%' + keywords[i] + '%');
+		if (tokens.length != 0) {
+			for (int i = 0; i<tokens.length; i++) {
+				query.setParameter("token" + i, '%' + tokens[i] + '%');
 			}
 	
 		}
