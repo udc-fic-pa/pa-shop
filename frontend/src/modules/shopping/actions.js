@@ -74,15 +74,12 @@ const findOrderCompleted = order => ({
     order
 });
 
-const clearOrder = () => ({
+export const clearOrder = () => ({
     type: actionTypes.CLEAR_ORDER
 });
 
 export const findOrder = orderId => dispatch => {
-
-    dispatch(clearOrder());
     backend.shoppingService.findOrder(orderId, order => {
         dispatch(findOrderCompleted(order));
     });
-
 }

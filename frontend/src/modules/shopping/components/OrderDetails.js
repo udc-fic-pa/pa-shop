@@ -19,6 +19,10 @@ class OrderDetails extends React.Component {
 
     }
 
+    componentWillUnmount() {
+        this.props.clearOrder();
+    }
+
     render() {
 
         const order = this.props.order;
@@ -68,7 +72,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    findOrder: actions.findOrder
+    findOrder: actions.findOrder,
+    clearOrder: actions.clearOrder
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderDetails);

@@ -20,6 +20,10 @@ class ProductDetails extends React.Component {
     
     }
 
+    componentWillUnmount() {
+        this.props.clearProduct();
+    }
+
     render() {
 
         const product = this.props.product;
@@ -78,7 +82,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-    findProductById: actions.findProductById
+    findProductById: actions.findProductById,
+    clearProduct: actions.clearProduct
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

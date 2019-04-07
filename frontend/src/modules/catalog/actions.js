@@ -50,13 +50,10 @@ const findProductByIdCompleted = product => ({
 });
     
 export const findProductById = id => dispatch => {
-
-    dispatch(clearProduct());
     backend.catalogService.findByProductId(id,
         product => dispatch(findProductByIdCompleted(product)));
-
 }
 
-const clearProduct = () => ({
+export const clearProduct = () => ({
     type: actionTypes.CLEAR_PRODUCT
 });
