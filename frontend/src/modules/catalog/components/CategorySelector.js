@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 
 import * as selectors from '../selectors';
-import * as actions from '../actions';
 
 const CategorySelector = ({categories, findAllCategories, ...remainingProps} ) => (
 
@@ -25,8 +24,4 @@ const mapStateToProps = state => ({
     categories: selectors.getCategories(state)
 });
 
-const mapDispatchToProps = {
-    findAllCategories: actions.findAllCategories,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CategorySelector);
+export default connect(mapStateToProps)(CategorySelector);
