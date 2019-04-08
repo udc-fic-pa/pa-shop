@@ -4,7 +4,7 @@ import {FormattedMessage} from 'react-intl';
 
 import * as selectors from '../selectors';
 
-const CategorySelector = ({categories, findAllCategories, ...remainingProps} ) => (
+const CategorySelector = ({categories, dispatch, ...remainingProps} ) => (
 
     <select {...remainingProps}>
 
