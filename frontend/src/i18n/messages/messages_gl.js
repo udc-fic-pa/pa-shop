@@ -8,7 +8,6 @@ export default {
 
     'project.catalog.CategorySelector.allDepartments': 'Tódolos departamentos',
     'project.catalog.FindProductsResult.noProductsFound': 'No se atoparon productos',
-    'project.catalog.ProductDetails.backToSearchResults': 'Voltar a resultados de búsqueda',
 
     'project.common.ErrorDialog.title': 'Erro',
 
@@ -42,7 +41,6 @@ export default {
 
     'project.shopping.AddToCart.add': 'Engadir ao carrito',
     'project.shopping.BuyForm.title': 'Mercar',
-    'project.shopping.OrderDetails.backToOrders': 'Voltar a listado de pedidos',
     'project.shopping.FindOrdersResult.noOrders': 'Non se atoparon pedidos',
     'project.shopping.PurchaseCompleted.purchaseOrderGenerated': 'Orden de compra xerada',
     'project.shopping.ShoppingCart.empty': 'O carro está baleiro',

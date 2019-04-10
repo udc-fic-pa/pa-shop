@@ -17,13 +17,13 @@ const Body = ({loggedIn}) => (
         <Switch>
             <Route exact path="/" component={Home}/>
             <Route exact path="/catalog/find-products-result" component={FindProductsResult}/>
-            <Route exact path="/catalog/product-details/:id/:withBackLink" component={ProductDetails}/>
+            <Route exact path="/catalog/product-details/:id" component={ProductDetails}/>
             {loggedIn && <Route exact path="/shopping/shopping-cart" component={ShoppingCart}/>}
             {loggedIn && <Route exact path="/shopping/buy" component={Buy}/>}
             {loggedIn && <Route exact path="/shopping/purchase-completed" component={PurchaseCompleted}/>}
             {loggedIn && <Route exact path="/shopping/find-orders" component={FindOrders}/>}
             {loggedIn && <Route exact path="/shopping/find-orders-result" component={FindOrdersResult}/>}
-            {loggedIn && <Route exact path="/shopping/order-details/:id/:withBackLink" component={OrderDetails}/>}
+            {loggedIn && <Route exact path="/shopping/order-details/:id" component={OrderDetails}/>}
             {loggedIn && <Route exact path="/users/update-profile" component={UpdateProfile}/>}
             {loggedIn && <Route exact path="/users/change-password" component={ChangePassword}/>}
             {loggedIn && <Route exact path="/users/logout" component={Logout}/>}

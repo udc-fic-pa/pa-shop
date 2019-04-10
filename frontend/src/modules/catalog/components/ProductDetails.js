@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
 import {FormattedMessage, FormattedNumber} from 'react-intl';
 
 import users from '../../users';
 import * as selectors from '../selectors';
 import * as actions from '../actions';
 import {AddToShoppingCart} from '../../shopping';
+import {BackLink} from '../../common';
 
 class ProductDetails extends React.Component {
 
@@ -36,13 +36,7 @@ class ProductDetails extends React.Component {
 
             <div>
 
-                {this.props.match.params.withBackLink === 'withBackLink' &&
-                <p>
-                    <Link to="/catalog/find-products-result">
-                        <FormattedMessage id='project.catalog.ProductDetails.backToSearchResults'/>
-                    </Link>
-                </p>
-                }
+                <BackLink/>
                 
                 <div className="card text-center">
                     <div className="card-body">
