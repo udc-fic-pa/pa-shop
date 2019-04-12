@@ -84,7 +84,7 @@ class BuyForm extends React.Component {
                                 </label>
                                 <div className="col-md-4">
                                     <input type="text" id="postalAddress" className="form-control"
-                                        value={this.state.userName}
+                                        value={this.state.postalAddress}
                                         onChange={(e) => this.handlePostalAddressChange(e)}
                                         autoFocus
                                         required/>
@@ -99,7 +99,7 @@ class BuyForm extends React.Component {
                                 </label>
                                 <div className="col-md-4">
                                     <input type="text" id="postalCode" className="form-control"
-                                        value={this.state.password}
+                                        value={this.state.postalCode}
                                         onChange={(e) => this.handlePostalCodeChange(e)}
                                         required/>
                                     <div className="invalid-feedback">
