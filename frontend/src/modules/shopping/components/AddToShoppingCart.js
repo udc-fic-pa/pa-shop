@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
-import $ from 'jquery';
 import PropTypes from 'prop-types';
 
 import {Errors} from '../../common';
@@ -29,16 +28,14 @@ class AddToShoppingCart extends React.Component {
 
         event.preventDefault();
 
-        const form = $('#add-to-cart-form');
-
-        if (form.get(0).checkValidity()) {
+        if (this.form.checkValidity()) {
             this.props.addToShoppingCart(this.props.shoppingCartId, 
                 this.props.productId, this.state.quantity,
                 () => this.props.history.push('/shopping/shopping-cart'),
                 errors => this.setBackendErrors(errors));
         } else {
             this.setBackendErrors(null);
-            form.get(0).classList.add('was-validated');
+            this.form.classList.add('was-validated');
         }
 
     }
@@ -56,7 +53,9 @@ class AddToShoppingCart extends React.Component {
         return (
             <div>
                 <Errors errors={this.state.backendErrors} onClose={() => this.handleErrorsClose()}/>
-                <form id="add-to-cart-form" className="needs-validation" noValidate onSubmit={(e) => this.handleSubmit(e)}>
+                <form ref={node => this.form = node}
+                    className="needs-validation" noValidate 
+                    onSubmit={(e) => this.handleSubmit(e)}>
                     <div className="form-group row">
                         <label htmlFor="quantity" className="offset-md-5 col-md-1 col-form-label">
                             <FormattedMessage id="project.global.fields.quantity"/>

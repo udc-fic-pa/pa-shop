@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
-import $ from 'jquery';
 import PropTypes from 'prop-types';
 
 import {Errors} from '../../common';
@@ -36,13 +35,11 @@ class BuyForm extends React.Component {
 
         event.preventDefault();
 
-        const form = $('#buy-form');
-
-        if (form.get(0).checkValidity()) {
+        if (this.form.checkValidity()) {
             this.buy();
         } else {
             this.setBackendErrors(null);
-            form.get(0).classList.add('was-validated');
+            this.form.classList.add('was-validated');
         }
 
     }
@@ -76,7 +73,8 @@ class BuyForm extends React.Component {
                         <FormattedMessage id="project.shopping.BuyForm.title"/>
                     </h5>
                     <div className="card-body">
-                        <form id="buy-form" className="needs-validation" noValidate 
+                        <form ref={node => this.form = node}
+                            className="needs-validation" noValidate 
                             onSubmit={(e) => this.handleSubmit(e)}>
                             <div className="form-group row">
                                 <label htmlFor="postalAddress" className="col-md-3 col-form-label">

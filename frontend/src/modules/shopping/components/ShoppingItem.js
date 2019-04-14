@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {FormattedMessage, FormattedNumber} from 'react-intl';
-import $ from 'jquery';
 
 import {ProductLink} from '../../common';
 
@@ -10,8 +9,6 @@ class ShoppingItem extends React.Component {
     constructor(props) {
 
         super(props);
-
-        this.quantityFormId = `modify-shopping-item-quantity-form-${props.item.productId}`;
 
         this.state = {
             quantity: props.item.quantity
@@ -27,13 +24,11 @@ class ShoppingItem extends React.Component {
 
         event.preventDefault();
 
-        const form = $(`#${this.quantityFormId}`);
-
-        if (form.get(0).checkValidity()) {
+        if (this.form.checkValidity()) {
             this.handleUpdateQuantity();
         } else {
             this.props.onBackendErrors(null);
-            form.get(0).classList.add('was-validated');
+            this.form.classList.add('was-validated');
         }
     
     }
@@ -88,7 +83,8 @@ class ShoppingItem extends React.Component {
                 <td><FormattedNumber value={item.productPrice}/>€</td>
                 { edit &&
                 <td>
-                    <form id={this.quantityFormId} className="form-inline needs-validation" 
+                    <form ref={node => this.form = node} 
+                        className="form-inline needs-validation" 
                         noValidate onSubmit={(e) => this.handleSubmit(e)}>
                         <input type="number" className="form-control mr-2" style={{width: '50%'}}
                             value={this.state.quantity}
