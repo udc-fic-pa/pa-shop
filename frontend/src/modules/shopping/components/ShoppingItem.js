@@ -93,7 +93,7 @@ class ShoppingItem extends React.Component {
                         <input type="number" className="form-control mr-2" style={{width: '50%'}}
                             value={this.state.quantity}
                             onChange={(e) => this.handleQuantityChange(e)}
-                            min="1" max="1000"/>
+                            min="1"/>
                         <button type="submit" className="btn btn-primary">
                             <FormattedMessage id="project.global.buttons.save"/>
                         </button>
