@@ -1,21 +1,15 @@
 package es.udc.pashop.backend.test.model.services;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.pashop.backend.model.common.exceptions.DuplicateInstanceException;
@@ -40,7 +34,8 @@ import es.udc.pashop.backend.model.services.PermissionException;
 import es.udc.pashop.backend.model.services.ShoppingService;
 import es.udc.pashop.backend.model.services.UserService;
 
-@RunWith(SpringRunner.class)
+import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 @ActiveProfiles("test")
 @Transactional
@@ -178,69 +173,62 @@ public class ShoppingServiceTest {
 		
 	}
 	
-	@Test(expected = InstanceNotFoundException.class)
-	public void testAddToNonExistingShoppingCart() throws InstanceNotFoundException, PermissionException, 
-		MaxQuantityExceededException, MaxItemsExceededException {
+	@Test
+	public void testAddToNonExistingShoppingCart() {
 		
 		User user = signUpUser("user");
 		Product product = addProduct("product");
 		
-		shoppingService.addToShoppingCart(user.getId(), NON_EXISTENT_ID, product.getId(), 1);
+		assertThrows(InstanceNotFoundException.class,
+			() -> shoppingService.addToShoppingCart(user.getId(), NON_EXISTENT_ID, product.getId(), 1));
 		
 	}
 	
-	@Test(expected = InstanceNotFoundException.class)
-	public void testAddNonExistingProductToShoppingCart() throws InstanceNotFoundException, PermissionException, 
-		MaxQuantityExceededException, MaxItemsExceededException {
+	@Test
+	public void testAddNonExistingProductToShoppingCart() {
 		
 		User user = signUpUser("user");
 		
-		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), NON_EXISTENT_ID, 1);
+		assertThrows(InstanceNotFoundException.class, () ->
+			shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), NON_EXISTENT_ID, 1));
 		
 	}
 	
-	@Test(expected = PermissionException.class)
-	public void testAddToAnotherShoppingCart() throws InstanceNotFoundException, PermissionException,
-		MaxQuantityExceededException, MaxItemsExceededException {
+	@Test
+	public void testAddToAnotherShoppingCart() {
 		
 		User user1 = signUpUser("user1");
 		User user2 = signUpUser("user2");
 		Product product = addProduct("product");
 		
-		shoppingService.addToShoppingCart(user1.getId(), user2.getShoppingCart().getId(), product.getId(), 1);
-		
-	}
-	
-	@Test(expected = PermissionException.class)
-	public void testAddToShoppingCartWithNonExistentUserId() throws InstanceNotFoundException, PermissionException,
-		MaxQuantityExceededException, MaxItemsExceededException {
-		
-		User user = signUpUser("user");
-		Product product = addProduct("product");
-		
-		shoppingService.addToShoppingCart(NON_EXISTENT_ID, user.getShoppingCart().getId(), product.getId(), 1);
+		assertThrows(PermissionException.class, () ->
+			shoppingService.addToShoppingCart(user1.getId(), user2.getShoppingCart().getId(), product.getId(), 1));
 		
 	}
 	
 	@Test
-	public void testAddNewProductToShoppingCartMaxQuantityExceededException() throws InstanceNotFoundException, 
-		PermissionException, MaxItemsExceededException {
+	public void testAddToShoppingCartWithNonExistentUserId() {
+		
+		User user = signUpUser("user");
+		Product product = addProduct("product");
+		
+		assertThrows(PermissionException.class,	() ->
+			shoppingService.addToShoppingCart(NON_EXISTENT_ID, user.getShoppingCart().getId(), product.getId(), 1));
+		
+	}
+	
+	@Test
+	public void testAddNewProductToShoppingCartMaxQuantityExceededException() {
 		
 		User user = signUpUser("user");
 		Product product = addProduct("product");
 		int quantity = ShoppingCartItem.MAX_QUANTITY + 1;
-		boolean exceptionCatched = false;
-				
-		try {
-			shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), quantity);
-		} catch (MaxQuantityExceededException e) {
-			exceptionCatched = true;
-			assertEquals(ShoppingCartItem.MAX_QUANTITY, e.getMaxAllowedIncrement());
-		}
-		
-		assertTrue(exceptionCatched);
-		assertEquals(0, user.getShoppingCart().getItems().size());
 
+		MaxQuantityExceededException exception = assertThrows(MaxQuantityExceededException.class, () ->
+			shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), quantity));
+
+		assertEquals(ShoppingCartItem.MAX_QUANTITY, exception.getMaxAllowedIncrement());
+		assertEquals(0, user.getShoppingCart().getItems().size());
 		
 	}
 	
@@ -252,19 +240,14 @@ public class ShoppingServiceTest {
 		Product product = addProduct("product");
 		int quantity1 = 1;
 		int quantity2 = ShoppingCartItem.MAX_QUANTITY;
-		boolean exceptionCatched = false;
-				
+
 		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), quantity1);
 
-		try {
-			shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), quantity2);
-		} catch (MaxQuantityExceededException e) {
-			exceptionCatched = true;
-			assertEquals(ShoppingCartItem.MAX_QUANTITY-quantity1, e.getMaxAllowedIncrement());
-		}
-		
-		assertTrue(exceptionCatched);
-		
+		MaxQuantityExceededException exception = assertThrows(MaxQuantityExceededException.class, () ->
+			shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), quantity2));
+
+		assertEquals(ShoppingCartItem.MAX_QUANTITY-quantity1, exception.getMaxAllowedIncrement());
+
 		ShoppingCart shoppingCart = user.getShoppingCart();
 		Optional<ShoppingCartItem> item = shoppingCart.getItem(product.getId());
 		
@@ -286,15 +269,12 @@ public class ShoppingServiceTest {
 			Product product = addProduct("product"+i, category);
 			shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), 1);
 		}
-				
-		try {
-			Product product = addProduct("product"+ShoppingCart.MAX_ITEMS, category);
-			shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), 1);
-		} catch (MaxItemsExceededException e) {
-			exceptionCatched = true;
-		}
+
+		Product product = addProduct("product"+ShoppingCart.MAX_ITEMS, category);
+
+		MaxItemsExceededException exception = assertThrows(MaxItemsExceededException.class,	() ->
+			shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), 1));
 		
-		assertTrue(exceptionCatched);
 		assertEquals(ShoppingCart.MAX_ITEMS, user.getShoppingCart().getItems().size());
 		
 	}
@@ -318,41 +298,39 @@ public class ShoppingServiceTest {
 	
 	}
 	
-	@Test(expected = InstanceNotFoundException.class)
-	public void testUpdateShoppingCartItemQuantityWithNonExistentShoppingCartId() throws InstanceNotFoundException,
-		PermissionException, MaxQuantityExceededException, MaxItemsExceededException {
+	@Test
+	public void testUpdateShoppingCartItemQuantityWithNonExistentShoppingCartId() {
 		
 		User user = signUpUser("user");
 		Product product = addProduct("product");
 		
-		shoppingService.updateShoppingCartItemQuantity(user.getId(), NON_EXISTENT_ID, product.getId(), 2);
+		assertThrows(InstanceNotFoundException.class, () ->
+			shoppingService.updateShoppingCartItemQuantity(user.getId(), NON_EXISTENT_ID, product.getId(), 2));
 		
 	}
 	
-	@Test(expected = InstanceNotFoundException.class)
-	public void testUpdateShoppingCartItemQuantityWithNonExistentProductId() throws InstanceNotFoundException,
-		PermissionException, MaxQuantityExceededException, MaxItemsExceededException {
+	@Test
+	public void testUpdateShoppingCartItemQuantityWithNonExistentProductId() {
 		
 		User user = signUpUser("user");
-		
-		shoppingService.updateShoppingCartItemQuantity(user.getId(), user.getShoppingCart().getId(), NON_EXISTENT_ID, 
-			1);
+
+		assertThrows(InstanceNotFoundException.class, () ->
+			shoppingService.updateShoppingCartItemQuantity(user.getId(), user.getShoppingCart().getId(), NON_EXISTENT_ID, 1));
 		
 	}
 	
-	@Test(expected = PermissionException.class)
-	public void testUpdateShoppingCartItemQuantityWithNonExistentUserId() throws InstanceNotFoundException,
-		PermissionException, MaxQuantityExceededException {
+	@Test
+	public void testUpdateShoppingCartItemQuantityWithNonExistentUserId() {
 		
 		User user = signUpUser("user");
 		Product product = addProduct("product");
 		
-		shoppingService.updateShoppingCartItemQuantity(NON_EXISTENT_ID, user.getShoppingCart().getId(), product.getId(), 
-			1);
+		assertThrows(PermissionException.class,	() ->
+			shoppingService.updateShoppingCartItemQuantity(NON_EXISTENT_ID, user.getShoppingCart().getId(), product.getId(), 1));
 		
 	}
 	
-	@Test(expected = PermissionException.class)
+	@Test
 	public void testUpdateShoppingCartItemQuantityToAnotherShoppingCart() throws InstanceNotFoundException,
 		PermissionException, MaxQuantityExceededException, MaxItemsExceededException {
 		
@@ -361,12 +339,13 @@ public class ShoppingServiceTest {
 		Product product = addProduct("product");
 		
 		shoppingService.addToShoppingCart(user2.getId(), user2.getShoppingCart().getId(), product.getId(), 1);
-		shoppingService.updateShoppingCartItemQuantity(user1.getId(), user2.getShoppingCart().getId(), product.getId(), 
-			2);
+
+		assertThrows(PermissionException.class,	() ->
+			shoppingService.updateShoppingCartItemQuantity(user1.getId(), user2.getShoppingCart().getId(), product.getId(), 2));
 		
 	}
 	
-	@Test(expected = MaxQuantityExceededException.class)
+	@Test
 	public void testUpdateShoppingCartItemQuantityMaxQuantityExceededException() throws InstanceNotFoundException,
 		PermissionException, MaxQuantityExceededException, MaxItemsExceededException {
 		
@@ -374,8 +353,9 @@ public class ShoppingServiceTest {
 		Product product = addProduct("product");
 		
 		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), 1);
-		shoppingService.updateShoppingCartItemQuantity(user.getId(), user.getShoppingCart().getId(), product.getId(), 
-			ShoppingCartItem.MAX_QUANTITY+1);
+
+		assertThrows(MaxQuantityExceededException.class, () ->
+			shoppingService.updateShoppingCartItemQuantity(user.getId(), user.getShoppingCart().getId(), product.getId(), ShoppingCartItem.MAX_QUANTITY+1));
 		
 	}
 	
@@ -399,36 +379,36 @@ public class ShoppingServiceTest {
 		
 	}
 	
-	@Test(expected = InstanceNotFoundException.class)
-	public void removeNonExistentShoppingCartItem() throws InstanceNotFoundException, PermissionException,
-		MaxQuantityExceededException, MaxItemsExceededException {
+	@Test
+	public void removeNonExistentShoppingCartItem() {
 		
 		User user = signUpUser("user");
 		
-		shoppingService.removeShoppingCartItem(user.getId(), user.getShoppingCart().getId(), NON_EXISTENT_ID);
+		assertThrows(InstanceNotFoundException.class, () ->
+			shoppingService.removeShoppingCartItem(user.getId(), user.getShoppingCart().getId(), NON_EXISTENT_ID));
 		
 	}
 	
-	@Test(expected = PermissionException.class)
-	public void testRemoveShoppingCartItemWithNonExistentUserId() throws InstanceNotFoundException,
-		PermissionException {
+	@Test
+	public void testRemoveShoppingCartItemWithNonExistentUserId() {
 		
 		User user = signUpUser("user");
 		Product product = addProduct("product");
 		
-		shoppingService.removeShoppingCartItem(NON_EXISTENT_ID, user.getShoppingCart().getId(), product.getId());
+		assertThrows(PermissionException.class, () ->
+			shoppingService.removeShoppingCartItem(NON_EXISTENT_ID, user.getShoppingCart().getId(), product.getId()));
 		
 	}
 	
-	@Test(expected = PermissionException.class)
-	public void removeItemFromAnotherShoppingCart() throws InstanceNotFoundException, PermissionException,
-		MaxQuantityExceededException, MaxItemsExceededException {
+	@Test
+	public void removeItemFromAnotherShoppingCart() {
 		
 		User user1 = signUpUser("user1");
 		User user2 = signUpUser("user2");
 		Product product = addProduct("product");
 		
-		shoppingService.removeShoppingCartItem(user1.getId(), user2.getShoppingCart().getId(), product.getId());
+		assertThrows(PermissionException.class, () ->
+			shoppingService.removeShoppingCartItem(user1.getId(), user2.getShoppingCart().getId(), product.getId()));
 		
 	}
 	
@@ -469,57 +449,57 @@ public class ShoppingServiceTest {
 		
 	}
 	 
-	@Test(expected = InstanceNotFoundException.class)
-	public void testBuyWithNonExistingShoppingCart() throws InstanceNotFoundException, PermissionException,
-		EmptyShoppingCartException {
+	@Test
+	public void testBuyWithNonExistingShoppingCart() {
 		
 		User user = signUpUser("user");
 		
-		shoppingService.buy(user.getId(), NON_EXISTENT_ID, "Postal Address", "12345");
+		assertThrows(InstanceNotFoundException.class, () ->
+			shoppingService.buy(user.getId(), NON_EXISTENT_ID, "Postal Address", "12345"));
 		
 	}
 	
-	@Test(expected = PermissionException.class)
-	public void testBuyAnotherShoppingCart() throws InstanceNotFoundException, PermissionException,
-		EmptyShoppingCartException {
+	@Test
+	public void testBuyAnotherShoppingCart() {
 		
 		User user1 = signUpUser("user1");
 		User user2 = signUpUser("user2");
 		
-		shoppingService.buy(user1.getId(), user2.getShoppingCart().getId(), "Postal Address", "12345");
+		assertThrows(PermissionException.class, () ->
+			shoppingService.buy(user1.getId(), user2.getShoppingCart().getId(), "Postal Address", "12345"));
 		
 	}
 	
-	@Test(expected = PermissionException.class)
-	public void testBuyWithNonExistentUserId() throws InstanceNotFoundException, PermissionException,
-		EmptyShoppingCartException {
+	@Test
+	public void testBuyWithNonExistentUserId() {
 		
 		User user = signUpUser("user");
 		
-		shoppingService.buy(NON_EXISTENT_ID, user.getShoppingCart().getId(), "Postal Address", "12345");
+		assertThrows(PermissionException.class, () ->
+			shoppingService.buy(NON_EXISTENT_ID, user.getShoppingCart().getId(), "Postal Address", "12345"));
 		
 	}
 	
-	@Test(expected = EmptyShoppingCartException.class)
-	public void testBuyEmptyShoppingCart() throws InstanceNotFoundException, PermissionException,
-		EmptyShoppingCartException {
+	@Test
+	public void testBuyEmptyShoppingCart() {
 		
 		User user = signUpUser("user");
 		
-		shoppingService.buy(user.getId(), user.getShoppingCart().getId(), "Postal Address", "12345");
+		assertThrows(EmptyShoppingCartException.class, () ->
+			shoppingService.buy(user.getId(), user.getShoppingCart().getId(), "Postal Address", "12345"));
 		
 	}
 	
-	@Test(expected = InstanceNotFoundException.class)
-	public void testFindNonExistentOrder() throws InstanceNotFoundException, PermissionException {
+	@Test
+	public void testFindNonExistentOrder() {
 		
 		User user = signUpUser("user");
 		
-		shoppingService.findOrder(user.getId(), NON_EXISTENT_ID);
+		assertThrows(InstanceNotFoundException.class, () ->	shoppingService.findOrder(user.getId(), NON_EXISTENT_ID));
 		
 	}
 	
-	@Test(expected = PermissionException.class)
+	@Test
 	public void testFindOrderOfAnotherUser() throws InstanceNotFoundException, PermissionException, 
 		MaxQuantityExceededException, MaxItemsExceededException, EmptyShoppingCartException {
 		
@@ -531,11 +511,11 @@ public class ShoppingServiceTest {
 		
 		Order order = shoppingService.buy(user1.getId(), user1.getShoppingCart().getId(), "Postal Address", "12345");	
 		
-		shoppingService.findOrder(user2.getId(), order.getId());
+		assertThrows(PermissionException.class, () -> shoppingService.findOrder(user2.getId(), order.getId()));
 		
 	}
 	
-	@Test(expected = PermissionException.class)
+	@Test
 	public void testFindOrderWithNonExistingUserId() throws InstanceNotFoundException, PermissionException, 
 		MaxQuantityExceededException, MaxItemsExceededException, EmptyShoppingCartException {
 		
@@ -544,9 +524,9 @@ public class ShoppingServiceTest {
 				
 		shoppingService.addToShoppingCart(user.getId(), user.getShoppingCart().getId(), product.getId(), 1);
 		
-		Order order = shoppingService.buy(user.getId(), user.getShoppingCart().getId(), "Postal Address", "12345");	
-		
-		shoppingService.findOrder(NON_EXISTENT_ID, order.getId());
+		Order order = shoppingService.buy(user.getId(), user.getShoppingCart().getId(), "Postal Address", "12345");
+
+		assertThrows(PermissionException.class, () -> shoppingService.findOrder(NON_EXISTENT_ID, order.getId()));
 		
 	}
 	

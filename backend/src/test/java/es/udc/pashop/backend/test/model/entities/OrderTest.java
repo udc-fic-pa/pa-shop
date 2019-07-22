@@ -1,10 +1,10 @@
 package es.udc.pashop.backend.test.model.entities;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.math.BigDecimal;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import es.udc.pashop.backend.model.entities.Category;
 import es.udc.pashop.backend.model.entities.Order;
