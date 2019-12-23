@@ -29,7 +29,7 @@ public class CatalogServiceImpl implements CatalogService {
 	@Override
 	public List<Category> findAllCategories() {
 		
-		Iterable<Category> categories = categoryDao.findAll(new Sort(Sort.Direction.ASC, "name"));
+		Iterable<Category> categories = categoryDao.findAll(Sort.by(Sort.Direction.ASC, "name"));
 		List<Category> categoriesAsList = new ArrayList<>();
 		
 		categories.forEach(c -> categoriesAsList.add(c));
