@@ -2,13 +2,15 @@ package es.udc.pashop.backend.model.services;
 
 import java.util.Optional;
 
+import es.udc.pashop.backend.model.exceptions.IncorrectLoginException;
+import es.udc.pashop.backend.model.exceptions.IncorrectPasswordException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.udc.pashop.backend.model.common.exceptions.DuplicateInstanceException;
-import es.udc.pashop.backend.model.common.exceptions.InstanceNotFoundException;
+import es.udc.pashop.backend.model.exceptions.DuplicateInstanceException;
+import es.udc.pashop.backend.model.exceptions.InstanceNotFoundException;
 import es.udc.pashop.backend.model.entities.ShoppingCart;
 import es.udc.pashop.backend.model.entities.ShoppingCartDao;
 import es.udc.pashop.backend.model.entities.User;

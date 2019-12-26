@@ -14,7 +14,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.udc.pashop.backend.model.common.exceptions.InstanceNotFoundException;
+import es.udc.pashop.backend.model.exceptions.InstanceNotFoundException;
 import es.udc.pashop.backend.model.entities.Category;
 import es.udc.pashop.backend.model.entities.CategoryDao;
 import es.udc.pashop.backend.model.entities.Product;

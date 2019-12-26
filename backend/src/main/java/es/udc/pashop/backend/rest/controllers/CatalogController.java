@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import es.udc.pashop.backend.model.common.exceptions.InstanceNotFoundException;
+import es.udc.pashop.backend.model.exceptions.InstanceNotFoundException;
 import es.udc.pashop.backend.model.entities.Product;
 import es.udc.pashop.backend.model.services.Block;
 import es.udc.pashop.backend.model.services.CatalogService;

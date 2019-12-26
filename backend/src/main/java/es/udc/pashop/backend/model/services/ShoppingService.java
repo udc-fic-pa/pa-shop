@@ -1,8 +1,6 @@
 package es.udc.pashop.backend.model.services;
 
-import es.udc.pashop.backend.model.common.exceptions.InstanceNotFoundException;
-import es.udc.pashop.backend.model.entities.MaxItemsExceededException;
-import es.udc.pashop.backend.model.entities.MaxQuantityExceededException;
+import es.udc.pashop.backend.model.exceptions.*;
 import es.udc.pashop.backend.model.entities.Order;
 import es.udc.pashop.backend.model.entities.ShoppingCart;
 

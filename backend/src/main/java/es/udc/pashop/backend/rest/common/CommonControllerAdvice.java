@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import es.udc.pashop.backend.model.common.exceptions.DuplicateInstanceException;
-import es.udc.pashop.backend.model.common.exceptions.InstanceNotFoundException;
-import es.udc.pashop.backend.model.services.PermissionException;
+import es.udc.pashop.backend.model.exceptions.DuplicateInstanceException;
+import es.udc.pashop.backend.model.exceptions.InstanceNotFoundException;
+import es.udc.pashop.backend.model.exceptions.PermissionException;
 
 @ControllerAdvice
 public class CommonControllerAdvice {

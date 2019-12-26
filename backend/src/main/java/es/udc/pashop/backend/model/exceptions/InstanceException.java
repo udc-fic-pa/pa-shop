@@ -1,4 +1,4 @@
-package es.udc.pashop.backend.model.common.exceptions;
+package es.udc.pashop.backend.model.exceptions;
 
 @SuppressWarnings("serial")
 public abstract class InstanceException extends Exception {

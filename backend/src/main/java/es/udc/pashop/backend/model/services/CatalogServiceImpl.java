@@ -10,7 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.udc.pashop.backend.model.common.exceptions.InstanceNotFoundException;
+import es.udc.pashop.backend.model.exceptions.InstanceNotFoundException;
 import es.udc.pashop.backend.model.entities.Category;
 import es.udc.pashop.backend.model.entities.CategoryDao;
 import es.udc.pashop.backend.model.entities.Product;

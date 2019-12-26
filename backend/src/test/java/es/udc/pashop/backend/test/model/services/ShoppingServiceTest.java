@@ -18,12 +18,12 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.udc.pashop.backend.model.common.exceptions.DuplicateInstanceException;
-import es.udc.pashop.backend.model.common.exceptions.InstanceNotFoundException;
+import es.udc.pashop.backend.model.exceptions.DuplicateInstanceException;
+import es.udc.pashop.backend.model.exceptions.InstanceNotFoundException;
 import es.udc.pashop.backend.model.entities.Category;
 import es.udc.pashop.backend.model.entities.CategoryDao;
-import es.udc.pashop.backend.model.entities.MaxItemsExceededException;
-import es.udc.pashop.backend.model.entities.MaxQuantityExceededException;
+import es.udc.pashop.backend.model.exceptions.MaxItemsExceededException;
+import es.udc.pashop.backend.model.exceptions.MaxQuantityExceededException;
 import es.udc.pashop.backend.model.entities.Order;
 import es.udc.pashop.backend.model.entities.OrderDao;
 import es.udc.pashop.backend.model.entities.OrderItem;
@@ -35,8 +35,8 @@ import es.udc.pashop.backend.model.entities.ShoppingCartItem;
 import es.udc.pashop.backend.model.entities.ShoppingCartItemDao;
 import es.udc.pashop.backend.model.entities.User;
 import es.udc.pashop.backend.model.services.Block;
-import es.udc.pashop.backend.model.services.EmptyShoppingCartException;
-import es.udc.pashop.backend.model.services.PermissionException;
+import es.udc.pashop.backend.model.exceptions.EmptyShoppingCartException;
+import es.udc.pashop.backend.model.exceptions.PermissionException;
 import es.udc.pashop.backend.model.services.ShoppingService;
 import es.udc.pashop.backend.model.services.UserService;
 

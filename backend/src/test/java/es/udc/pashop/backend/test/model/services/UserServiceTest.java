@@ -11,11 +11,11 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.udc.pashop.backend.model.common.exceptions.DuplicateInstanceException;
-import es.udc.pashop.backend.model.common.exceptions.InstanceNotFoundException;
+import es.udc.pashop.backend.model.exceptions.DuplicateInstanceException;
+import es.udc.pashop.backend.model.exceptions.InstanceNotFoundException;
 import es.udc.pashop.backend.model.entities.User;
-import es.udc.pashop.backend.model.services.IncorrectLoginException;
-import es.udc.pashop.backend.model.services.IncorrectPasswordException;
+import es.udc.pashop.backend.model.exceptions.IncorrectLoginException;
+import es.udc.pashop.backend.model.exceptions.IncorrectPasswordException;
 import es.udc.pashop.backend.model.services.UserService;
 
 @RunWith(SpringRunner.class)

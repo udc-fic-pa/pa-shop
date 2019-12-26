@@ -22,13 +22,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import es.udc.pashop.backend.model.common.exceptions.InstanceNotFoundException;
-import es.udc.pashop.backend.model.entities.MaxItemsExceededException;
-import es.udc.pashop.backend.model.entities.MaxQuantityExceededException;
+import es.udc.pashop.backend.model.exceptions.InstanceNotFoundException;
+import es.udc.pashop.backend.model.exceptions.MaxItemsExceededException;
+import es.udc.pashop.backend.model.exceptions.MaxQuantityExceededException;
 import es.udc.pashop.backend.model.entities.Order;
 import es.udc.pashop.backend.model.services.Block;
-import es.udc.pashop.backend.model.services.EmptyShoppingCartException;
-import es.udc.pashop.backend.model.services.PermissionException;
+import es.udc.pashop.backend.model.exceptions.EmptyShoppingCartException;
+import es.udc.pashop.backend.model.exceptions.PermissionException;
 import es.udc.pashop.backend.model.services.ShoppingService;
 import es.udc.pashop.backend.rest.common.ErrorsDto;
 import es.udc.pashop.backend.rest.dtos.AddToShoppingCartParamsDto;

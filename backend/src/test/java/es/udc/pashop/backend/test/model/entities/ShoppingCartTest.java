@@ -7,8 +7,8 @@ import java.math.BigDecimal;
 import org.junit.Test;
 
 import es.udc.pashop.backend.model.entities.Category;
-import es.udc.pashop.backend.model.entities.MaxItemsExceededException;
-import es.udc.pashop.backend.model.entities.MaxQuantityExceededException;
+import es.udc.pashop.backend.model.exceptions.MaxItemsExceededException;
+import es.udc.pashop.backend.model.exceptions.MaxQuantityExceededException;
 import es.udc.pashop.backend.model.entities.Product;
 import es.udc.pashop.backend.model.entities.ShoppingCart;
 import es.udc.pashop.backend.model.entities.ShoppingCartItem;

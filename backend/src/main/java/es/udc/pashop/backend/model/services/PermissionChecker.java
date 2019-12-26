@@ -1,9 +1,10 @@
 package es.udc.pashop.backend.model.services;
 
-import es.udc.pashop.backend.model.common.exceptions.InstanceNotFoundException;
+import es.udc.pashop.backend.model.exceptions.InstanceNotFoundException;
 import es.udc.pashop.backend.model.entities.Order;
 import es.udc.pashop.backend.model.entities.ShoppingCart;
 import es.udc.pashop.backend.model.entities.User;
+import es.udc.pashop.backend.model.exceptions.PermissionException;
 
 public interface PermissionChecker {
 	

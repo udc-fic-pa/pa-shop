@@ -1,5 +1,7 @@
 package es.udc.pashop.backend.model.entities;
 
+import es.udc.pashop.backend.model.exceptions.MaxQuantityExceededException;
+
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
