@@ -35,7 +35,7 @@ public class CatalogController {
 	}
 	
 	@GetMapping("/products/{id}")
-	public ProductDto findProductById(@PathVariable("id") Long id) throws InstanceNotFoundException {
+	public ProductDto findProductById(@PathVariable Long id) throws InstanceNotFoundException {
 		return toProductDto(catalogService.findProductById(id));
 	}
 	
