@@ -21,14 +21,10 @@ public class JwtGeneratorImpl implements JwtGenerator {
 	@Override
 	public String generate(JwtInfo info) {
 		
-		Claims claims = Jwts.claims();
-		
-		claims.setSubject(info.getUserName())
-			.setExpiration(new Date(System.currentTimeMillis() + expirationMinutes*60*1000));
-		claims.put("userId", info.getUserId());
-		claims.put("role", info.getRole());
-		
-		return Jwts.builder().setClaims(claims)
+		return Jwts.builder()
+			.claim("userId", info.getUserId())
+			.claim("role", info.getRole())
+			.setExpiration(new Date(System.currentTimeMillis() + expirationMinutes*60*1000))
 	        .signWith(SignatureAlgorithm.HS512, signKey.getBytes())
 	        .compact();
 
