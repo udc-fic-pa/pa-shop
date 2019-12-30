@@ -1,17 +1,15 @@
 package es.udc.pashop.backend.test.model.services;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.pashop.backend.model.exceptions.InstanceNotFoundException;
@@ -22,7 +20,6 @@ import es.udc.pashop.backend.model.entities.ProductDao;
 import es.udc.pashop.backend.model.services.Block;
 import es.udc.pashop.backend.model.services.CatalogService;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("test")
 @Transactional
@@ -70,9 +67,9 @@ public class CatalogServiceTest {
 		
 	}
 	
-	@Test(expected = InstanceNotFoundException.class)
-	public void testFindProductByNonExistentId() throws InstanceNotFoundException {
-		catalogService.findProductById(NON_EXISTENT_ID);
+	@Test
+	public void testFindProductByNonExistentId() {
+		assertThrows(InstanceNotFoundException.class, () -> catalogService.findProductById(NON_EXISTENT_ID));
 	}
 	
 	
