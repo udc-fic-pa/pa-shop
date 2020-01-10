@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
@@ -7,82 +7,63 @@ import {Errors} from '../../common';
 import * as actions from '../actions';
 import * as selectors from '../selectors';
 
-class AddToShoppingCart extends React.Component {
+let AddToShoppingCart = ({shoppingCartId, productId, addToShoppingCart, history}) => {
 
-    constructor(props) {
+    const [quantity, setQuantity] = useState(1);
+    const [backendErrors, setBackendErrors] = useState(null);
+    let form;
 
-        super(props);
-
-        this.state = {
-            quantity: 1,
-            backendErrors: null
-        };
-
-    }
-
-    handleQuantityChange(event) {
-        this.setState({quantity: Number(event.target.value)});
-    }
-
-    handleSubmit(event) {
+    const handleSubmit = event => {
 
         event.preventDefault();
 
-        if (this.form.checkValidity()) {
-            this.props.addToShoppingCart(this.props.shoppingCartId, 
-                this.props.productId, this.state.quantity,
-                () => this.props.history.push('/shopping/shopping-cart'),
-                errors => this.setBackendErrors(errors));
+        if (form.checkValidity()) {
+
+            addToShoppingCart(shoppingCartId, 
+                productId, quantity,
+                () => history.push('/shopping/shopping-cart'),
+                errors => setBackendErrors(errors));
+
         } else {
-            this.setBackendErrors(null);
-            this.form.classList.add('was-validated');
+
+            setBackendErrors(null);
+            form.classList.add('was-validated');
+
         }
 
     }
 
-    setBackendErrors(backendErrors) {
-        this.setState({backendErrors});
-    }
-
-    handleErrorsClose() {
-        this.setState({backendErrors: null});
-    }
-
-    render() {
-
-        return (
-            <div>
-                <Errors errors={this.state.backendErrors} onClose={() => this.handleErrorsClose()}/>
-                <form ref={node => this.form = node}
-                    className="needs-validation" noValidate 
-                    onSubmit={(e) => this.handleSubmit(e)}>
-                    <div className="form-group row">
-                        <label htmlFor="quantity" className="offset-md-5 col-md-1 col-form-label">
-                            <FormattedMessage id="project.global.fields.quantity"/>
-                        </label>
-                        <div className="col-md-2">
-                            <input type="number" id="quantity" className="form-control"
-                                value={this.state.quantity}
-                                onChange={(e) => this.handleQuantityChange(e)}
-                                autoFocus
-                                min="1" />
-                            <div className="invalid-feedback">
-                                <FormattedMessage id='project.global.validator.incorrectQuantity'/>
-                            </div>
+    return (
+        <div>
+            <Errors errors={backendErrors} onClose={() => setBackendErrors(null)}/>
+            <form ref={node => form = node}
+                className="needs-validation" noValidate 
+                onSubmit={e => handleSubmit(e)}>
+                <div className="form-group row">
+                    <label htmlFor="quantity" className="offset-md-5 col-md-1 col-form-label">
+                        <FormattedMessage id="project.global.fields.quantity"/>
+                    </label>
+                    <div className="col-md-2">
+                        <input type="number" id="quantity" className="form-control"
+                            value={quantity}
+                            onChange={e => setQuantity(Number(e.target.value))}
+                            autoFocus
+                            min="1" />
+                        <div className="invalid-feedback">
+                            <FormattedMessage id='project.global.validator.incorrectQuantity'/>
                         </div>
                     </div>
-                    <div className="form-group row">
-                        <div className="offset-md-6 col-md-2">
-                            <button type="submit" className="btn btn-primary">
-                                <FormattedMessage id="project.shopping.AddToCart.add"/>
-                            </button>
-                        </div>
+                </div>
+                <div className="form-group row">
+                    <div className="offset-md-6 col-md-2">
+                        <button type="submit" className="btn btn-primary">
+                            <FormattedMessage id="project.shopping.AddToCart.add"/>
+                        </button>
                     </div>
-                </form>
-            </div>
-        );
-
-    }
+                </div>
+            </form>
+        </div>
+    );
 
 }
 
