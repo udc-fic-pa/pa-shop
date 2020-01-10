@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {FormattedMessage, FormattedDate, FormattedTime} from 'react-intl';
 
@@ -7,57 +7,49 @@ import * as selectors from '../selectors';
 import ShoppingItemList from './ShoppingItemList';
 import {BackLink} from '../../common';
 
-class OrderDetails extends React.Component {
+const OrderDetails = ({order, findOrder, clearOrder, match}) => {
 
-    componentDidMount() {
+    const id = Number(match.params.id);
 
-        const id = Number(this.props.match.params.id);
+    useEffect(() => {
 
         if (!Number.isNaN(id)) {   
-            this.props.findOrder(id);
+            findOrder(id);
         }
 
+        return clearOrder;
+
+    }, [id, findOrder, clearOrder]);
+
+    if (!order) {
+        return null;
     }
 
-    componentWillUnmount() {
-        this.props.clearOrder();
-    }
+    return (
 
-    render() {
+        <div>
 
-        const order = this.props.order;
+            <BackLink/>
 
-        if (!order) {
-            return null;
-        }
-
-        return (
-
-            <div>
-
-                <BackLink/>
-
-                <div className="card text-center">
-                    <div className="card-body">
-                        <h5 className="card-title">
-                            <FormattedMessage id='project.global.fields.purchaseOrder'/> {order.id} 
-                        </h5>
-                        <h6 className="card-subtitle text-muted">
-                            <FormattedDate value={new Date(order.date)}/> - <FormattedTime value={new Date(order.date)}/>
-                        </h6>
-                        <p className="card-text">
-                            {order.postalAddress} - {order.postalCode} 
-                        </p>
-                    </div>
+            <div className="card text-center">
+                <div className="card-body">
+                    <h5 className="card-title">
+                        <FormattedMessage id='project.global.fields.purchaseOrder'/> {order.id} 
+                    </h5>
+                    <h6 className="card-subtitle text-muted">
+                        <FormattedDate value={new Date(order.date)}/> - <FormattedTime value={new Date(order.date)}/>
+                    </h6>
+                    <p className="card-text">
+                        {order.postalAddress} - {order.postalCode} 
+                    </p>
                 </div>
-
-                <ShoppingItemList list={order}/>
-
             </div>
 
-        );
+            <ShoppingItemList list={order}/>
 
-    }
+        </div>
+
+    );
 
 }
 
