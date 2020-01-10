@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {BrowserRouter as Router} from 'react-router-dom';
 
@@ -11,33 +11,29 @@ import catalog from '../../catalog';
 const reauthenticationCallback = dispatch => () => 
     dispatch(users.actions.logout());
 
-class App extends React.Component {
+const App = ({dispatch}) => {
 
-    componentDidMount() {
+    useEffect(() => {
   
-        this.props.dispatch(
+        dispatch(
             users.actions.tryLoginFromServiceToken(
-                reauthenticationCallback(this.props.dispatch)));
+                reauthenticationCallback(dispatch)));
 
-        this.props.dispatch(catalog.actions.findAllCategories());
+        dispatch(catalog.actions.findAllCategories());
 
-    }
+    });
 
-    render() {
-
-        return (
-            <div>
-                <Router>
-                    <div>
-                        <Header/>
-                        <Body/>
-                    </div>
-                </Router>
-                <Footer/>
-            </div>
-        );
-
-    }
+    return (
+        <div>
+            <Router>
+                <div>
+                    <Header/>
+                    <Body/>
+                </div>
+            </Router>
+            <Footer/>
+        </div>
+    );
 
 }
 
