@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {FormattedMessage, FormattedNumber} from 'react-intl';
 
@@ -8,64 +8,58 @@ import * as actions from '../actions';
 import {AddToShoppingCart} from '../../shopping';
 import {BackLink} from '../../common';
 
-class ProductDetails extends React.Component {
+const ProductDetails = ({loggedIn, product, categories, findProductById, clearProduct, match, history}) => {
 
-    componentDidMount() {
+    const productId = match.params.id;
 
-        const id = Number(this.props.match.params.id);
+    useEffect(() => {
+
+        const id = Number(productId);
 
         if (!Number.isNaN(id)) {
-            this.props.findProductById(id);
+            findProductById(id);
         }
-    
+
+        return clearProduct;
+
+    }, [productId]);
+
+    if (!product) {
+        return null;
     }
-
-    componentWillUnmount() {
-        this.props.clearProduct();
-    }
-
-    render() {
-
-        const product = this.props.product;
-
-        if (!product) {
-            return null;
-        }
         
-        return (
+    return (
 
-            <div>
+        <div>
 
-                <BackLink/>
-                
-                <div className="card text-center">
-                    <div className="card-body">
-                        <h5 className="card-title">{product.name}</h5>
-                        <h6 className="card-subtitle text-muted">
-                            <FormattedMessage id='project.global.fields.department'/>:&nbsp;
-                                {selectors.getCategoryName(this.props.categories, product.categoryId)}
-                        </h6>
-                        <p className="card-text">{product.description}</p>
-                        <p className="card-text font-weight-bold">
-                            <FormattedMessage id='project.global.fields.price'/>
-                            : <FormattedNumber value={product.price}/>€
-                        </p>
-                    </div>
+            <BackLink/>
+            
+            <div className="card text-center">
+                <div className="card-body">
+                    <h5 className="card-title">{product.name}</h5>
+                    <h6 className="card-subtitle text-muted">
+                        <FormattedMessage id='project.global.fields.department'/>:&nbsp;
+                            {selectors.getCategoryName(categories, product.categoryId)}
+                    </h6>
+                    <p className="card-text">{product.description}</p>
+                    <p className="card-text font-weight-bold">
+                        <FormattedMessage id='project.global.fields.price'/>
+                        : <FormattedNumber value={product.price}/>€
+                    </p>
                 </div>
-
-                {this.props.loggedIn && 
-                    <div>
-                        <br/>
-                        <AddToShoppingCart productId={product.id} 
-                            history={this.props.history}/>
-                    </div>
-                }
-
             </div>
-    
-        );
 
-    }
+            {loggedIn && 
+                <div>
+                    <br/>
+                    <AddToShoppingCart productId={product.id} 
+                        history={history}/>
+                </div>
+            }
+
+        </div>
+
+    );
 
 }
 
