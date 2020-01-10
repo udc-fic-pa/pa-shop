@@ -22,7 +22,7 @@ const ProductDetails = ({loggedIn, product, categories, findProductById, clearPr
 
         return clearProduct;
 
-    }, [productId]);
+    }, [productId, findProductById, clearProduct]);
 
     if (!product) {
         return null;
