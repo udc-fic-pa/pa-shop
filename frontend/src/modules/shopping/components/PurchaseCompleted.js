@@ -1,20 +1,26 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 
 import * as selectors from '../selectors';
 import OrderLink from './OrderLink';
 
-const PurchaseCompleted = ({orderId}) => orderId && (
-    <div className="alert alert-success" role="alert">
-        <FormattedMessage id="project.shopping.PurchaseCompleted.purchaseOrderGenerated"/>:
-        &nbsp;
-        <OrderLink id={orderId}/>
-    </div>
-);
+const PurchaseCompleted = () => {
 
-const mapStateToProps = state => ({
-    orderId: selectors.getLastOrderId(state)
-});
+    const orderId = useSelector(selectors.getLastOrderId);
 
-export default connect(mapStateToProps)(PurchaseCompleted);
+    if (!orderId) {
+        return null;
+    }
+    
+    return (
+        <div className="alert alert-success" role="alert">
+            <FormattedMessage id="project.shopping.PurchaseCompleted.purchaseOrderGenerated"/>:
+            &nbsp;
+            <OrderLink id={orderId}/>
+        </div>
+    );
+
+}
+
+export default PurchaseCompleted;

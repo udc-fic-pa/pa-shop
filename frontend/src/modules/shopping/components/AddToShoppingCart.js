@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
 
@@ -7,8 +7,10 @@ import {Errors} from '../../common';
 import * as actions from '../actions';
 import * as selectors from '../selectors';
 
-let AddToShoppingCart = ({shoppingCartId, productId, addToShoppingCart, history}) => {
+let AddToShoppingCart = ({productId, history}) => {
 
+    const shoppingCart = useSelector(selectors.getShoppingCart);
+    const dispatch = useDispatch();
     const [quantity, setQuantity] = useState(1);
     const [backendErrors, setBackendErrors] = useState(null);
     let form;
@@ -19,10 +21,10 @@ let AddToShoppingCart = ({shoppingCartId, productId, addToShoppingCart, history}
 
         if (form.checkValidity()) {
 
-            addToShoppingCart(shoppingCartId, 
+            dispatch(actions.addToShoppingCart(shoppingCart.id, 
                 productId, quantity,
                 () => history.push('/shopping/shopping-cart'),
-                errors => setBackendErrors(errors));
+                errors => setBackendErrors(errors)));
 
         } else {
 
@@ -67,16 +69,6 @@ let AddToShoppingCart = ({shoppingCartId, productId, addToShoppingCart, history}
 
 }
 
-const mapStateToProps = (state) => ({
-    shoppingCartId: selectors.getShoppingCart(state).id
-});
-
-const mapDispatchToProps = {
-    addToShoppingCart: actions.addToShoppingCart
-}
-
-AddToShoppingCart = connect(
-    mapStateToProps, mapDispatchToProps)(AddToShoppingCart);
 
 AddToShoppingCart.propTypes = {
     productId: PropTypes.number.isRequired,

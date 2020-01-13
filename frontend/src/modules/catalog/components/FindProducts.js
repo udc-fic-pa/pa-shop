@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
 
 import CategorySelector from './CategorySelector';
 import * as actions from '../actions';
 
-const FindProducts = ({dispatch, history}) => {
+const FindProducts = ({history}) => {
 
+    const dispatch = useDispatch();
     const [categoryId, setCategoryId] = useState('');
     const [keywords, setKeywords] = useState('');
 
@@ -41,4 +42,4 @@ const FindProducts = ({dispatch, history}) => {
 
 }
 
-export default withRouter(connect()(FindProducts));
+export default withRouter(FindProducts);

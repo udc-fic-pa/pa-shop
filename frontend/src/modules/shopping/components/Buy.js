@@ -1,19 +1,25 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 import ShoppingItemList from './ShoppingItemList';
 import BuyForm from './BuyForm';
 import * as selectors from '../selectors';
 
-const Buy = ({cart, history}) => cart.items.length > 0 && (
-    <div>
-        <BuyForm history={history}/>
-        <ShoppingItemList list={cart}/>
-    </div>
-);
+const Buy = ({history}) => {
 
-const mapStateToProps = state => ({
-    cart: selectors.getShoppingCart(state)
-});
+    const cart = useSelector(selectors.getShoppingCart);
 
-export default connect(mapStateToProps)(Buy);
+    if (cart.items.length === 0) {
+        return null;
+    }
+    
+   return (
+        <div>
+            <BuyForm history={history}/>
+            <ShoppingItemList list={cart}/>
+        </div>
+    );
+
+}
+
+export default Buy;

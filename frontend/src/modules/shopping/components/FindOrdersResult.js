@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 
 import * as actions from '../actions';
@@ -7,7 +7,10 @@ import * as selectors from '../selectors';
 import {Pager} from '../../common';
 import Orders from './Orders';
 
-const FindOrdersResult = ({orderSearch, previousFindOrdersResultPage, nextFindOrdersResultPage}) => {
+const FindOrdersResult = () => {
+
+    const orderSearch = useSelector(selectors.getOrderSearch);
+    const dispatch = useDispatch();
 
     if (!orderSearch) {
         return null;
@@ -28,25 +31,14 @@ const FindOrdersResult = ({orderSearch, previousFindOrdersResultPage, nextFindOr
             <Pager 
                 back={{
                     enabled: orderSearch.criteria.page >= 1,
-                    onClick: () => previousFindOrdersResultPage(orderSearch.criteria)}}
+                    onClick: () => dispatch(actions.previousFindOrdersResultPage(orderSearch.criteria))}}
                 next={{
                     enabled: orderSearch.result.existMoreItems,
-                    onClick: () => nextFindOrdersResultPage(orderSearch.criteria)}}/>
+                    onClick: () => dispatch(actions.nextFindOrdersResultPage(orderSearch.criteria))}}/>
         </div>
 
     );
 
 }
 
-
-const mapStateToProps = state => ({
-    orderSearch: selectors.getOrderSearch(state)
-});
-
-const mapDispatchToProps = {
-    findOrders: actions.findOrders,
-    previousFindOrdersResultPage: actions.previousFindOrdersResultPage,
-    nextFindOrdersResultPage: actions.nextFindOrdersResultPage
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(FindOrdersResult);
+export default FindOrdersResult;

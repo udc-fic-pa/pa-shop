@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {FormattedMessage, FormattedNumber} from 'react-intl';
 
 import users from '../../users';
@@ -8,21 +8,25 @@ import * as actions from '../actions';
 import {AddToShoppingCart} from '../../shopping';
 import {BackLink} from '../../common';
 
-const ProductDetails = ({loggedIn, product, categories, findProductById, clearProduct, match, history}) => {
+const ProductDetails = ({match, history}) => {
 
     const productId = match.params.id;
+    const loggedIn = useSelector(users.selectors.isLoggedIn);
+    const product = useSelector(selectors.getProduct);
+    const categories = useSelector(selectors.getCategories);
+    const dispatch = useDispatch();
 
     useEffect(() => {
 
         const id = Number(productId);
 
         if (!Number.isNaN(id)) {
-            findProductById(id);
+            dispatch(actions.findProductById(id));
         }
 
-        return clearProduct;
+        return () => dispatch(actions.clearProduct());
 
-    }, [productId, findProductById, clearProduct]);
+    }, [productId, dispatch]);
 
     if (!product) {
         return null;
@@ -63,15 +67,4 @@ const ProductDetails = ({loggedIn, product, categories, findProductById, clearPr
 
 }
 
-const mapStateToProps = (state) => ({
-    loggedIn: users.selectors.isLoggedIn(state),
-    product: selectors.getProduct(state),
-    categories: selectors.getCategories(state)
-});
-
-const mapDispatchToProps = {
-    findProductById: actions.findProductById,
-    clearProduct: actions.clearProduct
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
+export default ProductDetails;

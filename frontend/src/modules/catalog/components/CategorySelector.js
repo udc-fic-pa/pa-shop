@@ -1,27 +1,29 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 
 import * as selectors from '../selectors';
 
-const CategorySelector = ({categories, dispatch, ...remainingProps} ) => (
+const CategorySelector = (selectProps) => {
 
-    <select {...remainingProps}>
+    const categories = useSelector(selectors.getCategories);
+    
+    return (
 
-        <FormattedMessage id='project.catalog.CategorySelector.allDepartments'>
-            {message => (<option value="">{message}</option>)}
-        </FormattedMessage>
+        <select {...selectProps}>
 
-        {categories && categories.map(category => 
-            <option key={category.id} value={category.id}>{category.name}</option>
-        )}
+            <FormattedMessage id='project.catalog.CategorySelector.allDepartments'>
+                {message => (<option value="">{message}</option>)}
+            </FormattedMessage>
 
-    </select>
+            {categories && categories.map(category => 
+                <option key={category.id} value={category.id}>{category.name}</option>
+            )}
 
-);
+        </select>
 
-const mapStateToProps = state => ({
-    categories: selectors.getCategories(state)
-});
+    );
 
-export default connect(mapStateToProps)(CategorySelector);
+}
+
+export default CategorySelector;

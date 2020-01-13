@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {FormattedMessage, FormattedDate, FormattedTime} from 'react-intl';
 
 import * as actions from '../actions';
@@ -7,19 +7,21 @@ import * as selectors from '../selectors';
 import ShoppingItemList from './ShoppingItemList';
 import {BackLink} from '../../common';
 
-const OrderDetails = ({order, findOrder, clearOrder, match}) => {
+const OrderDetails = ({match}) => {
 
     const id = Number(match.params.id);
+    const order = useSelector(selectors.getOrder);
+    const dispatch = useDispatch();
 
     useEffect(() => {
 
         if (!Number.isNaN(id)) {   
-            findOrder(id);
+            dispatch(actions.findOrder(id));
         }
 
-        return clearOrder;
+        return () => dispatch(actions.clearOrder());
 
-    }, [id, findOrder, clearOrder]);
+    }, [id, dispatch]);
 
     if (!order) {
         return null;
@@ -53,13 +55,4 @@ const OrderDetails = ({order, findOrder, clearOrder, match}) => {
 
 }
 
-const mapStateToProps = state => ({
-    order: selectors.getOrder(state)
-});
-
-const mapDispatchToProps = {
-    findOrder: actions.findOrder,
-    clearOrder: actions.clearOrder
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(OrderDetails);
+export default OrderDetails;

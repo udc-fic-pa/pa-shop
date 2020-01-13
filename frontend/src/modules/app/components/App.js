@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {BrowserRouter as Router} from 'react-router-dom';
 
 import Header from './Header';
@@ -11,7 +11,9 @@ import catalog from '../../catalog';
 const reauthenticationCallback = dispatch => () => 
     dispatch(users.actions.logout());
 
-const App = ({dispatch}) => {
+const App = () => {
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
   
@@ -37,4 +39,4 @@ const App = ({dispatch}) => {
 
 }
 
-export default connect()(App);
+export default App;

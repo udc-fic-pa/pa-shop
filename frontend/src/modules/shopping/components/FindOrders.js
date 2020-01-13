@@ -1,9 +1,11 @@
 import {useEffect} from 'react';
-import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 import * as actions from '../actions';
 
-const FindOrders = ({dispatch, history}) => {
+const FindOrders = ({history}) => {
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
 
@@ -16,4 +18,4 @@ const FindOrders = ({dispatch, history}) => {
 
 }
 
-export default connect()(FindOrders);
+export default FindOrders;

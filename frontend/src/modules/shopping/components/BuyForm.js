@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
 
@@ -7,8 +7,10 @@ import {Errors} from '../../common';
 import * as actions from '../actions';
 import * as selectors from '../selectors';
 
-let BuyForm = ({shoppingCartId, buy, history}) => {
+let BuyForm = ({history}) => {
 
+    const shoppingCart = useSelector(selectors.getShoppingCart);
+    const dispatch = useDispatch();
     const [postalAddress, setPostalAddress] = useState('');
     const [postalCode, setPostalCode] = useState('');
     const [backendErrors, setBackendErrors] = useState(null);
@@ -20,10 +22,10 @@ let BuyForm = ({shoppingCartId, buy, history}) => {
 
         if (form.checkValidity()) {
 
-            buy(shoppingCartId, 
+            dispatch(actions.buy(shoppingCart.id, 
                 postalAddress.trim(), postalCode.trim(), 
                 () => history.push('/shopping/purchase-completed'),
-                errors => setBackendErrors(errors));
+                errors => setBackendErrors(errors)));
 
         } else {
             setBackendErrors(null);
@@ -89,16 +91,6 @@ let BuyForm = ({shoppingCartId, buy, history}) => {
     );
 
 }
-
-const mapStateToProps = (state) => ({
-    shoppingCartId: selectors.getShoppingCart(state).id
-});
-
-const mapDispatchToProps = {
-    buy: actions.buy
-}
-
-BuyForm = connect(mapStateToProps, mapDispatchToProps)(BuyForm);
 
 BuyForm.propTypes = {
     history: PropTypes.object.isRequired
