@@ -19,21 +19,23 @@ const Body = () => {
             <br/>
             <AppGlobalComponents/>
             <Switch>
-                <Route exact path="/" component={Home}/>
-                <Route exact path="/catalog/find-products-result" component={FindProductsResult}/>
-                <Route exact path="/catalog/product-details/:id" component={ProductDetails}/>
-                {loggedIn && <Route exact path="/shopping/shopping-cart" component={ShoppingCart}/>}
-                {loggedIn && <Route exact path="/shopping/buy" component={Buy}/>}
-                {loggedIn && <Route exact path="/shopping/purchase-completed" component={PurchaseCompleted}/>}
-                {loggedIn && <Route exact path="/shopping/find-orders" component={FindOrders}/>}
-                {loggedIn && <Route exact path="/shopping/find-orders-result" component={FindOrdersResult}/>}
-                {loggedIn && <Route exact path="/shopping/order-details/:id" component={OrderDetails}/>}
-                {loggedIn && <Route exact path="/users/update-profile" component={UpdateProfile}/>}
-                {loggedIn && <Route exact path="/users/change-password" component={ChangePassword}/>}
-                {loggedIn && <Route exact path="/users/logout" component={Logout}/>}
-                {!loggedIn && <Route exact path="/users/login" component={Login}/>}
-                {!loggedIn && <Route exact path="/users/signup" component={SignUp}/>}
-                <Route component={Home}/>
+                <Route exact path="/">
+                    <Home/>
+                </Route>
+                <Route exact path="/catalog/find-products-result"><FindProductsResult/></Route>
+                <Route exact path="/catalog/product-details/:id"><ProductDetails/></Route>
+                {loggedIn && <Route exact path="/shopping/shopping-cart"><ShoppingCart/></Route>}
+                {loggedIn && <Route exact path="/shopping/buy"><Buy/></Route>}
+                {loggedIn && <Route exact path="/shopping/purchase-completed"><PurchaseCompleted/></Route>}
+                {loggedIn && <Route exact path="/shopping/find-orders"><FindOrders/></Route>}
+                {loggedIn && <Route exact path="/shopping/find-orders-result"><FindOrdersResult/></Route>}
+                {loggedIn && <Route exact path="/shopping/order-details/:id"><OrderDetails/></Route>}
+                {loggedIn && <Route exact path="/users/update-profile"><UpdateProfile/></Route>}
+                {loggedIn && <Route exact path="/users/change-password"><ChangePassword/></Route>}
+                {loggedIn && <Route exact path="/users/logout"><Logout/></Route>}
+                {!loggedIn && <Route exact path="/users/login"><Login/></Route>}
+                {!loggedIn && <Route exact path="/users/signup"><SignUp/></Route>}
+                <Route><Home/></Route>
             </Switch>
         </div>
 
