@@ -1,16 +1,17 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
-import PropTypes from 'prop-types';
+import {useHistory} from 'react-router-dom';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
 import * as selectors from '../selectors';
 
-let BuyForm = ({history}) => {
+const BuyForm = () => {
 
     const shoppingCart = useSelector(selectors.getShoppingCart);
     const dispatch = useDispatch();
+    const history = useHistory();
     const [postalAddress, setPostalAddress] = useState('');
     const [postalCode, setPostalCode] = useState('');
     const [backendErrors, setBackendErrors] = useState(null);
@@ -91,9 +92,5 @@ let BuyForm = ({history}) => {
     );
 
 }
-
-BuyForm.propTypes = {
-    history: PropTypes.object.isRequired
-};
 
 export default BuyForm;

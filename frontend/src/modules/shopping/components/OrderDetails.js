@@ -1,15 +1,16 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {FormattedMessage, FormattedDate, FormattedTime} from 'react-intl';
+import {useParams} from 'react-router-dom';
 
 import * as actions from '../actions';
 import * as selectors from '../selectors';
 import ShoppingItemList from './ShoppingItemList';
 import {BackLink} from '../../common';
 
-const OrderDetails = ({match}) => {
+const OrderDetails = () => {
 
-    const id = Number(match.params.id);
+    const {id} = useParams();
     const order = useSelector(selectors.getOrder);
     const dispatch = useDispatch();
 

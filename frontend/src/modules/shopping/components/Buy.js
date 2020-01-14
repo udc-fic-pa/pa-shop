@@ -5,7 +5,7 @@ import ShoppingItemList from './ShoppingItemList';
 import BuyForm from './BuyForm';
 import * as selectors from '../selectors';
 
-const Buy = ({history}) => {
+const Buy = () => {
 
     const cart = useSelector(selectors.getShoppingCart);
 
@@ -15,7 +15,7 @@ const Buy = ({history}) => {
     
    return (
         <div>
-            <BuyForm history={history}/>
+            <BuyForm/>
             <ShoppingItemList list={cart}/>
         </div>
     );

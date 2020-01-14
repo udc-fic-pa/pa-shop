@@ -2,15 +2,17 @@ import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
+import {useHistory} from 'react-router-dom';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
 import * as selectors from '../selectors';
 
-let AddToShoppingCart = ({productId, history}) => {
+const AddToShoppingCart = ({productId}) => {
 
     const shoppingCart = useSelector(selectors.getShoppingCart);
     const dispatch = useDispatch();
+    const history = useHistory();
     const [quantity, setQuantity] = useState(1);
     const [backendErrors, setBackendErrors] = useState(null);
     let form;
@@ -71,8 +73,7 @@ let AddToShoppingCart = ({productId, history}) => {
 
 
 AddToShoppingCart.propTypes = {
-    productId: PropTypes.number.isRequired,
-    history: PropTypes.object.isRequired
+    productId: PropTypes.number.isRequired
 };
 
 export default AddToShoppingCart;

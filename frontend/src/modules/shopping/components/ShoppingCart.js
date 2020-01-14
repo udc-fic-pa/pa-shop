@@ -1,15 +1,17 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
+import {useHistory} from 'react-router-dom';
 
 import ShoppingItemList from './ShoppingItemList';
 import * as selectors from '../selectors';
 import * as actions from '../actions';
 
-const ShoppingCart = ({history}) => {
+const ShoppingCart = () => {
 
     const cart = useSelector(selectors.getShoppingCart);
     const dispatch = useDispatch();
+    const history = useHistory();
 
     return (
 
