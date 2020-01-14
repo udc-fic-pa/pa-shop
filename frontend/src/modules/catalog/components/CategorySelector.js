@@ -1,6 +1,7 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
+import PropTypes from 'prop-types';
 
 import * as selectors from '../selectors';
 
@@ -25,5 +26,9 @@ const CategorySelector = (selectProps) => {
     );
 
 }
+
+CategorySelector.propTypes = {
+    selectProps: PropTypes.object
+};
 
 export default CategorySelector;
