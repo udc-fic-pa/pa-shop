@@ -19,9 +19,7 @@ const Body = () => {
             <br/>
             <AppGlobalComponents/>
             <Switch>
-                <Route exact path="/">
-                    <Home/>
-                </Route>
+                <Route exact path="/"><Home/></Route>
                 <Route exact path="/catalog/find-products-result"><FindProductsResult/></Route>
                 <Route exact path="/catalog/product-details/:id"><ProductDetails/></Route>
                 {loggedIn && <Route exact path="/shopping/shopping-cart"><ShoppingCart/></Route>}
