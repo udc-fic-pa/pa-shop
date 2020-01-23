@@ -21,7 +21,8 @@
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 safari version",
+      "last 1 edge version"
     ]
   },
   "author": "Fernando Bellas-Permuy",
@@ -29,7 +30,6 @@
   "dependencies": {
     "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
     "bootstrap": "^4.4.1",
-    "core-js": "^3.6.0",
     "jquery": "^3.4.1",
     "popper.js": "^1.16.0",
     "react": "^16.12.0",
