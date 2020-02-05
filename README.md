@@ -34,3 +34,11 @@ cd frontend
 yarn install (only first time to download libraries)
 yarn start
 ```
+
+## Running frontend unit tests
+
+```
+cd frontend
+yarn test
+```
+
