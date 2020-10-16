@@ -11,5 +11,5 @@ backend/.project
 backend/.settings/
 
 # IntelliJ IDEA configuration.
-backend/.idea/
+.idea/
 pa-shop-backend.iml
