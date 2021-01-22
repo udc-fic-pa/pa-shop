@@ -12,10 +12,10 @@
 ```
 Start Mysql server if not running (e.g. mysqld).
 
-mysqladmin -u root create pa
-mysqladmin -u root create patest
+mysqladmin -u root create pa -p
+mysqladmin -u root create patest -p
 
-mysql -u root
+mysql -u root -p
     CREATE USER 'pa'@'localhost' IDENTIFIED BY 'pa';
     GRANT ALL PRIVILEGES ON pa.* to 'pa'@'localhost' WITH GRANT OPTION;
     GRANT ALL PRIVILEGES ON patest.* to 'pa'@'localhost' WITH GRANT OPTION;
