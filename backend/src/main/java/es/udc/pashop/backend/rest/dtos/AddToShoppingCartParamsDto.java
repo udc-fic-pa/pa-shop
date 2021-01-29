@@ -17,7 +17,6 @@ public class AddToShoppingCartParamsDto {
 		this.productId = productId;
 	}
 
-	@NotNull
 	@Min(value=1)
 	public int getQuantity() {
 		return quantity;

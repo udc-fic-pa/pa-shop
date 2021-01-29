@@ -1,5 +1,3 @@
--- Indexes for primary keys have been explicitly created.
-
 DROP TABLE OrderItem;
 DROP TABLE OrderTable;
 DROP TABLE ShoppingCartItem;
