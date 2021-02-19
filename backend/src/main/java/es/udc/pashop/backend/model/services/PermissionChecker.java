@@ -8,14 +8,14 @@ import es.udc.pashop.backend.model.exceptions.PermissionException;
 
 public interface PermissionChecker {
 	
-	public void checkUserExists(Long userId) throws InstanceNotFoundException;
+	void checkUserExists(Long userId) throws InstanceNotFoundException;
 	
-	public User checkUser(Long userId) throws InstanceNotFoundException;
+	User checkUser(Long userId) throws InstanceNotFoundException;
 	
-	public ShoppingCart checkShoppingCartExistsAndBelongsTo(Long shoppingCartId, Long userId)
+	ShoppingCart checkShoppingCartExistsAndBelongsTo(Long shoppingCartId, Long userId)
 		throws PermissionException, InstanceNotFoundException;
 	
-	public Order checkOrderExistsAndBelongsTo(Long orderId, Long userId)
+	Order checkOrderExistsAndBelongsTo(Long orderId, Long userId)
 		throws PermissionException, InstanceNotFoundException;
 	
 }
