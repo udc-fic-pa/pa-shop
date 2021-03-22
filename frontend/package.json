@@ -26,7 +26,7 @@
     ]
   },
   "author": "Fernando Bellas-Permuy",
-  "license": "BSD",
+  "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@testing-library/jest-dom": "^4.2.4",
