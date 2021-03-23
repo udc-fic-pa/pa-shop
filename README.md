@@ -33,3 +33,11 @@ cd frontend
 npm install (only first time to download libraries)
 npm start
 ```
+
+## Running frontend unit tests
+
+```
+cd frontend
+npm test
+```
+

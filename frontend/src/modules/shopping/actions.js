@@ -33,7 +33,7 @@ export const removeShoppingCartItem = (shoppingCartId, productId, onSuccess,
         },
         onErrors);
 
-const buyCompleted = (orderId) => ({
+export const buyCompleted = (orderId) => ({
     type: actionTypes.BUY_COMPLETED,
     orderId
 });
