@@ -1,4 +1,3 @@
-import React from 'react';
 import {FormattedMessage, FormattedDate, FormattedTime} from 'react-intl';
 import PropTypes from 'prop-types';
 
