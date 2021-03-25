@@ -11,4 +11,5 @@ export {default as FindOrders} from './components/FindOrders';
 export {default as FindOrdersResult} from './components/FindOrdersResult';
 export {default as OrderDetails} from './components/OrderDetails';
 
+// eslint-disable-next-line
 export default {actions, reducer, selectors};
