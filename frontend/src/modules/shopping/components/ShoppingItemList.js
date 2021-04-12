@@ -53,7 +53,7 @@ const ShoppingItemList = ({list, edit, onUpdateQuantity, onRemoveItem}) => {
 
             <p className="text-center font-weight-bold">
                 <FormattedMessage id='project.global.fields.totalPrice'/> 
-                : <FormattedNumber value={list.totalPrice}/>€
+                : <FormattedNumber value={list.totalPrice} style="currency" currency="EUR"/>
             </p>
 
         </div>

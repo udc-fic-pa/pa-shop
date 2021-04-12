@@ -49,7 +49,7 @@ const ProductDetails = () => {
                     <p className="card-text">{product.description}</p>
                     <p className="card-text font-weight-bold">
                         <FormattedMessage id='project.global.fields.price'/>
-                        : <FormattedNumber value={product.price}/>€
+                        : <FormattedNumber value={product.price} style="currency" currency="EUR"/>
                     </p>
                 </div>
             </div>
