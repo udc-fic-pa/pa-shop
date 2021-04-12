@@ -52,8 +52,9 @@ const ShoppingItemList = ({list, edit, onUpdateQuantity, onRemoveItem}) => {
             </table>
 
             <p className="text-center font-weight-bold">
-                <FormattedMessage id='project.global.fields.totalPrice'/> 
-                : <FormattedNumber value={list.totalPrice} style="currency" currency="EUR"/>
+                <FormattedMessage id='project.global.fields.totalPrice'/>{': '}
+                {/* eslint-disable-next-line */}
+                <FormattedNumber value={list.totalPrice} style="currency" currency="EUR"/>
             </p>
 
         </div>

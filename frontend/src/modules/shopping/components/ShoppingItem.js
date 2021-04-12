@@ -57,7 +57,10 @@ const ShoppingItem = ({shoppingItemListId, item, edit, onUpdateQuantity,
                 }
                 <ProductLink id={item.productId} name={item.productName}/>
             </td>
-            <td><FormattedNumber value={item.productPrice} style="currency" currency="EUR"/></td>
+            <td>
+                {/* eslint-disable-next-line */}
+                <FormattedNumber value={item.productPrice} style="currency" currency="EUR"/>    
+            </td>
             { edit &&
             <td>
                 <form ref={node => form = node} 

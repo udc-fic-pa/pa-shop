@@ -48,8 +48,9 @@ const ProductDetails = () => {
                     </h6>
                     <p className="card-text">{product.description}</p>
                     <p className="card-text font-weight-bold">
-                        <FormattedMessage id='project.global.fields.price'/>
-                        : <FormattedNumber value={product.price} style="currency" currency="EUR"/>
+                        <FormattedMessage id='project.global.fields.price'/>{': '}
+                        {/* eslint-disable-next-line */} 
+                        <FormattedNumber value={product.price} style="currency" currency="EUR"/>
                     </p>
                 </div>
             </div>
