@@ -1,15 +1,13 @@
 import {useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 import {useHistory} from 'react-router-dom';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
-import * as selectors from '../selectors';
 
-const BuyForm = () => {
+const BuyForm = ({shoppingCartId}) => {
 
-    const shoppingCart = useSelector(selectors.getShoppingCart);
     const dispatch = useDispatch();
     const history = useHistory();
     const [postalAddress, setPostalAddress] = useState('');
@@ -23,7 +21,7 @@ const BuyForm = () => {
 
         if (form.checkValidity()) {
 
-            dispatch(actions.buy(shoppingCart.id, 
+            dispatch(actions.buy(shoppingCartId, 
                 postalAddress.trim(), postalCode.trim(), 
                 () => history.push('/shopping/purchase-completed'),
                 errors => setBackendErrors(errors)));

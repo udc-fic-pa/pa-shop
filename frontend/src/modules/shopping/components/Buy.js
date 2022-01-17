@@ -14,7 +14,7 @@ const Buy = () => {
     
    return (
         <div>
-            <BuyForm/>
+            <BuyForm shoppingCartId={cart.id}/>
             <ShoppingItemList list={cart}/>
         </div>
     );
