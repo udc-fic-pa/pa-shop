@@ -9,7 +9,7 @@ export const findProducts = ({categoryId, keywords, page},
     let path = `/catalog/products?page=${page}`;
 
     path += categoryId ? `&categoryId=${categoryId}` : "";
-    path += keywords.length > 0 ? `&keywords=${keywords}` : "";
+    path += keywords.length > 0 ? `&keywords=${encodeURIComponent(keywords)}` : "";
 
     appFetch(path, config('GET'), onSuccess);
 
