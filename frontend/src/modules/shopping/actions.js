@@ -40,7 +40,7 @@ const buyCompleted = (orderId) => ({
 
 export const buy = (shoppingCartId, postalAddress, postalCode, onSuccess, 
     onErrors) => dispatch =>
-    backend.shoppingService.buy(shoppingCartId, postalAddress, postalCode, ({id}) => {
+    backend.shoppingService.buy(shoppingCartId, postalAddress, postalCode, id => {
         dispatch(buyCompleted(id));
         onSuccess();
     },

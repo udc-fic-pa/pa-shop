@@ -34,7 +34,6 @@ import es.udc.pashop.backend.rest.common.ErrorsDto;
 import es.udc.pashop.backend.rest.dtos.AddToShoppingCartParamsDto;
 import es.udc.pashop.backend.rest.dtos.BlockDto;
 import es.udc.pashop.backend.rest.dtos.BuyParamsDto;
-import es.udc.pashop.backend.rest.dtos.IdDto;
 import es.udc.pashop.backend.rest.dtos.OrderDto;
 import es.udc.pashop.backend.rest.dtos.OrderSummaryDto;
 import es.udc.pashop.backend.rest.dtos.RemoveShoppingCartItemParamsDto;
@@ -120,12 +119,12 @@ public class ShoppingController {
 	}
 	
 	@PostMapping("/shoppingcarts/{shoppingCartId}/buy")
-	public IdDto buy(@RequestAttribute Long userId, @PathVariable Long shoppingCartId,
+	public Long buy(@RequestAttribute Long userId, @PathVariable Long shoppingCartId,
 		@Validated @RequestBody BuyParamsDto params) 
 		throws InstanceNotFoundException, PermissionException, EmptyShoppingCartException {
 		
-		return new IdDto(shoppingService.buy(userId, shoppingCartId, params.getPostalAddress(),
-			params.getPostalCode()).getId());
+		return shoppingService.buy(userId, shoppingCartId, params.getPostalAddress(),
+			params.getPostalCode()).getId();
 		
 	}
 	
