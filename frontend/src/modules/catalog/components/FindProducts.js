@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
 
 import CategorySelector from './CategorySelector';
@@ -9,7 +9,7 @@ import * as actions from '../actions';
 const FindProducts = () => {
 
     const dispatch = useDispatch();
-    const history = useHistory();
+    const navigate = useNavigate();
     const [categoryId, setCategoryId] = useState('');
     const [keywords, setKeywords] = useState('');
 
@@ -18,7 +18,7 @@ const FindProducts = () => {
         dispatch(actions.findProducts(
             {categoryId: toNumber(categoryId), 
                 keywords: keywords.trim(), page: 0}));
-        history.push('/catalog/find-products-result');
+        navigate('/catalog/find-products-result');
     }
 
     const toNumber = value => value.length > 0 ? Number(value) : null;

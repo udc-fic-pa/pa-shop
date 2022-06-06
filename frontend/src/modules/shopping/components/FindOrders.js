@@ -1,18 +1,18 @@
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 import * as actions from '../actions';
 
 const FindOrders = () => {
 
     const dispatch = useDispatch();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     useEffect(() => {
 
         dispatch(actions.findOrders({page: 0}));
-        history.push('/shopping/find-orders-result');
+        navigate('/shopping/find-orders-result');
 
     });
 
