@@ -49,7 +49,7 @@ const ShoppingItem = ({shoppingItemListId, item, edit, onUpdateQuantity,
                 <span>
                     <button type="button" className="btn btn-danger btn-sm"
                         onClick={() => handleRemoveItem()}>
-                        <span className="fas fa-trash-alt"></span>
+                        <span className="fa-solid fa-trash-can"></span>
                     </button>
                     &nbsp;
                     &nbsp;

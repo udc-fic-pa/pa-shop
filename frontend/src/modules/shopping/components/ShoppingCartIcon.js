@@ -8,7 +8,7 @@ const ShoppingCartIcon = () => {
     
     return (
         <div>
-            <span className="fas fa-shopping-cart"></span>&nbsp;
+            <span className="fa-solid fa-cart-shopping"></span>&nbsp;
             ({shoppingCart.totalQuantity})
         </div>
     );
