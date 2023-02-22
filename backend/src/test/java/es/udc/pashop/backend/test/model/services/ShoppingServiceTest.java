@@ -79,7 +79,7 @@ public class ShoppingServiceTest {
 	}
 	
 	private Category addCategory(String name) {
-		return categoryDao.save(new Category("category"));
+		return categoryDao.save(new Category(name));
 	}
 	
 	private Product addProduct(String name, Category category) {
