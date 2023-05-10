@@ -5,11 +5,20 @@ import * as actions from '../actions';
 import * as selectors from '../selectors';
 import {Pager} from '../../common';
 import Orders from './Orders';
+import {useEffect} from "react";
 
 const FindOrdersResult = () => {
 
     const orderSearch = useSelector(selectors.getOrderSearch);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+
+        dispatch(actions.findOrders({page: 0}));
+
+        return () => dispatch(actions.clearOrderSearch());
+
+    }, [dispatch]);
 
     if (!orderSearch) {
         return null;

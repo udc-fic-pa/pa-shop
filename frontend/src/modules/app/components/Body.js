@@ -6,7 +6,7 @@ import Home from './Home';
 import {Login, SignUp, UpdateProfile, ChangePassword, Logout} from '../../users';
 import users from '../../users';
 import {FindProductsResult, ProductDetails} from '../../catalog';
-import {ShoppingCart, Buy, PurchaseCompleted, FindOrders, FindOrdersResult, OrderDetails} from '../../shopping';
+import {ShoppingCart, Buy, PurchaseCompleted, FindOrdersResult, OrderDetails} from '../../shopping';
 
 const Body = () => {
 
@@ -24,7 +24,6 @@ const Body = () => {
                 {loggedIn && <Route path="/shopping/shopping-cart" element={<ShoppingCart/>}/>}
                 {loggedIn && <Route path="/shopping/buy" element={<Buy/>}/>}
                 {loggedIn && <Route path="/shopping/purchase-completed" element={<PurchaseCompleted/>}/>}
-                {loggedIn && <Route path="/shopping/find-orders" element={<FindOrders/>}/>}
                 {loggedIn && <Route path="/shopping/find-orders-result" element={<FindOrdersResult/>}/>}
                 {loggedIn && <Route path="/shopping/order-details/:id" element={<OrderDetails/>}/>}
                 {loggedIn && <Route path="/users/update-profile" element={<UpdateProfile/>}/>}

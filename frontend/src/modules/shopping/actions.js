@@ -51,13 +51,12 @@ const findOrdersCompleted = orderSearch => ({
     orderSearch
 });
 
-const clearOrderSearch = () => ({
+export const clearOrderSearch = () => ({
     type: actionTypes.CLEAR_ORDER_SEARCH
 });
 
 export const findOrders = criteria => dispatch => {
 
-    dispatch(clearOrderSearch());
     backend.shoppingService.findOrders(criteria, 
         result => dispatch(findOrdersCompleted({criteria, result})));
 
