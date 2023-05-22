@@ -1,6 +1,6 @@
 package es.udc.pashop.backend.rest.dtos;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 public class LoginParamsDto {
 	

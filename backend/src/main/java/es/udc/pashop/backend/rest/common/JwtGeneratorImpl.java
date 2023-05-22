@@ -2,6 +2,7 @@ package es.udc.pashop.backend.rest.common;
 
 import java.util.Date;
 
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +26,7 @@ public class JwtGeneratorImpl implements JwtGenerator {
 			.claim("userId", info.getUserId())
 			.claim("role", info.getRole())
 			.setExpiration(new Date(System.currentTimeMillis() + expirationMinutes*60*1000))
-	        .signWith(SignatureAlgorithm.HS512, signKey.getBytes())
+	        .signWith(Keys.hmacShaKeyFor(signKey.getBytes()), SignatureAlgorithm.HS256)
 	        .compact();
 
 	}
@@ -33,8 +34,9 @@ public class JwtGeneratorImpl implements JwtGenerator {
 	@Override
 	public JwtInfo getInfo(String token) {
 		
-		Claims claims = Jwts.parser()
+		Claims claims = Jwts.parserBuilder()
 	        .setSigningKey(signKey.getBytes())
+			.build()
 	        .parseClaimsJws(token)
 	        .getBody();
 		

@@ -2,9 +2,9 @@ package es.udc.pashop.backend.model.entities;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface OrderDao extends PagingAndSortingRepository<Order, Long> {
+public interface OrderDao extends CrudRepository<Order, Long> {
 	
 	Slice<Order> findByUserIdOrderByDateDesc(Long userId, Pageable pageable);
 	

@@ -1,5 +1,5 @@
 package es.udc.pashop.backend.model.entities;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface OrderItemDao extends PagingAndSortingRepository<OrderItem, Long> {}
+public interface OrderItemDao extends CrudRepository<OrderItem, Long> {}

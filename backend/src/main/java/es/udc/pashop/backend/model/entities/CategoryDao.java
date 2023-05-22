@@ -1,5 +1,6 @@
 package es.udc.pashop.backend.model.entities;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.ListPagingAndSortingRepository;
 
-public interface CategoryDao extends PagingAndSortingRepository<Category, Long> {}
+public interface CategoryDao extends CrudRepository<Category, Long>, ListPagingAndSortingRepository<Category, Long> {}

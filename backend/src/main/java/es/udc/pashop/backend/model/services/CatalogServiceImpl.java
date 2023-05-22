@@ -28,13 +28,7 @@ public class CatalogServiceImpl implements CatalogService {
 
 	@Override
 	public List<Category> findAllCategories() {
-		
-		Iterable<Category> categories = categoryDao.findAll(Sort.by(Sort.Direction.ASC, "name"));
-		List<Category> categoriesAsList = new ArrayList<>();
-		
-		categories.forEach(c -> categoriesAsList.add(c));
-		
-		return categoriesAsList;
+		return categoryDao.findAll(Sort.by(Sort.Direction.ASC, "name"));
 	}
 
 	@Override
