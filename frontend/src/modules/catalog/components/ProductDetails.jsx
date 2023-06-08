@@ -27,7 +27,7 @@ const ProductDetails = () => {
 
         return () => dispatch(actions.clearProduct());
 
-    }, [id, dispatch]);
+    }, []);
 
     if (!product) {
         return null;
