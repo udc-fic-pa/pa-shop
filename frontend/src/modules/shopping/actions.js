@@ -62,11 +62,15 @@ export const findOrders = criteria => dispatch => {
 
 }    
 
-export const previousFindOrdersResultPage = criteria => 
-    findOrders({page: criteria.page-1});
+export const previousFindOrdersResultPage = criteria => dispatch => {
+    dispatch(clearOrderSearch());
+    dispatch(findOrders({page: criteria.page-1}));
+}
 
-export const nextFindOrdersResultPage = criteria => 
-    findOrders({page: criteria.page+1});
+export const nextFindOrdersResultPage = criteria => dispatch => {
+    dispatch(clearOrderSearch());
+    dispatch(findOrders({page: criteria.page+1}));
+}
 
 const findOrderCompleted = order => ({
     type: actionTypes.FIND_ORDER_COMPLETED,
