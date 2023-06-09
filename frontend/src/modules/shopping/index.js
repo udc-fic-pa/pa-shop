@@ -10,5 +10,4 @@ export {default as PurchaseCompleted} from './components/PurchaseCompleted';
 export {default as FindOrdersResult} from './components/FindOrdersResult';
 export {default as OrderDetails} from './components/OrderDetails';
 
-// eslint-disable-next-line
 export default {actions, reducer, selectors};

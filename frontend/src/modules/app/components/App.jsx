@@ -18,7 +18,7 @@ const App = () => {
 
         dispatch(catalog.actions.findAllCategories());
 
-    }, []);
+    }, [dispatch]);
 
     return (
         <div>

@@ -27,7 +27,7 @@ const ProductDetails = () => {
 
         return () => dispatch(actions.clearProduct());
 
-    }, []);
+    }, [id, dispatch]);
 
     if (!product) {
         return null;
@@ -49,7 +49,6 @@ const ProductDetails = () => {
                     <p className="card-text">{product.description}</p>
                     <p className="card-text font-weight-bold">
                         <FormattedMessage id='project.global.fields.price'/>{': '}
-                        {/* eslint-disable-next-line */} 
                         <FormattedNumber value={product.price} style="currency" currency="EUR"/>
                     </p>
                 </div>

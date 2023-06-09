@@ -18,7 +18,7 @@ const FindOrdersResult = () => {
 
         return () => dispatch(actions.clearOrderSearch());
 
-    }, []);
+    }, [dispatch]);
 
     if (!orderSearch) {
         return null;

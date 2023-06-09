@@ -22,7 +22,7 @@ const OrderDetails = () => {
 
         return () => dispatch(actions.clearOrder());
 
-    }, []);
+    }, [id, dispatch]);
 
     if (!order) {
         return null;

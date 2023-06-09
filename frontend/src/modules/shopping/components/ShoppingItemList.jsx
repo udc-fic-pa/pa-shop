@@ -53,7 +53,6 @@ const ShoppingItemList = ({list, edit, onUpdateQuantity, onRemoveItem}) => {
 
             <p className="text-center font-weight-bold">
                 <FormattedMessage id='project.global.fields.totalPrice'/>{': '}
-                {/* eslint-disable-next-line */}
                 <FormattedNumber value={list.totalPrice} style="currency" currency="EUR"/>
             </p>
 

@@ -2,6 +2,7 @@ import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 import {useNavigate} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
@@ -90,5 +91,9 @@ const BuyForm = ({shoppingCartId}) => {
     );
 
 }
+
+BuyForm.propTypes = {
+    shoppingCartId: PropTypes.number.isRequired
+};
 
 export default BuyForm;
