@@ -3,6 +3,7 @@ package es.udc.pashop.backend.test.model.entities;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import org.junit.jupiter.api.Test;
 
@@ -41,7 +42,7 @@ public class ShoppingCartTest {
 		
 		int totalQuantity = quantity1 + quantity2;
 		BigDecimal totalPrice = price1.multiply(new BigDecimal(quantity1))
-			.add(price2.multiply(new BigDecimal(quantity2)));
+			.add(price2.multiply(new BigDecimal(quantity2))).setScale(2, RoundingMode.HALF_EVEN);
 		
 		assertEquals(totalQuantity, shoppingCart.getTotalQuantity());
 		assertEquals(totalPrice, shoppingCart.getTotalPrice());
