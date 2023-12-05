@@ -26,10 +26,8 @@ public class Product {
 
 		this.name = name;
 		this.description = description;
-		this.price = price;
+		this.price = price.setScale(2, RoundingMode.HALF_EVEN);
 		this.category = category;
-		
-		price.setScale(2, RoundingMode.HALF_EVEN);
 		
 	}
 

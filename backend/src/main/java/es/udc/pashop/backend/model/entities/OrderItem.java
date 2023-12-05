@@ -26,10 +26,8 @@ public class OrderItem {
 	public OrderItem(Product product, BigDecimal productPrice, int quantity) {
 		
 		this.product = product;	
-		this.productPrice = productPrice;
+		this.productPrice = productPrice.setScale(2, RoundingMode.HALF_EVEN);
 		this.quantity = quantity;
-		
-		productPrice.setScale(2, RoundingMode.HALF_EVEN);
 		
 	}
 	
