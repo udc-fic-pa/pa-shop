@@ -40,8 +40,7 @@ public class JwtGeneratorImpl implements JwtGenerator {
 	        .getPayload();
 		
 		return new JwtInfo(
-			((Integer) claims.get("userId")).longValue(), 
-			claims.getSubject(), 
+			((Integer) claims.get("userId")).longValue(),
 			(String) claims.get("role"));
 		
 	}
