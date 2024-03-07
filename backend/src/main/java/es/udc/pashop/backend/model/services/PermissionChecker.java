@@ -7,9 +7,7 @@ import es.udc.pashop.backend.model.entities.User;
 import es.udc.pashop.backend.model.exceptions.PermissionException;
 
 public interface PermissionChecker {
-	
-	void checkUserExists(Long userId) throws InstanceNotFoundException;
-	
+
 	User checkUser(Long userId) throws InstanceNotFoundException;
 	
 	ShoppingCart checkShoppingCartExistsAndBelongsTo(Long shoppingCartId, Long userId)
