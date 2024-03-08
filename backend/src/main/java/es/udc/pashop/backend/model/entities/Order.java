@@ -35,7 +35,7 @@ public class Order {
 	public Order(User user, LocalDateTime date, String postalAddress, String postalCode) {
 		
 		this.user = user;
-		this.date = date;
+		this.date = date.withNano(0);
 		this.postalAddress = postalAddress;
 		this.postalCode = postalCode;
 		
@@ -75,7 +75,7 @@ public class Order {
 	}
 
 	public void setDate(LocalDateTime date) {
-		this.date = date;
+		this.date = date.withNano(0);
 	}
 
 	public String getPostalAddress() {

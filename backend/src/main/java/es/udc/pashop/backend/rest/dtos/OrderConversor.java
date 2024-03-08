@@ -24,14 +24,14 @@ public class OrderConversor {
 		
 		items.sort(Comparator.comparing(OrderItemDto::getProductName));
 		
-		return new OrderDto(order.getId(), items, toMillis(order.getDate()), order.getTotalPrice(),
+		return new OrderDto(order.getId(), items, order.getDate(), order.getTotalPrice(),
 			order.getPostalAddress(), order.getPostalCode());
 		
 	}
 	
 	private final static OrderSummaryDto toOrderSummaryDto(Order order) {
 		
-		 return new OrderSummaryDto(order.getId(), toMillis(order.getDate()));
+		 return new OrderSummaryDto(order.getId(), order.getDate());
 		 
 	}
 	

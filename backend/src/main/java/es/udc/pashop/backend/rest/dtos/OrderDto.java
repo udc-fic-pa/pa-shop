@@ -1,20 +1,21 @@
 package es.udc.pashop.backend.rest.dtos;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class OrderDto {
 	
 	private Long id;
 	private List<OrderItemDto> items;
-	private long date;
+	private LocalDateTime date;
 	private BigDecimal totalPrice;
 	private String postalAddress;
 	private String postalCode;
 	
 	public OrderDto() {}
 
-	public OrderDto(Long id, List<OrderItemDto> items, long date, BigDecimal totalPrice, String postalAddress, String postalCode) {
+	public OrderDto(Long id, List<OrderItemDto> items, LocalDateTime date, BigDecimal totalPrice, String postalAddress, String postalCode) {
 
 		this.id = id;
 		this.items = items;
@@ -41,11 +42,11 @@ public class OrderDto {
 		this.items = items;
 	}
 
-	public long getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
-	public void setDate(long date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 	
