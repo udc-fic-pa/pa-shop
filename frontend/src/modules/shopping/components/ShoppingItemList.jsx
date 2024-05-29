@@ -1,5 +1,4 @@
 import {useState} from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage, FormattedNumber} from 'react-intl';
 
 import ShoppingItem from './ShoppingItem';
@@ -60,13 +59,6 @@ const ShoppingItemList = ({list, edit, onUpdateQuantity, onRemoveItem}) => {
 
     );
 
-}
-
-ShoppingItemList.propTypes = {
-    list: PropTypes.object.isRequired,
-    edit: PropTypes.bool,
-    onUpdateQuantity: PropTypes.func,
-    onRemoveItem: PropTypes.func
 }
 
 export default ShoppingItemList;

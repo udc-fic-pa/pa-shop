@@ -1,5 +1,4 @@
 import {FormattedMessage} from 'react-intl';
-import PropTypes from 'prop-types';
 
 import * as selectors from '../selectors';
 import {ProductLink} from '../../common';
@@ -31,10 +30,5 @@ const Products = ({products, categories}) => (
     </table>
 
 );
-
-Products.propTypes = {
-    products: PropTypes.array.isRequired,
-    categories: PropTypes.array.isRequired
-};
 
 export default Products;

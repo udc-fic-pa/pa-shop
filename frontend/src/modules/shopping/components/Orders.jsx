@@ -1,5 +1,4 @@
 import {FormattedMessage, FormattedDate, FormattedTime} from 'react-intl';
-import PropTypes from 'prop-types';
 
 import OrderLink from './OrderLink';
 
@@ -32,10 +31,6 @@ const Orders = ({orders}) => (
     </table>
 
 );
-
-Orders.propTypes = {
-    orders: PropTypes.array.isRequired
-};
 
 export default Orders;
 

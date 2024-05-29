@@ -1,7 +1,6 @@
 import {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
-import PropTypes from 'prop-types';
 import {useNavigate} from 'react-router-dom';
 
 import {Errors} from '../../common';
@@ -71,9 +70,5 @@ const AddToShoppingCart = ({productId}) => {
 
 }
 
-
-AddToShoppingCart.propTypes = {
-    productId: PropTypes.number.isRequired
-};
 
 export default AddToShoppingCart;

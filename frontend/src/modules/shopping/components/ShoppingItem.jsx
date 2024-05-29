@@ -1,5 +1,4 @@
 import {useState} from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage, FormattedNumber} from 'react-intl';
 
 import {ProductLink} from '../../common';
@@ -82,15 +81,6 @@ const ShoppingItem = ({shoppingItemListId, item, edit, onUpdateQuantity,
         </tr>
     );
 
-}
-
-ShoppingItem.propTypes = {
-    shoppingItemListId: PropTypes.number.isRequired,
-    item: PropTypes.object.isRequired,
-    edit: PropTypes.bool,
-    onUpdateQuantity: PropTypes.func,
-    onRemoveItem: PropTypes.func,
-    onBackendErrors: PropTypes.func
 }
 
 export default ShoppingItem;

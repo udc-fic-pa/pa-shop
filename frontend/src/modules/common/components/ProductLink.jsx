@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import {Link} from 'react-router-dom';
 
 const ProductLink = ({id, name}) => {
@@ -11,10 +9,5 @@ const ProductLink = ({id, name}) => {
     );
 
 }
-
-ProductLink.propTypes = {
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-};
 
 export default ProductLink; 

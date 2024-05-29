@@ -1,5 +1,4 @@
 import {Link} from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 const OrderLink = ({id}) => {
 
@@ -10,9 +9,5 @@ const OrderLink = ({id}) => {
     );
 
 }
-
-OrderLink.propTypes = {
-    id: PropTypes.number.isRequired
-};
 
 export default OrderLink;
