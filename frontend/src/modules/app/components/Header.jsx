@@ -41,7 +41,7 @@ const Header = () => {
                     </li>
 
                     <li className="nav-item">
-                        <Link className="nav-link" to="/shopping/find-orders-result">
+                        <Link className="nav-link" to="/shopping/find-orders">
                             <FormattedMessage id="project.shopping.header.orders"/>
                         </Link>
                     </li>
