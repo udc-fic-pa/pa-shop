@@ -6,17 +6,26 @@ import Body from './Body';
 import Footer from './Footer';
 import users from '../../users';
 import catalog from '../../catalog';
+import backend from '../../../backend';
 
 const App = () => {
 
     const dispatch = useDispatch();
 
     useEffect(() => {
+
+        const findAllCategories = async () => {
+            const response = await backend.catalogService.findAllCategories();
+            if (response.ok) {
+                dispatch(catalog.actions.findAllCategoriesCompleted(response.payload));
+            }
+        }
   
         dispatch(users.actions.tryLoginFromServiceToken(
             () => dispatch(users.actions.logout())));
 
-        dispatch(catalog.actions.findAllCategories());
+        
+        findAllCategories();
 
     }, [dispatch]);
 

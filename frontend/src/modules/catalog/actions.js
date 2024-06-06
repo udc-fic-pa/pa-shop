@@ -1,25 +1,10 @@
 import * as actionTypes from './actionTypes';
-import * as selectors from './selectors';
 import backend from '../../backend';
 
-const findAllCategoriesCompleted = categories => ({
+export const findAllCategoriesCompleted = categories => ({
     type: actionTypes.FIND_ALL_CATEGORIES_COMPLETED,
     categories
 }); 
-
-export const findAllCategories = () => (dispatch, getState) => {
-
-    const categories = selectors.getCategories(getState());
-
-    if (!categories) {
-
-        backend.catalogService.findAllCategories(
-            categories => dispatch(findAllCategoriesCompleted(categories))
-        );
-        
-    }
-
-}
 
 export const findProductsCompleted = productSearch => ({
     type: actionTypes.FIND_PRODUCTS_COMPLETED,
