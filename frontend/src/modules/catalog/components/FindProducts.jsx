@@ -5,6 +5,7 @@ import {FormattedMessage} from 'react-intl';
 
 import CategorySelector from './CategorySelector';
 import * as actions from '../actions';
+import backend from '../../../backend';
 
 const FindProducts = () => {
 
@@ -13,15 +14,23 @@ const FindProducts = () => {
     const [categoryId, setCategoryId] = useState('');
     const [keywords, setKeywords] = useState('');
 
-    const handleSubmit = event => {
-        event.preventDefault();
-        dispatch(actions.findProducts(
-            {categoryId: toNumber(categoryId), 
-                keywords: keywords.trim(), page: 0}));
-        navigate('/catalog/find-products-result');
-    }
-
     const toNumber = value => value.length > 0 ? Number(value) : null;
+
+    const handleSubmit = async (event) => {
+
+        event.preventDefault();
+        dispatch(actions.clearProductSearch());
+
+        const criteria = {categoryId: toNumber(categoryId), 
+            keywords: keywords.trim(), page: 0};
+        const response = await backend.catalogService.findProducts(criteria);
+
+        if (response.ok) {
+            dispatch(actions.findProductsCompleted({criteria, result: response.payload}));
+            navigate('/catalog/find-products-result');
+        }
+
+    }
 
     return (
 

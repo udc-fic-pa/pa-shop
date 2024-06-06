@@ -21,30 +21,16 @@ export const findAllCategories = () => (dispatch, getState) => {
 
 }
 
-const findProductsCompleted = productSearch => ({
+export const findProductsCompleted = productSearch => ({
     type: actionTypes.FIND_PRODUCTS_COMPLETED,
     productSearch
 });
 
-export const findProducts = criteria => dispatch => {
-
-    dispatch(clearProductSearch());
-    backend.catalogService.findProducts(criteria,
-        result => dispatch(findProductsCompleted({criteria, result})));
-
-}
-
-export const previousFindProductsResultPage = criteria =>
-    findProducts({...criteria, page: criteria.page-1});
-
-export const nextFindProductsResultPage = criteria =>
-    findProducts({...criteria, page: criteria.page+1});
-
-const clearProductSearch = () => ({
+export const clearProductSearch = () => ({
     type: actionTypes.CLEAR_PRODUCT_SEARCH
 });
 
-const findProductByIdCompleted = product => ({
+export const findProductByIdCompleted = product => ({
     type: actionTypes.FIND_PRODUCT_BY_ID_COMPLETED,
     product
 });
