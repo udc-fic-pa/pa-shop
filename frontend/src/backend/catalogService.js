@@ -1,4 +1,3 @@
-import {appFetch, config} from './appFetch'; // FIXME: remove when appFetch2 replaces appFetch.
 import {appFetch2} from './appFetch';
 
 export const findAllCategories = async () => await appFetch2('GET', '/catalog/categories');
@@ -14,5 +13,4 @@ export const findProducts = async ({categoryId, keywords, page}) => {
 
 }
 
-export const findByProductId = (id, onSuccess) => 
-    appFetch(`/catalog/products/${id}`, config('GET'), onSuccess);
+export const findProductById = async (id) => await appFetch2('GET', `/catalog/products/${id}`);

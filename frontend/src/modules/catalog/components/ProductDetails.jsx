@@ -6,6 +6,7 @@ import {useParams} from 'react-router-dom';
 import users from '../../users';
 import * as selectors from '../selectors';
 import * as actions from '../actions';
+import backend from '../../../backend';
 import {AddToShoppingCart} from '../../shopping';
 import {BackLink} from '../../common';
 
@@ -16,18 +17,24 @@ const ProductDetails = () => {
     const categories = useSelector(selectors.getCategories);
     const dispatch = useDispatch();
     const {id} = useParams();
+    const productId = Number(id);
 
     useEffect(() => {
 
-        const productId = Number(id);
-
-        if (!Number.isNaN(productId)) {
-            dispatch(actions.findProductById(productId));
+        const findProductById = async (productId) => {
+            if (!Number.isNaN(productId)) {
+                const response = await backend.catalogService.findProductById(productId);
+                if (response.ok) {
+                    dispatch(actions.findProductByIdCompleted(response.payload));
+                }
+            }
         }
+
+        findProductById(productId);
 
         return () => dispatch(actions.clearProduct());
 
-    }, [id, dispatch]);
+    }, [productId, dispatch]);
 
     if (!product) {
         return null;
