@@ -17,7 +17,7 @@ const AddToShoppingCart = ({productId}) => {
     const [backendErrors, setBackendErrors] = useState(null);
     let form;
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async event => {
 
         event.preventDefault();
 

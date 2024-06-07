@@ -13,4 +13,4 @@ export const findProducts = async ({categoryId, keywords, page}) => {
 
 }
 
-export const findProductById = async (id) => await appFetch2('GET', `/catalog/products/${id}`);
+export const findProductById = async id => await appFetch2('GET', `/catalog/products/${id}`);

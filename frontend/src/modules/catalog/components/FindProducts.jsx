@@ -16,7 +16,7 @@ const FindProducts = () => {
 
     const toNumber = value => value.length > 0 ? Number(value) : null;
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async event => {
 
         event.preventDefault();
         dispatch(actions.clearProductSearch());
