@@ -5,15 +5,13 @@ export const addToShoppingCart = async (shoppingCartId, productId, quantity) =>
     await appFetch2('POST', `/shopping/shoppingcarts/${shoppingCartId}/addToShoppingCart`, 
         {productId, quantity});
 
-export const updateShoppingCartItemQuantity = (shoppingCartId, productId,
-    quantity, onSuccess, onErrors) =>
-    appFetch(`/shopping/shoppingcarts/${shoppingCartId}/updateShoppingCartItemQuantity`, 
-        config('POST', {productId, quantity}), onSuccess, onErrors);
+export const updateShoppingCartItemQuantity = async (shoppingCartId, productId, quantity) =>
+    await appFetch2('POST', `/shopping/shoppingcarts/${shoppingCartId}/updateShoppingCartItemQuantity`, 
+        {productId, quantity});
 
-export const removeShoppingCartItem = (shoppingCartId, productId, onSuccess,
-    onErrors) =>
-    appFetch(`/shopping/shoppingcarts/${shoppingCartId}/removeShoppingCartItem`, 
-        config('POST', {productId}), onSuccess, onErrors);
+export const removeShoppingCartItem = async (shoppingCartId, productId) =>
+    await appFetch2('POST', `/shopping/shoppingcarts/${shoppingCartId}/removeShoppingCartItem`, 
+        {productId});
 
 export const buy = (shoppingCartId, postalAddress, postalCode, onSuccess, 
     onErrors) =>

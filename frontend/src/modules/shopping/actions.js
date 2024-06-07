@@ -6,15 +6,6 @@ export const shoppingCartUpdated = shoppingCart => ({
     shoppingCart
 });
 
-export const updateShoppingCartItemQuantity = (shoppingCartId, productId, 
-    quantity, onSuccess, onErrors) => dispatch => 
-    backend.shoppingService.updateShoppingCartItemQuantity(shoppingCartId,
-        productId, quantity, shoppingCart => {
-            dispatch(shoppingCartUpdated(shoppingCart));
-            onSuccess();
-        },
-        onErrors);
-
 export const removeShoppingCartItem = (shoppingCartId, productId, onSuccess, 
     onErrors) => dispatch => 
     backend.shoppingService.removeShoppingCartItem(shoppingCartId,
