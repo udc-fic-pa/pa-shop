@@ -6,6 +6,7 @@ import {useNavigate} from 'react-router-dom';
 import {Errors} from '../../common';
 import * as actions from '../actions';
 import * as selectors from '../selectors';
+import backend from '../../../backend';
 
 const AddToShoppingCart = ({productId}) => {
 
@@ -16,16 +17,21 @@ const AddToShoppingCart = ({productId}) => {
     const [backendErrors, setBackendErrors] = useState(null);
     let form;
 
-    const handleSubmit = event => {
+    const handleSubmit = async (event) => {
 
         event.preventDefault();
 
         if (form.checkValidity()) {
 
-            dispatch(actions.addToShoppingCart(shoppingCart.id, 
-                productId, quantity,
-                () => navigate('/shopping/shopping-cart'),
-                errors => setBackendErrors(errors)));
+            const response = await backend.shoppingService.addToShoppingCart(shoppingCart.id, 
+                productId, quantity);
+
+            if (response.ok) {
+                dispatch(actions.shoppingCartUpdated(response.payload));
+                navigate('/shopping/shopping-cart');
+            } else {
+                setBackendErrors(response.payload);
+            }
 
         } else {
 

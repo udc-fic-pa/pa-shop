@@ -1,9 +1,9 @@
-import {config, appFetch} from './appFetch';
+import {config, appFetch} from './appFetch'; // FIXME: remove when appFetch2 replaces appFetch.
+import {appFetch2} from './appFetch';
 
-export const addToShoppingCart = (shoppingCartId, productId, quantity, onSuccess, 
-    onErrors) =>
-    appFetch(`/shopping/shoppingcarts/${shoppingCartId}/addToShoppingCart`, 
-        config('POST', {productId, quantity}), onSuccess, onErrors);
+export const addToShoppingCart = async (shoppingCartId, productId, quantity) =>
+    await appFetch2('POST', `/shopping/shoppingcarts/${shoppingCartId}/addToShoppingCart`, 
+        {productId, quantity});
 
 export const updateShoppingCartItemQuantity = (shoppingCartId, productId,
     quantity, onSuccess, onErrors) =>
