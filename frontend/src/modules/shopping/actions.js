@@ -1,4 +1,3 @@
-import backend from '../../backend';
 import * as actionTypes from './actionTypes';
 
 export const shoppingCartUpdated = shoppingCart => ({
@@ -20,7 +19,7 @@ export const clearOrderSearch = () => ({
     type: actionTypes.CLEAR_ORDER_SEARCH
 });
 
-const findOrderCompleted = order => ({
+export const findOrderCompleted = order => ({
     type: actionTypes.FIND_ORDER_COMPLETED,
     order
 });
@@ -28,9 +27,3 @@ const findOrderCompleted = order => ({
 export const clearOrder = () => ({
     type: actionTypes.CLEAR_ORDER
 });
-
-export const findOrder = orderId => dispatch => {
-    backend.shoppingService.findOrder(orderId, order => {
-        dispatch(findOrderCompleted(order));
-    });
-}
