@@ -3,6 +3,7 @@ import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 
 import * as actions from '../actions';
+import backend from '../../../backend';
 
 const FindOrders = () => {
 
@@ -11,7 +12,15 @@ const FindOrders = () => {
 
     useEffect(() => {
 
-        dispatch(actions.findOrders({page: 0}));
+        const findOrders = async (criteria) => {
+            const response = await backend.shoppingService.findOrders(criteria);
+            if (response.ok) {
+                dispatch(actions.findOrdersCompleted({criteria, result: response.payload}));
+            }
+        }
+
+        dispatch(actions.clearOrderSearch());
+        findOrders({page: 0});
         navigate('/shopping/find-orders-result');
 
     });
