@@ -17,8 +17,8 @@ export const buy = async (shoppingCartId, postalAddress, postalCode) =>
     await appFetch2('POST', `/shopping/shoppingcarts/${shoppingCartId}/buy`, 
         {postalAddress, postalCode});
 
-export const findOrders = ({page}, onSuccess) => 
-    appFetch(`/shopping/orders?page=${page}`, config('GET'), onSuccess);
+export const findOrders = async ({page}) => 
+    await appFetch2('GET', `/shopping/orders?page=${page}`);
 
 export const findOrder = (orderId, onSuccess) =>
     appFetch(`/shopping/orders/${orderId}`, config('GET'), onSuccess);

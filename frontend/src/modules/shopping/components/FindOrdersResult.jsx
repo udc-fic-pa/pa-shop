@@ -3,6 +3,7 @@ import {FormattedMessage} from 'react-intl';
 
 import * as actions from '../actions';
 import * as selectors from '../selectors';
+import backend from '../../../backend';
 import {Pager} from '../../common';
 import Orders from './Orders';
 
@@ -10,6 +11,27 @@ const FindOrdersResult = () => {
 
     const orderSearch = useSelector(selectors.getOrderSearch);
     const dispatch = useDispatch();
+
+    const handleBackNext = async (backClicked, criteria) => {
+
+        dispatch(actions.clearOrderSearch());
+        
+        let newCriteria;
+
+        if (backClicked) {
+            newCriteria = {page: criteria.page-1}
+        } else {
+            newCriteria = {page: criteria.page+1}
+        }
+
+        const response = await backend.shoppingService.findOrders(newCriteria);
+
+        if (response.ok) {
+            dispatch(actions.findOrdersCompleted({criteria: newCriteria, result: response.payload}));
+
+        }
+
+    }
 
     if (!orderSearch) {
         return null;
@@ -30,10 +52,10 @@ const FindOrdersResult = () => {
             <Pager 
                 back={{
                     enabled: orderSearch.criteria.page >= 1,
-                    onClick: () => dispatch(actions.previousFindOrdersResultPage(orderSearch.criteria))}}
+                    onClick: () => handleBackNext(true, orderSearch.criteria)}}
                 next={{
                     enabled: orderSearch.result.existMoreItems,
-                    onClick: () => dispatch(actions.nextFindOrdersResultPage(orderSearch.criteria))}}/>
+                    onClick: () => handleBackNext(false, orderSearch.criteria)}}/>
         </div>
 
     );
