@@ -16,8 +16,10 @@ const OrderDetails = () => {
 
     useEffect(() => {
 
-        if (!Number.isNaN(id)) {   
-            dispatch(actions.findOrder(id));
+        const orderId = Number(id);
+
+        if (!Number.isNaN(orderId)) {   
+            dispatch(actions.findOrder(orderId));
         }
 
         return () => dispatch(actions.clearOrder());
