@@ -13,10 +13,9 @@ export const removeShoppingCartItem = async (shoppingCartId, productId) =>
     await appFetch2('POST', `/shopping/shoppingcarts/${shoppingCartId}/removeShoppingCartItem`, 
         {productId});
 
-export const buy = (shoppingCartId, postalAddress, postalCode, onSuccess, 
-    onErrors) =>
-    appFetch(`/shopping/shoppingcarts/${shoppingCartId}/buy`, 
-        config('POST', {postalAddress, postalCode}), onSuccess, onErrors);
+export const buy = async (shoppingCartId, postalAddress, postalCode) =>
+    await appFetch2('POST', `/shopping/shoppingcarts/${shoppingCartId}/buy`, 
+        {postalAddress, postalCode});
 
 export const findOrders = ({page}, onSuccess) => 
     appFetch(`/shopping/orders?page=${page}`, config('GET'), onSuccess);

@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
+import backend from '../../../backend';
 
 const BuyForm = ({shoppingCartId}) => {
 
@@ -15,17 +16,22 @@ const BuyForm = ({shoppingCartId}) => {
     const [backendErrors, setBackendErrors] = useState(null);
     let form;
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
 
         event.preventDefault();
 
         if (form.checkValidity()) {
 
-            dispatch(actions.buy(shoppingCartId, 
-                postalAddress.trim(), postalCode.trim(), 
-                () => navigate('/shopping/purchase-completed'),
-                errors => setBackendErrors(errors)));
+            const response = await backend.shoppingService.buy(shoppingCartId, 
+                postalAddress, postalCode);
 
+            if (response.ok) {
+                dispatch(actions.buyCompleted(response.payload));
+                navigate('/shopping/purchase-completed');
+            } else {
+                setBackendErrors(response.payload);
+            }
+            
         } else {
             setBackendErrors(null);
             form.classList.add('was-validated');

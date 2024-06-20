@@ -6,18 +6,10 @@ export const shoppingCartUpdated = shoppingCart => ({
     shoppingCart
 });
 
-const buyCompleted = (orderId) => ({
+export const buyCompleted = (orderId) => ({
     type: actionTypes.BUY_COMPLETED,
     orderId
 });
-
-export const buy = (shoppingCartId, postalAddress, postalCode, onSuccess, 
-    onErrors) => dispatch =>
-    backend.shoppingService.buy(shoppingCartId, postalAddress, postalCode, id => {
-        dispatch(buyCompleted(id));
-        onSuccess();
-    },
-    onErrors);
 
 const findOrdersCompleted = orderSearch => ({
     type: actionTypes.FIND_ORDERS_COMPLETED,
