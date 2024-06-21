@@ -1,5 +1,6 @@
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
 
 import Header from './Header';
 import Body from './Body';
@@ -11,6 +12,7 @@ import backend from '../../../backend';
 const App = () => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -20,11 +22,18 @@ const App = () => {
                 dispatch(catalog.actions.findAllCategoriesCompleted(response.payload));
             }
         }
-  
-        dispatch(users.actions.tryLoginFromServiceToken(
-            () => dispatch(users.actions.logout())));
 
-        
+        const tryLoginFromServiceToken = async () => {
+            const response = await backend.userService.tryLoginFromServiceToken(() => {
+                navigate('/users/login');
+                dispatch(users.actions.logout());
+            });
+            if (response.ok) {
+                dispatch(users.actions.loginCompleted(response.payload));
+            }
+        }
+
+        tryLoginFromServiceToken();
         findAllCategories();
 
     }, [dispatch]);
