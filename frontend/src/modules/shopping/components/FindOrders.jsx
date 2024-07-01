@@ -12,7 +12,7 @@ const FindOrders = () => {
 
     useEffect(() => {
 
-        const findOrders = async (criteria) => {
+        const findOrders = async criteria => {
             const response = await backend.shoppingService.findOrders(criteria);
             if (response.ok) {
                 dispatch(actions.findOrdersCompleted({criteria, result: response.payload}));

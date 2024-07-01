@@ -18,7 +18,7 @@ const OrderDetails = () => {
 
     useEffect(() => {
 
-        const findOrder = async (orderId) => {
+        const findOrder = async orderId => {
             if (!Number.isNaN(orderId)) {
                 const response = await backend.shoppingService.findOrder(orderId);
                 if (response.ok) {

@@ -21,7 +21,7 @@ const ProductDetails = () => {
 
     useEffect(() => {
 
-        const findProductById = async (productId) => {
+        const findProductById = async productId => {
             if (!Number.isNaN(productId)) {
                 const response = await backend.catalogService.findProductById(productId);
                 if (response.ok) {

@@ -19,5 +19,5 @@ export const buy = async (shoppingCartId, postalAddress, postalCode) =>
 export const findOrders = async ({page}) => 
     await appFetch('GET', `/shopping/orders?page=${page}`);
 
-export const findOrder = async (orderId) =>
+export const findOrder = async orderId =>
     await appFetch('GET', `/shopping/orders/${orderId}`);
