@@ -1,6 +1,6 @@
-import {appFetch2} from './appFetch';
+import {appFetch} from './appFetch';
 
-export const findAllCategories = async () => await appFetch2('GET', '/catalog/categories');
+export const findAllCategories = async () => await appFetch('GET', '/catalog/categories');
 
 export const findProducts = async ({categoryId, keywords, page}) => {
 
@@ -9,8 +9,8 @@ export const findProducts = async ({categoryId, keywords, page}) => {
     path += categoryId ? `&categoryId=${categoryId}` : "";
     path += keywords.length > 0 ? `&keywords=${encodeURIComponent(keywords)}` : "";
 
-    return await appFetch2('GET', path);
+    return await appFetch('GET', path);
 
 }
 
-export const findProductById = async id => await appFetch2('GET', `/catalog/products/${id}`);
+export const findProductById = async id => await appFetch('GET', `/catalog/products/${id}`);
