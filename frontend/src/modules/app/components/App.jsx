@@ -36,7 +36,7 @@ const App = () => {
         tryLoginFromServiceToken();
         findAllCategories();
 
-    }, [dispatch]);
+    }, [dispatch, navigate]);
 
     return (
         <div>
