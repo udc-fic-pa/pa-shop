@@ -18,12 +18,3 @@ export const findOrdersCompleted = orderSearch => ({
 export const clearOrderSearch = () => ({
     type: actionTypes.CLEAR_ORDER_SEARCH
 });
-
-export const findOrderCompleted = order => ({
-    type: actionTypes.FIND_ORDER_COMPLETED,
-    order
-});
-
-export const clearOrder = () => ({
-    type: actionTypes.CLEAR_ORDER
-});

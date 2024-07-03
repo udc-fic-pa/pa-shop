@@ -7,7 +7,6 @@ const initialState = {
     shoppingCart: null,
     lastOrderId: null,
     orderSearch: null,
-    order: null
 };
 
 const shoppingCart = (state = initialState.shoppingCart, action) => {
@@ -64,28 +63,10 @@ const orderSearch = (state = initialState.orderSearch, action) => {
 
 }
 
-const order = (state = initialState.order, action) => {
-
-    switch (action.type) {
-
-        case actionTypes.FIND_ORDER_COMPLETED:
-            return action.order;
-
-        case actionTypes.CLEAR_ORDER:
-            return initialState.order;
-
-        default:
-            return state;
-
-    }
-
-}
-
 const reducer = combineReducers({
     shoppingCart,
     lastOrderId,
-    orderSearch,
-    order
+    orderSearch
 });
 
 export default reducer;

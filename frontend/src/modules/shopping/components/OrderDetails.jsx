@@ -1,10 +1,7 @@
-import {useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useState, useEffect} from 'react';
 import {FormattedMessage, FormattedDate, FormattedTime} from 'react-intl';
 import {useParams} from 'react-router-dom';
 
-import * as actions from '../actions';
-import * as selectors from '../selectors';
 import backend from '../../../backend';
 import ShoppingItemList from './ShoppingItemList';
 import {BackLink} from '../../common';
@@ -13,8 +10,7 @@ const OrderDetails = () => {
 
     const {id} = useParams();
     const orderId = Number(id);
-    const order = useSelector(selectors.getOrder);
-    const dispatch = useDispatch();
+    const [order, setOrder] = useState(null);
 
     useEffect(() => {
 
@@ -22,16 +18,16 @@ const OrderDetails = () => {
             if (!Number.isNaN(orderId)) {
                 const response = await backend.shoppingService.findOrder(orderId);
                 if (response.ok) {
-                    dispatch(actions.findOrderCompleted(response.payload));
+                    setOrder(response.payload);
                 }
             }
         }
 
         findOrder(orderId);
 
-        return () => dispatch(actions.clearOrder());
+        return () => setOrder(null);
 
-    }, [orderId, dispatch]);
+    }, [orderId]);
 
     if (!order) {
         return null;
