@@ -5,7 +5,6 @@ import * as actionTypes from './actionTypes';
 const initialState = {
     categories: null,
     productSearch: null,
-    product: null
 };
 
 const categories = (state = initialState.categories, action) => {
@@ -39,27 +38,9 @@ const productSearch = (state = initialState.productSearch, action) => {
 
 }
 
-const product = (state = initialState.product, action) => {
-
-    switch (action.type) {
-
-        case actionTypes.FIND_PRODUCT_BY_ID_COMPLETED:
-            return action.product;
-
-        case actionTypes.CLEAR_PRODUCT:
-            return initialState.product;
-
-        default:
-            return state;
-
-    }
-
-}
-
 const reducer = combineReducers({
     categories,
-    productSearch,
-    product
+    productSearch
 });
 
 export default reducer;

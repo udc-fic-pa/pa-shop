@@ -1,11 +1,10 @@
-import {useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useState, useEffect} from 'react';
+import {useSelector} from 'react-redux';
 import {FormattedMessage, FormattedNumber} from 'react-intl';
 import {useParams} from 'react-router-dom';
 
 import users from '../../users';
 import * as selectors from '../selectors';
-import * as actions from '../actions';
 import backend from '../../../backend';
 import {AddToShoppingCart} from '../../shopping';
 import {BackLink} from '../../common';
@@ -13,9 +12,8 @@ import {BackLink} from '../../common';
 const ProductDetails = () => {
 
     const loggedIn = useSelector(users.selectors.isLoggedIn);
-    const product = useSelector(selectors.getProduct);
+    const [product, setProduct] = useState(null);
     const categories = useSelector(selectors.getCategories);
-    const dispatch = useDispatch();
     const {id} = useParams();
     const productId = Number(id);
 
@@ -25,16 +23,16 @@ const ProductDetails = () => {
             if (!Number.isNaN(productId)) {
                 const response = await backend.catalogService.findProductById(productId);
                 if (response.ok) {
-                    dispatch(actions.findProductByIdCompleted(response.payload));
+                    setProduct(response.payload);
                 }
             }
         }
 
         findProductById(productId);
 
-        return () => dispatch(actions.clearProduct());
+        return () => setProduct(null);
 
-    }, [productId, dispatch]);
+    }, [productId]);
 
     if (!product) {
         return null;

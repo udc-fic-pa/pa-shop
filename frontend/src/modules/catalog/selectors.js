@@ -22,6 +22,3 @@ export const getCategoryName = (categories, id) => {
 export const getProductSearch = state =>
     getModuleState(state).productSearch;
 
-export const getProduct = state =>
-    getModuleState(state).product;
-
