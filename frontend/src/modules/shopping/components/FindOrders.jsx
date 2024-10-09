@@ -20,8 +20,8 @@ const FindOrders = () => {
         }
 
         dispatch(actions.clearOrderSearch());
-        navigate('/shopping/find-orders-result');
         findOrders({page: 0});
+        navigate('/shopping/find-orders-result');
 
     });
 
