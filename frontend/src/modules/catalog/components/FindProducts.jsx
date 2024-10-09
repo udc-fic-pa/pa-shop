@@ -20,7 +20,6 @@ const FindProducts = () => {
 
         event.preventDefault();
         dispatch(actions.clearProductSearch());
-        navigate('/catalog/find-products-result');
 
         const criteria = {categoryId: toNumber(categoryId), 
             keywords: keywords.trim(), page: 0};
@@ -29,6 +28,8 @@ const FindProducts = () => {
         if (response.ok) {
             dispatch(actions.findProductsCompleted({criteria, result: response.payload}));
         }
+
+        navigate('/catalog/find-products-result');
 
     }
 
