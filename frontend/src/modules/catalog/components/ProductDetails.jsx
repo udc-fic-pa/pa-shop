@@ -30,8 +30,6 @@ const ProductDetails = () => {
 
         findProductById(productId);
 
-        return () => setProduct(null);
-
     }, [productId]);
 
     if (!product) {
