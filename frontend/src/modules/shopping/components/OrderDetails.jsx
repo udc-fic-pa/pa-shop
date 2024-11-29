@@ -25,8 +25,6 @@ const OrderDetails = () => {
 
         findOrder(orderId);
 
-        return () => setOrder(null);
-
     }, [orderId]);
 
     if (!order) {
