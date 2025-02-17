@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {FormattedMessage, FormattedNumber} from 'react-intl';
-import {useParams} from 'react-router-dom';
+import {useParams} from 'react-router';
 
 import users from '../../users';
 import * as selectors from '../selectors';

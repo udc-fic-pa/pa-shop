@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import {FormattedMessage, FormattedDate, FormattedTime} from 'react-intl';
-import {useParams} from 'react-router-dom';
+import {useParams} from 'react-router';
 
 import backend from '../../../backend';
 import ShoppingItemList from './ShoppingItemList';

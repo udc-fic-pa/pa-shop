@@ -1,6 +1,6 @@
 import {useSelector, useDispatch} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router';
 
 import ShoppingItemList from './ShoppingItemList';
 import * as selectors from '../selectors';
