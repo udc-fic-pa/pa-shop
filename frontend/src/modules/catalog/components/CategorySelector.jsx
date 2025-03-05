@@ -1,5 +1,6 @@
 import {useSelector} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
+import Form from 'react-bootstrap/Form';
 
 import * as selectors from '../selectors';
 
@@ -9,9 +10,9 @@ const CategorySelector = (selectProps) => {
     
     return (
 
-        <select {...selectProps}>
+        <Form.Select {...selectProps } className="me-2">
 
-            <FormattedMessage id='project.catalog.CategorySelector.allDepartments'>
+            <FormattedMessage id='project.catalog.CategorySelector.allCategories'>
                 {message => (<option value="">{message}</option>)}
             </FormattedMessage>
 
@@ -19,7 +20,7 @@ const CategorySelector = (selectProps) => {
                 <option key={category.id} value={category.id}>{category.name}</option>
             )}
 
-        </select>
+        </Form.Select>
 
     );
 

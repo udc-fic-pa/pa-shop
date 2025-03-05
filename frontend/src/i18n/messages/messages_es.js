@@ -6,7 +6,7 @@ export default {
     'project.shopping.header.orders': 'Pedidos',
     'project.app.Home.welcome': 'Busque en nuestro catálogo de productos.',
 
-    'project.catalog.CategorySelector.allDepartments': 'Todos los departamentos',
+    'project.catalog.CategorySelector.allCategories': 'Todas las categorías',
     'project.catalog.FindProductsResult.noProductsFound': 'No se encontraron productos',
 
     'project.common.ErrorDialog.title': 'Error',

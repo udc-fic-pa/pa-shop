@@ -35,7 +35,7 @@ const App = () => {
     }, [dispatch]);
 
     return (
-        <div>
+        <div className="d-flex flex-column min-vh-100">
             <Header/>
             <Body/>
             <Footer/>
