@@ -20,12 +20,11 @@ const Login = () => {
     const navigate = useNavigate();
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
-    const [validated, setValidated] = useState(false);
+    const [formValidated, setFormValidated] = useState(false);
     const [backendErrors, setBackendErrors] = useState(null);
+    let form;
 
     const handleSubmit = async event => {
-
-        const form = event.currentTarget;
 
         event.preventDefault();
 
@@ -46,7 +45,7 @@ const Login = () => {
 
         } else {
             setBackendErrors(null);
-            setValidated(true);
+            setFormValidated(true);
         }
 
     }
@@ -64,13 +63,14 @@ const Login = () => {
                     <FormattedMessage id="project.users.Login.title"/>
                 </Card.Header>
                 <Card.Body>
-                    <Form noValidate validated={validated}  onSubmit={e => handleSubmit(e)}>
-                        <Form.Group as={Row} className="mb-3">
-                            <Form.Label column md={3}>
+                    <Form ref={node => form = node}
+                          noValidate validated={formValidated} onSubmit={e => handleSubmit(e)}>
+                        <Form.Group as={Row} className="mb-3" controlId="userName">
+                            <Form.Label column md={3} >
                                 <FormattedMessage id="project.global.fields.userName"/>
                             </Form.Label>
                             <Col md={4}>
-                                <Form.Control type="text" id="userName"
+                                <Form.Control type="text"
                                     value={userName}
                                     onChange={e => setUserName(e.target.value)}
                                     autoFocus
@@ -80,12 +80,12 @@ const Login = () => {
                                 </Form.Control.Feedback>
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Row} className="mb-3">
+                        <Form.Group as={Row} className="mb-3" controlId="password">
                             <Form.Label column md={3}>
                                 <FormattedMessage id="project.global.fields.password"/>
                             </Form.Label>
                             <Col md={4}>
-                                <Form.Control type="password" id="password"
+                                <Form.Control type="password"
                                     value={password}
                                     onChange={e => setPassword(e.target.value)}
                                     required/>
