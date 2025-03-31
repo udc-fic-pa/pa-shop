@@ -74,6 +74,7 @@ const Login = () => {
                                     value={userName}
                                     onChange={e => setUserName(e.target.value)}
                                     autoFocus
+                                    autoComplete="username"
                                     required/>
                                 <Form.Control.Feedback type="invalid">
                                     <FormattedMessage id='project.global.validator.required'/>
@@ -88,6 +89,7 @@ const Login = () => {
                                 <Form.Control type="password"
                                     value={password}
                                     onChange={e => setPassword(e.target.value)}
+                                    autoComplete="current-password"
                                     required/>
                                 <Form.Control.Feedback type="invalid">
                                     <FormattedMessage id='project.global.validator.required'/>

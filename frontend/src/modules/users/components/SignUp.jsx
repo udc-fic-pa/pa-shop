@@ -102,6 +102,7 @@ const SignUp = () => {
                                     value={userName}
                                     onChange={e => setUserName(e.target.value)}
                                     autoFocus
+                                    autoComplete="username"
                                     required/>
                                 <Form.Control.Feedback type="invalid">
                                     <FormattedMessage id='project.global.validator.required'/>
@@ -116,6 +117,7 @@ const SignUp = () => {
                                 <Form.Control type="password"
                                     value={password}
                                     onChange={e => setPassword(e.target.value)}
+                                    autoComplete="new-password"
                                     required/>
                                 <Form.Control.Feedback type="invalid">
                                     <FormattedMessage id='project.global.validator.required'/>
@@ -131,6 +133,7 @@ const SignUp = () => {
                                     type="password"
                                     value={confirmPassword}
                                     onChange={e => handleConfirmPasswordChange(e.target.value)}
+                                    autoComplete="new-password"
                                     isInvalid={passwordsDoNotMatch}
                                     required/>
                                 <Form.Control.Feedback type="invalid">

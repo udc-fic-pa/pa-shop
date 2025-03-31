@@ -88,6 +88,7 @@ const ChangePassword = () => {
                                     value={oldPassword}
                                     onChange={e => setOldPassword(e.target.value)}
                                     autoFocus
+                                    autoComplete="current-password"
                                     required/>
                                 <Form.Control.Feedback type="invalid">
                                     <FormattedMessage id='project.global.validator.required'/>
@@ -103,6 +104,7 @@ const ChangePassword = () => {
                                               value={newPassword}
                                               onChange={e => setNewPassword(e.target.value)}
                                               autoFocus
+                                              autoComplete="new-password"
                                               required/>
                                 <Form.Control.Feedback type="invalid">
                                     <FormattedMessage id='project.global.validator.required'/>
@@ -118,6 +120,7 @@ const ChangePassword = () => {
                                     type="password"
                                     value={confirmNewPassword}
                                     onChange={e => handleConfirmNewPasswordChange(e.target.value)}
+                                    autoComplete="new-password"
                                     isInvalid={passwordsDoNotMatch}
                                     required/>
                                 <Form.Control.Feedback type="invalid">
