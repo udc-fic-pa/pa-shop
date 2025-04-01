@@ -1,5 +1,6 @@
 import {useSelector, useDispatch} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
+import Alert from 'react-bootstrap/Alert';
 
 import * as selectors from '../selectors';
 import * as actions from '../actions';
@@ -39,9 +40,9 @@ const FindProductsResult = () => {
 
     if (productSearch.result.items.length === 0) {
         return (
-            <div className="alert alert-danger" role="alert">
+            <Alert variant="danger">
                 <FormattedMessage id='project.catalog.FindProductsResult.noProductsFound'/>
-            </div>
+            </Alert>
         );
     }
     

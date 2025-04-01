@@ -1,18 +1,19 @@
 import {FormattedMessage} from 'react-intl';
+import Table from 'react-bootstrap/Table';
 
 import * as selectors from '../selectors';
 import {ProductLink} from '../../common';
 
 const Products = ({products, categories}) => (
 
-    <table className="table table-striped table-hover">
+    <Table striped hover>
 
         <thead>
             <tr>
-                <th scope="col">
+                <th>
                     <FormattedMessage id='project.global.fields.department'/>
                 </th>
-                <th scope="col">
+                <th>
                     <FormattedMessage id='project.global.fields.name'/>
                 </th>
             </tr>
@@ -27,7 +28,7 @@ const Products = ({products, categories}) => (
             )}
         </tbody>
 
-    </table>
+    </Table>
 
 );
 
