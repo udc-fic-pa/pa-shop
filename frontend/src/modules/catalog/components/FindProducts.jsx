@@ -45,7 +45,7 @@ const FindProducts = () => {
             <Form.Control id="keywords" type="text" className="me-2"
                 value={keywords} onChange={e => setKeywords(e.target.value)}/>
 
-            <Button variant="primary" type="submit">
+            <Button type="submit">
                 <FormattedMessage id='project.global.buttons.search'/>
             </Button>
         </Form>
