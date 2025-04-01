@@ -1,17 +1,18 @@
 import {FormattedMessage, FormattedDate, FormattedTime} from 'react-intl';
+import Table from 'react-bootstrap/Table';
 
 import OrderLink from './OrderLink';
 
 const Orders = ({orders}) => (
 
-    <table className="table table-striped table-hover">
+    <Table striped hover>
 
         <thead>
             <tr>
-                <th scope="col">
+                <th>
                     <FormattedMessage id='project.global.fields.purchaseOrder'/>
                 </th>
-                <th scope="col">
+                <th>
                     <FormattedMessage id='project.global.fields.date'/>
                 </th>
             </tr>
@@ -28,7 +29,7 @@ const Orders = ({orders}) => (
             )}
         </tbody>
 
-    </table>
+    </Table>
 
 );
 
