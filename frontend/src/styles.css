@@ -1,3 +1,7 @@
-.form-group > label > span {
-    font-weight: bold;
+a:not([class]) {
+    text-decoration: none;
+}
+
+a:not([class]):hover {
+    text-decoration: underline;
 }
