@@ -48,7 +48,7 @@ const FindProductsResult = () => {
     
     return (
 
-        <div>
+        <>
             <Products products={productSearch.result.items} categories={categories}/>
             <Pager 
                 back={{
@@ -57,7 +57,7 @@ const FindProductsResult = () => {
                 next={{
                     enabled: productSearch.result.existMoreItems,
                     onClick: () => handleBackNext(false, productSearch.criteria)}}/>
-        </div>
+        </>
 
     );
 
