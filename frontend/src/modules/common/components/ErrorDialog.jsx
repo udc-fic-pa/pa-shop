@@ -12,34 +12,29 @@ const ErrorDialog = ({error, onClose}) => {
         return null;
     }
 
-    const modalStyle = {display: 'block'}; 
     const message = error instanceof NetworkError ?
         intl.formatMessage({id: 'project.global.exceptions.NetworkError'}) :
         error.message;
 
     return (
 
-        <div className="modal" style={modalStyle}>
+        <Modal show={true}>
+            <Modal.Header>
+                <Modal.Title>
+                    <FormattedMessage id="project.common.ErrorDialog.title"/>
+                </Modal.Title>
+            </Modal.Header>
 
-            <Modal.Dialog>
-                <Modal.Header>
-                    <Modal.Title>
-                        <FormattedMessage id="project.common.ErrorDialog.title"/>
-                    </Modal.Title>
-                </Modal.Header>
+            <Modal.Body>
+                <p>{message}</p>
+            </Modal.Body>
 
-                <Modal.Body>
-                    <p>{message}</p>
-                </Modal.Body>
-
-                <Modal.Footer>
-                    <Button variant="primary" onClick={onClose}>
-                        <FormattedMessage id="project.global.buttons.close"/>
-                    </Button>
-                </Modal.Footer>
-            </Modal.Dialog>
-
-        </div>
+            <Modal.Footer>
+                <Button variant="primary" onClick={onClose}>
+                    <FormattedMessage id="project.global.buttons.close"/>
+                </Button>
+            </Modal.Footer>
+        </Modal>
 
     );
 
