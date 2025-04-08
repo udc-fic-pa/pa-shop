@@ -2,11 +2,15 @@ import {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 import {useNavigate} from 'react-router';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
 import * as selectors from '../selectors';
 import backend from '../../../backend';
+import Row from "react-bootstrap/Row";
 
 const AddToShoppingCart = ({productId}) => {
 
@@ -14,6 +18,7 @@ const AddToShoppingCart = ({productId}) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [quantity, setQuantity] = useState(1);
+    const [formValidated, setFormValidated] = useState(false);
     const [backendErrors, setBackendErrors] = useState(null);
     let form;
 
@@ -36,42 +41,42 @@ const AddToShoppingCart = ({productId}) => {
         } else {
 
             setBackendErrors(null);
-            form.classList.add('was-validated');
+            setFormValidated(true);
 
         }
 
     }
 
     return (
-        <div>
+        <>
             <Errors errors={backendErrors} onClose={() => setBackendErrors(null)}/>
-            <form ref={node => form = node}
-                className="needs-validation" noValidate 
+            <Form ref={node => form = node}
+                noValidate validated={formValidated}
                 onSubmit={e => handleSubmit(e)}>
-                <div className="form-group row">
-                    <label htmlFor="quantity" className="offset-md-5 col-md-1 col-form-label">
+                <Form.Group as={Row} className="mb-3" controlId="quantity">
+                    <Form.Label column md={{ span: 1, offset: 5 }}>
                         <FormattedMessage id="project.global.fields.quantity"/>
-                    </label>
-                    <div className="col-md-2">
-                        <input type="number" id="quantity" className="form-control"
+                    </Form.Label>
+                    <Col md={2}>
+                        <Form.Control type="number"
                             value={quantity}
                             onChange={e => setQuantity(Number(e.target.value))}
                             autoFocus
                             min="1" />
-                        <div className="invalid-feedback">
+                        <Form.Control.Feedback type="invalid">
                             <FormattedMessage id='project.global.validator.incorrectQuantity'/>
-                        </div>
-                    </div>
-                </div>
-                <div className="form-group row">
-                    <div className="offset-md-6 col-md-2">
-                        <button type="submit" className="btn btn-primary">
+                        </Form.Control.Feedback>
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row}>
+                    <Col md={{ span: 2, offset: 6 }}>
+                        <Button type="submit">
                             <FormattedMessage id="project.shopping.AddToCart.add"/>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
+                        </Button>
+                    </Col>
+                </Form.Group>
+            </Form>
+        </>
     );
 
 }
