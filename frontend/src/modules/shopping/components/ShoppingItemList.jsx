@@ -1,5 +1,7 @@
 import {useState} from 'react';
 import {FormattedMessage, FormattedNumber} from 'react-intl';
+import Alert from 'react-bootstrap/Alert';
+import Table from 'react-bootstrap/Table';
 
 import ShoppingItem from './ShoppingItem';
 import {Errors} from '../../common';
@@ -10,9 +12,9 @@ const ShoppingItemList = ({list, edit, onUpdateQuantity, onRemoveItem}) => {
 
     if (list.items.length === 0) {
         return (
-            <div className="alert alert-info" role="alert">
+            <Alert variant="danger">
                 <FormattedMessage id='project.shopping.ShoppingCart.empty'/>
-            </div>
+            </Alert>
         );
     }
 
@@ -23,15 +25,15 @@ const ShoppingItemList = ({list, edit, onUpdateQuantity, onRemoveItem}) => {
             <Errors errors={backendErrors}
                 onClose={() => setBackendErrors(null)}/>
 
-            <table className="table">
+            <Table>
 
                 <thead>
                     <tr>
-                        <th scope="col" style={{width: '60%'}}></th>
-                        <th scope="col" style={{width: '20%'}}>
+                        <th style={{width: '60%'}}></th>
+                        <th style={{width: '20%'}}>
                             <FormattedMessage id='project.global.fields.price'/>
                         </th>
-                        <th scope="col" style={{width: '20%'}}>
+                        <th style={{width: '20%'}}>
                             <FormattedMessage id='project.global.fields.quantity'/>
                         </th>
                     </tr>
@@ -48,9 +50,9 @@ const ShoppingItemList = ({list, edit, onUpdateQuantity, onRemoveItem}) => {
                     )}
                 </tbody>
 
-            </table>
+            </Table>
 
-            <p className="text-center font-weight-bold">
+            <p className="text-center fw-bold">
                 <FormattedMessage id='project.global.fields.totalPrice'/>{': '}
                 <FormattedNumber value={list.totalPrice} style="currency" currency="EUR"/>
             </p>

@@ -1,6 +1,7 @@
 import {useSelector, useDispatch} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 import {useNavigate} from 'react-router';
+import Button from 'react-bootstrap/Button';
 
 import ShoppingItemList from './ShoppingItemList';
 import * as selectors from '../selectors';
@@ -49,10 +50,10 @@ const ShoppingCart = () => {
                 onRemoveItem={onRemoveItem}/>
             {cart.items.length > 0 &&
             <div className="text-center">
-                <button type="button" className="btn btn-primary"
+                <Button type="button"
                     onClick={() => navigate('/shopping/buy')}>
                     <FormattedMessage id="project.global.buttons.buy"/>
-                </button>
+                </Button>
             </div>
             }
         </div>
