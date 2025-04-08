@@ -109,7 +109,7 @@ const UpdateProfile = () => {
                                 </Form.Control.Feedback>
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Row} className="mb-3">
+                        <Form.Group as={Row}>
                             <Col md={{ span: 4, offset: 3 }}>
                                 <Button type="submit">
                                     <FormattedMessage id="project.global.buttons.save"/>
