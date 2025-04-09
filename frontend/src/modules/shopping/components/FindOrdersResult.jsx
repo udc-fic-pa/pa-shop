@@ -40,7 +40,7 @@ const FindOrdersResult = () => {
 
     if (orderSearch.result.items.length === 0) {
         return (
-            <Alert variant="danger">
+            <Alert variant="info">
                 <FormattedMessage id='project.shopping.FindOrdersResult.noOrders'/>
             </Alert>
         );
