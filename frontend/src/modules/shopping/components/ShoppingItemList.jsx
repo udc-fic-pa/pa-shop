@@ -12,7 +12,7 @@ const ShoppingItemList = ({list, edit, onUpdateQuantity, onRemoveItem}) => {
 
     if (list.items.length === 0) {
         return (
-            <Alert variant="danger">
+            <Alert variant="info">
                 <FormattedMessage id='project.shopping.ShoppingCart.empty'/>
             </Alert>
         );
