@@ -40,7 +40,7 @@ const FindProductsResult = () => {
 
     if (productSearch.result.items.length === 0) {
         return (
-            <Alert variant="danger">
+            <Alert variant="info">
                 <FormattedMessage id='project.catalog.FindProductsResult.noProductsFound'/>
             </Alert>
         );
