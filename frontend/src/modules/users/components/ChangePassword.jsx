@@ -103,7 +103,6 @@ const ChangePassword = () => {
                                 <Form.Control type="password"
                                               value={newPassword}
                                               onChange={e => setNewPassword(e.target.value)}
-                                              autoFocus
                                               autoComplete="new-password"
                                               required/>
                                 <Form.Control.Feedback type="invalid">
