@@ -13,10 +13,10 @@ const Buy = () => {
     }
     
    return (
-        <div>
+        <>
             <BuyForm shoppingCartId={cart.id}/>
             <ShoppingItemList list={cart}/>
-        </div>
+        </>
     );
 
 }
