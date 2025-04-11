@@ -37,7 +37,7 @@ const OrderDetails = () => {
 
             <BackLink/>
 
-            <div className="card text-center">
+            <div className="card text-center mt-3">
                 <div className="card-body">
                     <h5 className="card-title">
                         <FormattedMessage id='project.global.fields.purchaseOrder'/> {order.id} 

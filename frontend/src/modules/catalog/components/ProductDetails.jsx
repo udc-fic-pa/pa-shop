@@ -43,7 +43,7 @@ const ProductDetails = () => {
 
             <BackLink/>
             
-            <Card className="text-center">
+            <Card className="text-center mt-3">
                 <Card.Body>
                     <Card.Title>{product.name}</Card.Title>
                     <Card.Subtitle className="text-muted">
