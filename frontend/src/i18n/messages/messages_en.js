@@ -21,7 +21,7 @@ export default {
     'project.global.buttons.search': 'Search',
     'project.global.exceptions.NetworkError': 'Network error',
     'project.global.fields.date': 'Date',
-    'project.global.fields.department': 'Department',
+    'project.global.fields.category': 'Category',
     'project.global.fields.email': 'Email address',
     'project.global.fields.firstName': 'First name',
     'project.global.fields.purchaseOrder': 'Purchase order',

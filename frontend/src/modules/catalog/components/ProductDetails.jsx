@@ -47,7 +47,7 @@ const ProductDetails = () => {
                 <Card.Body>
                     <Card.Title>{product.name}</Card.Title>
                     <Card.Subtitle className="text-muted">
-                        <FormattedMessage id='project.global.fields.department'/>:&nbsp;
+                        <FormattedMessage id='project.global.fields.category'/>:&nbsp;
                             {selectors.getCategoryName(categories, product.categoryId)}
                     </Card.Subtitle>
                     <Card.Text>{product.description}</Card.Text>

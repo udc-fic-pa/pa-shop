@@ -11,7 +11,7 @@ const Products = ({products, categories}) => (
         <thead>
             <tr>
                 <th>
-                    <FormattedMessage id='project.global.fields.department'/>
+                    <FormattedMessage id='project.global.fields.category'/>
                 </th>
                 <th>
                     <FormattedMessage id='project.global.fields.name'/>
