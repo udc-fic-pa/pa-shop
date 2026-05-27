@@ -22,7 +22,7 @@ public class OrderConversor {
 		
 		List<OrderItemDto> items = order.getItems().stream().map(i -> toOrderItemDto(i)).collect(Collectors.toList());
 		
-		items.sort(Comparator.comparing(OrderItemDto::getProductName));
+		items.sort(Comparator.comparing(OrderItemDto::productName));
 		
 		return new OrderDto(order.getId(), items, order.getDate(), order.getTotalPrice(),
 			order.getPostalAddress(), order.getPostalCode());

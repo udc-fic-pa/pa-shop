@@ -16,7 +16,7 @@ public class ShoppingCartConversor {
 		List<ShoppingCartItemDto> items = 
 			cart.getItems().stream().map(i -> toShoppingCartItemDto(i)).collect(Collectors.toList());
 		
-		items.sort(Comparator.comparing(ShoppingCartItemDto::getProductName));
+		items.sort(Comparator.comparing(ShoppingCartItemDto::productName));
 		
 		return new ShoppingCartDto(cart.getId(), items, cart.getTotalQuantity(), cart.getTotalPrice());
 		

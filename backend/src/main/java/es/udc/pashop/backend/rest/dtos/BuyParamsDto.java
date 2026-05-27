@@ -3,29 +3,12 @@ package es.udc.pashop.backend.rest.dtos;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class BuyParamsDto {
-	
-	private String postalAddress;
-	private String postalCode;
-	
-	@NotNull
-	@Size(min=1, max=200) 
-	public String getPostalAddress() {
-		return postalAddress;
-	}
+public record BuyParamsDto(@NotNull @Size(min=1, max=200) String postalAddress,
+	@NotNull @Size(min=1, max=20) String postalCode) {
 
-	public void setPostalAddress(String postalAddress) {
-		this.postalAddress = postalAddress.trim();
-	}
-
-	@NotNull
-	@Size(min=1, max=20)
-	public String getPostalCode() {
-		return postalCode;
-	}
-
-	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode.trim();
+	public BuyParamsDto {
+		postalAddress = postalAddress != null ? postalAddress.trim() : null;
+		postalCode = postalCode != null ? postalCode.trim() : null;
 	}
 
 }

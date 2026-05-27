@@ -62,7 +62,7 @@ public class ShoppingController {
 		String errorMessage = messageSource.getMessage(MAX_QUANTITY_EXCEEDED_EXCEPTION_CODE,
 			new Object[] {exception.getMaxAllowedIncrement()}, MAX_QUANTITY_EXCEEDED_EXCEPTION_CODE, locale);
 
-		return new ErrorsDto(errorMessage);
+		return ErrorsDto.ofGlobalError(errorMessage);
 		
 	}
 	
@@ -74,10 +74,10 @@ public class ShoppingController {
 		String errorMessage = messageSource.getMessage(MAX_ITEMS_EXCEEDED_EXCEPTION_CODE, null,
 			MAX_ITEMS_EXCEEDED_EXCEPTION_CODE, locale);
  
-		return new ErrorsDto(errorMessage);
+		return ErrorsDto.ofGlobalError(errorMessage);
 		
 	}
-	
+
 	@ExceptionHandler(EmptyShoppingCartException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ResponseBody
@@ -86,17 +86,17 @@ public class ShoppingController {
 		String errorMessage = messageSource.getMessage(EMPTY_SHOPPING_CART_EXCEPTION_CODE, null,
 			EMPTY_SHOPPING_CART_EXCEPTION_CODE, locale);
  
-		return new ErrorsDto(errorMessage);
-		
+		return ErrorsDto.ofGlobalError(errorMessage);
+
 	}
-	
+
 	@PostMapping("/shoppingcarts/{shoppingCartId}/addToShoppingCart")
 	public ShoppingCartDto addToShoppingCart(@RequestAttribute Long userId, @PathVariable Long shoppingCartId, 
 		@Validated @RequestBody AddToShoppingCartParamsDto params) 
 		throws InstanceNotFoundException, PermissionException, MaxQuantityExceededException, MaxItemsExceededException {
 		
-		return toShoppingCartDto(shoppingService.addToShoppingCart(userId, shoppingCartId, params.getProductId(),
-			params.getQuantity()));
+		return toShoppingCartDto(shoppingService.addToShoppingCart(userId, shoppingCartId, params.productId(),
+			params.quantity()));
 		
 	}
 	
@@ -106,7 +106,7 @@ public class ShoppingController {
 		throws InstanceNotFoundException, PermissionException, MaxQuantityExceededException {
 		
 		return toShoppingCartDto(shoppingService.updateShoppingCartItemQuantity(userId, shoppingCartId,
-			params.getProductId(), params.getQuantity()));
+			params.productId(), params.quantity()));
 		
 	}
 	
@@ -114,7 +114,7 @@ public class ShoppingController {
 	public ShoppingCartDto removeShoppingCartItem(@RequestAttribute Long userId, @PathVariable Long shoppingCartId,
 		@RequestBody RemoveShoppingCartItemParamsDto params) throws InstanceNotFoundException, PermissionException {
 		
-		return toShoppingCartDto(shoppingService.removeShoppingCartItem(userId, shoppingCartId, params.getProductId()));
+		return toShoppingCartDto(shoppingService.removeShoppingCartItem(userId, shoppingCartId, params.productId()));
 		
 	}
 	
@@ -123,8 +123,8 @@ public class ShoppingController {
 		@Validated @RequestBody BuyParamsDto params) 
 		throws InstanceNotFoundException, PermissionException, EmptyShoppingCartException {
 		
-		return shoppingService.buy(userId, shoppingCartId, params.getPostalAddress(),
-			params.getPostalCode()).getId();
+		return shoppingService.buy(userId, shoppingCartId, params.postalAddress(),
+			params.postalCode()).getId();
 		
 	}
 	
