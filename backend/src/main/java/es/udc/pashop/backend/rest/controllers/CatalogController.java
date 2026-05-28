@@ -48,7 +48,7 @@ public class CatalogController {
 		Block<Product> productBlock = catalogService.findProducts(categoryId, 
 				keywords != null ? keywords.trim() : null, page, 10);
 		
-		return new BlockDto<>(toProductSummaryDtos(productBlock.getItems()), productBlock.getExistMoreItems());
+		return new BlockDto<>(toProductSummaryDtos(productBlock.items()), productBlock.existMoreItems());
 		
 	}
 

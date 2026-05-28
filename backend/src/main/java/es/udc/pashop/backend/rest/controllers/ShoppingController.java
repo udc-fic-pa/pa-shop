@@ -142,7 +142,7 @@ public class ShoppingController {
 		
 		Block<Order> orderBlock = shoppingService.findOrders(userId, page, 10);
 		
-		return new BlockDto<>(toOrderSummaryDtos(orderBlock.getItems()), orderBlock.getExistMoreItems());
+		return new BlockDto<>(toOrderSummaryDtos(orderBlock.items()), orderBlock.existMoreItems());
 		
 	}
 
