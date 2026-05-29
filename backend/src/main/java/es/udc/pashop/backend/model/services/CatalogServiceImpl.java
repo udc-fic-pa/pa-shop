@@ -1,6 +1,5 @@
 package es.udc.pashop.backend.model.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

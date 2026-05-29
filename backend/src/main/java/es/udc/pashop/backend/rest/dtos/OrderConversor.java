@@ -1,8 +1,5 @@
 package es.udc.pashop.backend.rest.dtos;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,10 +37,6 @@ public class OrderConversor {
 		return new OrderItemDto(item.getId(), item.getProduct().getId(), item.getProduct().getName(), item.getProductPrice(),
 			item.getQuantity());
 		
-	}
-	
-	private final static long toMillis(LocalDateTime date) {
-		return date.truncatedTo(ChronoUnit.MINUTES).atZone(ZoneOffset.systemDefault()).toInstant().toEpochMilli();
 	}
 
 }
